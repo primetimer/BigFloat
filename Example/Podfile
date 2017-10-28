@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'BigFloat_Example' do
+  pod 'BigFloat', :path => '../'
+
+  target 'BigFloat_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
