@@ -2,6 +2,8 @@ use_frameworks!
 
 target 'BigFloat_Example' do
   pod 'BigFloat', :path => '../'
+  pod 'BigInt', '~> 3.0'
+  pod 'SipHash', '~>1.2'
 
   target 'BigFloat_Tests' do
     inherit! :search_paths
@@ -9,3 +11,5 @@ target 'BigFloat_Example' do
     
   end
 end
+
+
