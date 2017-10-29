@@ -90,6 +90,16 @@ class ViewController: UIViewController, ProtShowResult {
 		super.viewDidLoad()
 		self.view.backgroundColor = UIColor.black
 		
+		do {
+			let d : Double = 1e10
+			let b = BigFloat(d)
+			var bn = BigFloat(1)
+			for _ in 1...2 {
+				bn = bn / b
+			}			
+			rpn.push(x: StackElem(val: bn))
+		}
+		
 		//The Number Pad
 		for i in 0...9 {
 			let button = CalcButton()
