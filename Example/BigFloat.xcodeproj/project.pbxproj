@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		546D65631FA46A5C00FAA00B /* digital-7mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 546D65561FA46A5B00FAA00B /* digital-7mono.ttf */; };
+		546D65641FA46A5C00FAA00B /* AsyncCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D65571FA46A5B00FAA00B /* AsyncCalc.swift */; };
+		546D65651FA46A5C00FAA00B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546D65591FA46A5B00FAA00B /* LaunchScreen.xib */; };
+		546D65661FA46A5C00FAA00B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 546D655B1FA46A5B00FAA00B /* Main.storyboard */; };
+		546D65671FA46A5C00FAA00B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 546D655D1FA46A5B00FAA00B /* Images.xcassets */; };
+		546D65681FA46A5C00FAA00B /* RPNCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D655E1FA46A5B00FAA00B /* RPNCalc.swift */; };
+		546D65691FA46A5C00FAA00B /* RPNInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D655F1FA46A5B00FAA00B /* RPNInfo.swift */; };
+		546D656A1FA46A5C00FAA00B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D65601FA46A5C00FAA00B /* Extensions.swift */; };
+		546D656B1FA46A5C00FAA00B /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D65611FA46A5C00FAA00B /* UIExtensions.swift */; };
+		546D656C1FA46A5C00FAA00B /* digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 546D65621FA46A5C00FAA00B /* digital-7.ttf */; };
+		54B8A3141FA46C7D0015CEA3 /* StackElem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B8A3131FA46C7D0015CEA3 /* StackElem.swift */; };
+		54B8A3161FA49BB90015CEA3 /* StackInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B8A3151FA49BB90015CEA3 /* StackInput.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -32,6 +44,18 @@
 		22922472580E3EAF03C0AD8C /* BigFloat.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BigFloat.podspec; path = ../BigFloat.podspec; sourceTree = "<group>"; };
 		264007136F393EA5277B8530 /* Pods_BigFloat_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigFloat_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2B696A04D5D49213640971 /* Pods-BigFloat_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigFloat_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigFloat_Tests/Pods-BigFloat_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		546D65561FA46A5B00FAA00B /* digital-7mono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7mono.ttf"; sourceTree = "<group>"; };
+		546D65571FA46A5B00FAA00B /* AsyncCalc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncCalc.swift; sourceTree = "<group>"; };
+		546D655A1FA46A5B00FAA00B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		546D655C1FA46A5B00FAA00B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		546D655D1FA46A5B00FAA00B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		546D655E1FA46A5B00FAA00B /* RPNCalc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPNCalc.swift; sourceTree = "<group>"; };
+		546D655F1FA46A5B00FAA00B /* RPNInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPNInfo.swift; sourceTree = "<group>"; };
+		546D65601FA46A5C00FAA00B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		546D65611FA46A5C00FAA00B /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		546D65621FA46A5C00FAA00B /* digital-7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7.ttf"; sourceTree = "<group>"; };
+		54B8A3131FA46C7D0015CEA3 /* StackElem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackElem.swift; sourceTree = "<group>"; };
+		54B8A3151FA49BB90015CEA3 /* StackInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackInput.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* BigFloat_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigFloat_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +104,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		546D65581FA46A5B00FAA00B /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				546D65591FA46A5B00FAA00B /* LaunchScreen.xib */,
+				546D655B1FA46A5B00FAA00B /* Main.storyboard */,
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +137,17 @@
 		607FACD21AFB9204008FA782 /* Example for BigFloat */ = {
 			isa = PBXGroup;
 			children = (
+				546D65571FA46A5B00FAA00B /* AsyncCalc.swift */,
+				54B8A3131FA46C7D0015CEA3 /* StackElem.swift */,
+				54B8A3151FA49BB90015CEA3 /* StackInput.swift */,
+				546D65581FA46A5B00FAA00B /* Base.lproj */,
+				546D65621FA46A5C00FAA00B /* digital-7.ttf */,
+				546D65561FA46A5B00FAA00B /* digital-7mono.ttf */,
+				546D65601FA46A5C00FAA00B /* Extensions.swift */,
+				546D655D1FA46A5B00FAA00B /* Images.xcassets */,
+				546D655E1FA46A5B00FAA00B /* RPNCalc.swift */,
+				546D655F1FA46A5B00FAA00B /* RPNInfo.swift */,
+				546D65611FA46A5C00FAA00B /* UIExtensions.swift */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -250,7 +294,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				546D65651FA46A5C00FAA00B /* LaunchScreen.xib in Resources */,
+				546D65631FA46A5C00FAA00B /* digital-7mono.ttf in Resources */,
+				546D65671FA46A5C00FAA00B /* Images.xcassets in Resources */,
+				546D656C1FA46A5C00FAA00B /* digital-7.ttf in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				546D65661FA46A5C00FAA00B /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
@@ -356,12 +405,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-BigFloat_Example/Pods-BigFloat_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BigFloat/BigFloat.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
+				"${BUILT_PRODUCTS_DIR}/PrimeFactors/PrimeFactors.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigFloat.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PrimeFactors.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,7 +428,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				54B8A3161FA49BB90015CEA3 /* StackInput.swift in Sources */,
+				546D656B1FA46A5C00FAA00B /* UIExtensions.swift in Sources */,
+				546D656A1FA46A5C00FAA00B /* Extensions.swift in Sources */,
+				54B8A3141FA46C7D0015CEA3 /* StackElem.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				546D65641FA46A5C00FAA00B /* AsyncCalc.swift in Sources */,
+				546D65681FA46A5C00FAA00B /* RPNCalc.swift in Sources */,
+				546D65691FA46A5C00FAA00B /* RPNInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +458,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		546D65591FA46A5B00FAA00B /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				546D655A1FA46A5B00FAA00B /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		546D655B1FA46A5B00FAA00B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				546D655C1FA46A5B00FAA00B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

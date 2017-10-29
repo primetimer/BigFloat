@@ -1,0 +1,6 @@
+framework module BigFloat {
+  umbrella header "BigFloat-umbrella.h"
+
+  export *
+  module * { export * }
+}

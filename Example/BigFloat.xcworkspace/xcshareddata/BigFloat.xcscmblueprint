@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "983701B31BF660C28ECAE7F250F262EBD02EC79E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "3FDA49B3E4A9DFE4C6D428B23ECC65BB1C3A6B7F" : 9223372036854775807,
+    "983701B31BF660C28ECAE7F250F262EBD02EC79E" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F4150123-E6E2-4F07-B36A-3B9DB03A9880",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "3FDA49B3E4A9DFE4C6D428B23ECC65BB1C3A6B7F" : "",
+    "983701B31BF660C28ECAE7F250F262EBD02EC79E" : "BigFloat\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BigFloat",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Example\/BigFloat.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/primetimer\/PrimeFactors.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3FDA49B3E4A9DFE4C6D428B23ECC65BB1C3A6B7F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/primetimer\/BigFloat.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "983701B31BF660C28ECAE7F250F262EBD02EC79E"
+    }
+  ]
+}

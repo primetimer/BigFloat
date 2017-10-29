@@ -1,0 +1,27 @@
+{
+  "name": "BigFloat",
+  "version": "0.1.0",
+  "summary": "A short description of BigFloat.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/primetimer/BigFloat",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "primetimer": "primetimertime@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/primetimer/BigFloat.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "dependencies": {
+    "BigInt": [
+
+    ]
+  },
+  "source_files": "BigFloat/Classes/**/*"
+}

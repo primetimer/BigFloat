@@ -1,0 +1,35 @@
+PODS:
+  - BigFloat (0.1.0):
+    - BigInt
+  - BigInt (3.0.1):
+    - SipHash (~> 1.2)
+  - PrimeFactors (0.1.0):
+    - BigInt
+  - SipHash (1.2.0)
+
+DEPENDENCIES:
+  - BigFloat (from `../`)
+  - BigInt (~> 3.0)
+  - PrimeFactors (from `https://github.com/primetimer/PrimeFactors`)
+  - SipHash (~> 1.2)
+
+EXTERNAL SOURCES:
+  BigFloat:
+    :path: ../
+  PrimeFactors:
+    :git: https://github.com/primetimer/PrimeFactors
+
+CHECKOUT OPTIONS:
+  PrimeFactors:
+    :commit: d7881acfa8567400a069c5b615e66276bf25c856
+    :git: https://github.com/primetimer/PrimeFactors
+
+SPEC CHECKSUMS:
+  BigFloat: d44c2ecc56c5a05567f99a9d898261f4cf043caf
+  BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
+  PrimeFactors: 8ca435ced44b6def3373cd935fe280f305562cda
+  SipHash: c6e9e43e9c531b5bc6602545130c26194a6d31ce
+
+PODFILE CHECKSUM: 2aacaeebc6c4b5d9c88e530519f3fd76fe414175
+
+COCOAPODS: 1.3.1

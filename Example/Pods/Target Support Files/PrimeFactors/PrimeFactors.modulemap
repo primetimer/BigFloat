@@ -1,0 +1,6 @@
+framework module PrimeFactors {
+  umbrella header "PrimeFactors-umbrella.h"
+
+  export *
+  module * { export * }
+}

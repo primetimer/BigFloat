@@ -1,0 +1,27 @@
+{
+  "name": "PrimeFactors",
+  "version": "0.1.0",
+  "summary": "A short description of PrimeFactors.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/primetimer/PrimeFactors",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "primetimer": "primetimertime@gmail.coom"
+  },
+  "source": {
+    "git": "https://github.com/primetimer/PrimeFactors.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "dependencies": {
+    "BigInt": [
+
+    ]
+  },
+  "source_files": "PrimeFactors/Classes/**/*"
+}
