@@ -11,6 +11,7 @@ import BigInt
 import BigFloat
 
 struct StackElem  {
+	var fix : Int = 6 //Anzahl Nachkommastellen
 	var type : StackType
 	
 	private var _num : BigInt? = nil
@@ -46,11 +47,10 @@ struct StackElem  {
 	}
 	
 	func FormatStr(maxrows: Int, rowlen: Int) -> (String,rows: Int) {
-		let s = String(describing: self)
+		let s = value.ExponentialString(base: 10, fix: self.fix)
+		//let s = String(describing: self)
 		return (s,1)
 	}
-	
-	
 }
 
 extension StackElem : CustomStringConvertible {

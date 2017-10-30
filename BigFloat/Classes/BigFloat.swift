@@ -1,89 +1,18 @@
-
+	
 import Foundation
 import BigInt
 
-extension BigInt {
-	func ExponentialString() {
-		
-	}
-}
-
-//Copied from BigInt library
-extension BigUInt {
-	
-	//MARK: String Conversion
-	
-	/// Calculates the number of numerals in a given radix that fit inside a single `Word`.
-	///
-	/// - Returns: (chars, power) where `chars` is highest that satisfy `radix^chars <= 2^Word.bitWidth`. `power` is zero
-	///   if radix is a power of two; otherwise `power == radix^chars`.
-	fileprivate static func charsPerWord(forRadix radix: Int) -> (chars: Int, power: Word) {
-		var power: Word = 1
-		var overflow = false
-		var count = 0
-		while !overflow {
-			let (p, o) = power.multipliedReportingOverflow(by: Word(radix))
-			overflow = o
-			if !o || p == 0 {
-				count += 1
-				power = p
-			}
-		}
-		return (count, power)
-	}
-}
-
-/*
-extension String {
-public init(_ v: BigUInt, radix: Int, exponential : Bool) {
-
-var ex = 0
-while true {
-
-}
-precondition(radix > 1)
-let (charsPerWord, power) = BigUInt.charsPerWord(forRadix: radix)
-guard v != 0 else { self = "0"; return }
-
-var parts: [String]
-if power == 0 {
-parts = v.words.map { String($0, radix: radix, uppercase: true) }
-}
-else {
-parts = []
-var rest = v
-while rest != 0 {
-let mod = rest / BigUInt(power)
-parts.append(String(mod, radix: radix, uppercase: true))
-}
-}
-assert(!parts.isEmpty)
-
-self = ""
-var first = true
-for part in parts.reversed() {
-let zeroes = charsPerWord - part.characters.count
-assert(zeroes >= 0)
-if !first && zeroes > 0 {
-// Insert leading zeroes for mid-Words
-self += String(repeating: "0", count: zeroes)
-}
-first = false
-self += part
-}
-}
-
-}
-*/
-
 public struct BigFloat : ExpressibleByFloatLiteral {
-	//public var sign : Int = 1
 	public var significand:BigInt = 0
 	public var exponent:Int = 0
 	public static let maxExponent = Int.max
 	public init(significand:BigInt, exponent:Int) {
 		self.significand = significand
 		self.exponent = exponent
+	}
+	
+	public func isZero() ->Bool {
+		return significand == 0
 	}
 	
 	private mutating func normalize() {
@@ -127,13 +56,18 @@ public struct BigFloat : ExpressibleByFloatLiteral {
 		self.significand = BigInt(sign*m)
 		self.exponent = e
 	}
-	
+
 	public mutating func truncate(bits:Int)->BigFloat {
 		if significand == 0 { return self }
 		let shift = self.precision - bits
 		if shift <= 0 { return self }
 		let ex = self.exponent + (self.significand.bitWidth)
-		self.significand >>= BigInt(shift)
+		self.significand >>= BigInt(shift-1)
+		let carry = significand & 1
+		if carry>0 {
+			self.significand += 1
+		}
+		self.significand >>= 1
 		self.exponent = ex - self.significand.bitWidth
 		while self.significand != 0 && self.significand & 1 == 0 {
 			self.significand >>= 1
@@ -183,28 +117,59 @@ public struct BigFloat : ExpressibleByFloatLiteral {
 		var prod = (self * r)
 		_ = prod.truncate(bits: px)
 		
+		/*
 		do {
 			let sd = self.toDouble()
 			let rd = r.toDouble()
 			let prodd = prod.toDouble()
 			print("Divisionmul",sd,rd,prodd)
 		}
+		*/
 		return prod
 	}
 	
+	public func reciprocal(precision:Int=32)->BigFloat {
+		if self.significand == 0 {
+			return self
+		}
+		if self.significand == 1 {
+			return BigFloat(significand:1, exponent:-self.exponent)
+		}
+		
+		let ex = self.exponent + significand.bitWidth + 1
+		//let px = max(self.precision, precision)
+		let px = 256
+		
+		let n = BigInt(1) << BigInt(px*2+2*significand.bitWidth)
+		
+		let q = n / self.significand
+		print(self.significand,significand.bitWidth,self.exponent)
+		print(n)
+		print(q,q.bitWidth)
+		var ans = BigFloat(significand:q, exponent:-ex-q.bitWidth+4)
+		ans.normalize()
+		return ans
+	}
+	
+	/*
 	public func reciprocal(precision:Int=0)->BigFloat {
 		if self.significand == 0 { return self }
 		if self.significand == 1 {
 			return BigFloat(significand:1, exponent:-self.exponent)
 		}
 		// let ex = self.exponent + significand.bitWidth
-		var px = BigFloat.maxprecision
+		let px = BigFloat.maxprecision
 		//let px = max(self.precision, precision)
 		let n = BigInt(1) << BigInt(px*2 + significand.bitWidth)
 		//print("n",self.exponent,q,
 		let q = n / self.significand
-		return BigFloat(significand:q, exponent:(-self.exponent - 2*px-significand.bitWidth))
+		var ans = BigFloat(significand:q, exponent:(-self.exponent - 2*px-significand.bitWidth))
+		ans.normalize()
+		ans.truncate(bits: px)
+
+		return ans
 	}
+	*/
 	
 	public func frexp()->(BigFloat, Int)   {
 		return (
@@ -276,20 +241,16 @@ public func +(lhs:BigFloat, rhs:BigFloat)->BigFloat {
 	let sig = ls + rs
 	return BigFloat(significand:sig, exponent:ex - Swift.abs(dx))
 }
+
 public func -(lhs:BigFloat, rhs:BigFloat)->BigFloat {
 	let subtrahend = -rhs
 	return lhs + subtrahend
 }
 
+
 //
 
-extension BigFloat : CustomStringConvertible {
-	public var description: String {
-		//let ans = self.toString(base: 10, fix: 0)
-		let ans = self.ExponentialString(base: 10)
-		return ans
-	}
-}
+
 
 public extension BigInt {
 	public init(_ bf:BigFloat) {
@@ -303,169 +264,5 @@ public extension BigInt {
 		}
 	}
 }
-
-
-public extension BigFloat {
-	
-	public func SplitIntFract()->(BigInt, BigFloat) {
-		let i = BigInt(self)
-		return (i, self - BigFloat(i))
-	}
-	
-	public func isZero() ->Bool {
-		return significand == 0
-	}
-	
-	public func toString(base:Int=10, fix:Int=0)->String {
-		if significand == 0 {
-			return "0."
-		}
-		if significand.sign == .minus {
-			let str = (-self).toString(base: base, fix: fix)
-			return "-" + str
-		}
-		
-		let dfactor = log(2) / log(Double(base))
-		var ndigits = fix != 0 ? fix
-			: Swift.max(Int(Double(self.precision) * dfactor)+2, 17)
-		var (int, fract) = self.SplitIntFract()
-		
-		var digits : [Int] = []
-		var started = false
-		while ndigits > 0 {
-			var r: BigInt
-			fract = fract*BigFloat(base)
-			(r, fract) = fract.SplitIntFract()
-			if r != 0 { started = true }
-			digits.append(Int(r))
-			if fract.isZero() { break }
-			if started { ndigits -= 1 }
-		}
-		var str = String(int,radix : base) + "."
-		for d in digits {
-			str = str + String(d)
-		}
-		return str
-	}
-	
-	
-	public func ExponentialString(base : Int, fix:Int=0 ) -> String {
-		
-		if self.significand < 0 {
-			return "-" + (-self).ExponentialString(base: base, fix : fix)
-		}
-		if self.significand == 0 {
-			return "0"
-		}
-		
-		var ex = 0
-		var temp = self
-		do {
-			
-			//Multipliziere so lange bis >= 1.0
-			while temp < BigFloat(1) {
-				temp = temp * BigFloat(base)
-				ex = ex - 1
-			}
-		}
-		
-		//Splitte Vor und nachkommateil
-		var (int,fract) = temp.SplitIntFract()
-		let bbase = BigInt(base)
-
-		
-		//Scuhe die letzte potenz mit 10^ex < self
-		var div = BigInt(1)
-		while int >= div*bbase {
-			div = div * bbase
-			ex = ex + 1
-		}
-		
-		
-		
-		//Bestimme die Ziffern des Vorkommaanteils
-		var digits : [Int] = []
-		while int > 0 {
-			let digit = int / div
-			digits.append(Int(digit))
-			int = int % div
-			div = div / bbase
-		}
-		
-		// Bestimme den Nachkommanteil
-		var fracdigits : [Int] = []
-		if fract > BigFloat(0) {
-			let dfactor = log(2) / log(Double(base))
-			var ndigits = fix != 0 ? fix
-				: Swift.max(Int(Double(self.precision) * dfactor)+2, 17)
-			
-			var fracstarted = false
-			while ndigits > 0 {
-				var r: BigInt
-				fract = fract*BigFloat(base)
-				(r, fract) = fract.SplitIntFract()
-				if r != 0 { fracstarted = true }
-				fracdigits.append(Int(r))
-				if fract.isZero() { break }
-				if fracstarted { ndigits -= 1 }
-			}
-		}
-		
-		
-		var str = ""
-		var fracstr = ""
-		do {
-			var started = false
-			for d in digits {
-				if !started {
-					str = String(d) + "."
-					started = true
-				} else {
-					str = str + String(d)
-				}
-			}
-		}
-		do {
-			for d in fracdigits {
-				fracstr = fracstr + String(d)
-			}
-		}
-		return str  + fracstr + "E" + String(ex)
-	}
-	
-	
-	/*
-	public func ExponentailString(base : Int) -> String {
-	
-	if self.significand == 0 { return "0." }
-	let compare = self.toString(base: base, fix: 0)
-	
-	var temp = self
-	var basepow = BigFloat(base)
-	var ex = 0
-	if self >= BigFloat(base) {
-	while temp >= BigFloat(base)
-	{
-	temp = self / basepow
-	basepow = basepow * BigFloat(base)
-	ex = ex + 1
-	}
-	} else {
-	while temp < BigFloat(1.0)
-	{
-	temp = self * basepow
-	basepow = basepow * BigFloat(base)
-	ex = ex - 1
-	}
-	}
-	
-	let str = temp.toString(base: base, fix: 16)
-	let exstr = String(ex)
-	let ans = str + " E" + exstr
-	return ans
-	}
-	*/
-}
-
 
 

@@ -43,3 +43,13 @@ class CalcButton : UIButton {
 	}
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
+
+class InputButton : CalcButton {
+	
+	private (set) var cmd : StackInputCmd = .unknown
+	convenience init (cmd : StackInputCmd) {
+		self.init()
+		self.cmd = cmd
+		self.titleLabel?.font = self.titleLabel?.font.withSize(14)
+	}
+}

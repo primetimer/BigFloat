@@ -11,8 +11,6 @@ import BigInt
 import PrimeFactors
 import BigFloat
 
-
-
 class ViewController: UIViewController, ProtShowResult {
 	private var input = StackInput()
 	private var _shiftmode : Bool = false
@@ -33,16 +31,27 @@ class ViewController: UIViewController, ProtShowResult {
 	private var uistate = UILabel()
 	private var uistack : [UILabel] = []
 	private var uistackdesc : [UILabel] = []
-	private var uiback = CalcButton(type: .Undefined)
+	private var uiback = InputButton(cmd: .back)
 	private var uiclx = CalcButton(type: .Undefined)
-	private var uienter = CalcButton()
+	//private var uienter = InputButton(cmd: .enter)
 	private var uipreview = CalcButton()
-	private var uiundo = CalcButton(type : .Undefined)
-	private let uishift = CalcButton()
+	private var uiundo = InputButton(cmd: .unknown)
+	private let uishift = InputButton(cmd: .unknown)
+	//private var uipunct = InputButton(cmd: .punct)
+	//private var uichs = InputButton(cmd: .chs)
+	//private var uiee = InputButton(cmd: .ee)
 	private let uiesc = CalcButton(type : .Undefined)
 	private let uiinfo = CalcButton(type : .Undefined)
 	private var buttonarr : [CalcButton] = []
 	private var uiinfotext = InfoView()
+	
+	func CreateInputButton(str: String, cmd : StackInputCmd) {
+		let b = InputButton(cmd: cmd)
+		buttonarr.append(b)
+		view.addSubview(b)
+		b.setTitle(str, for: .normal)
+		b.addTarget(self, action: #selector(NumberAction), for: .touchUpInside)
+	}
 	
 	//Create Button for Calc Action
 	func CreateCalcButton(str: String, type : CalcType) {
@@ -81,6 +90,17 @@ class ViewController: UIViewController, ProtShowResult {
 		return nil
 	}
 	
+	private func GetButtonByCmd(cmd: StackInputCmd) -> InputButton? {
+		for b in buttonarr {
+			if let i = b as? InputButton {
+				if i.cmd == cmd {
+					return i
+				}
+			}
+		}
+		return nil
+	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		ShowStack()
 		ShowButtons()
@@ -88,6 +108,15 @@ class ViewController: UIViewController, ProtShowResult {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		do {
+			let x = BigFloat(1)
+			let y = BigFloat(1.5)
+			let q = x / y
+			let s = q.ExponentialString(base: 10, fix: 6)
+			print(q)
+			print("Go")
+		}
 		self.view.backgroundColor = UIColor.black
 		
 		do {
@@ -102,12 +131,7 @@ class ViewController: UIViewController, ProtShowResult {
 		
 		//The Number Pad
 		for i in 0...9 {
-			let button = CalcButton()
-			ui_num.append(button)
-			button.setTitle(String(i), for: .normal)
-			view.addSubview(button)
-			button.addTarget(self, action: #selector(NumberAction), for: .touchUpInside)
-			buttonarr.append(ui_num[i])
+			CreateInputButton(str: String(i), cmd: StackInputCmd.ByDigit(dig: i))
 		}
 		
 		view.addSubview(uistate)	//State of calculation
@@ -132,8 +156,12 @@ class ViewController: UIViewController, ProtShowResult {
 		uiclx.addTarget(self, action: #selector(ClearAction), for: .touchUpInside)
 		uiclx.isHidden = true
 		
+		CreateInputButton(str: ".", cmd:  .punct)
+		CreateInputButton(str: "EE", cmd:  .ee)
+		CreateInputButton(str: "+/-", cmd: .chs)
+		CreateInputButton(str: "ENTER", cmd: .enter)
+		
 		view.addSubview(uipreview)
-		view.addSubview(uienter)
 		view.addSubview(uishift)
 		view.addSubview(uiesc)
 		view.addSubview(uiundo)
@@ -143,8 +171,6 @@ class ViewController: UIViewController, ProtShowResult {
 		
 		uiundo.setTitle("Undo", for: .normal)
 		uiundo.addTarget(self, action: #selector(NumberAction), for: .touchUpInside)
-		uienter.setTitle("Enter", for: .normal)
-		uienter.addTarget(self, action: #selector(NumberAction), for: .touchUpInside)
 		uipreview.setTitle("View #", for: .normal)
 		uipreview.addTarget(self, action: #selector(PreviewAction), for: .touchUpInside)
 		uishift.setTitle(("⇧"), for: .normal)
@@ -153,8 +179,6 @@ class ViewController: UIViewController, ProtShowResult {
 		uiesc.addTarget(self, action: #selector(EscapeAction), for: .touchUpInside)
 		uiinfo.setTitle("ℹ︎", for: .normal)
 		uiinfo.addTarget(self, action: #selector(InfoAction), for: .touchUpInside)
-		
-		buttonarr.append(uienter)
 		
 		//UI for Functions
 		CreateCalcButton(str: "LastX", type: .LastX)
@@ -195,7 +219,9 @@ class ViewController: UIViewController, ProtShowResult {
 		CreateCalcButton(str: "x² ", type: .Square)
 		CreateCalcButton(str: "x³", type: .Cube)
 		CreateCalcButton(str: "M(x)", type: .Mersenne)
-		uienter.shiftbutton = GetButtonByType(type: .LastX)
+		GetButtonByCmd(cmd: .ee)!.shiftbutton = uipreview
+		GetButtonByCmd(cmd: .enter)!.shiftbutton = GetButtonByType(type: .LastX)
+		/*
 		ui_num[0].shiftbutton = GetButtonByType(type: .TenPow)
 		ui_num[1].shiftbutton = GetButtonByType(type: .Mersenne)
 		ui_num[2].shiftbutton = GetButtonByType(type: .Square)
@@ -203,6 +229,7 @@ class ViewController: UIViewController, ProtShowResult {
 		ui_num[4].shiftbutton = GetButtonByType(type: .Cousin)
 		ui_num[5].shiftbutton = uipreview
 		ui_num[6].shiftbutton = GetButtonByType(type: .Sexy)
+		*/
 		Layout()
 	}
 	
@@ -211,7 +238,7 @@ class ViewController: UIViewController, ProtShowResult {
 	}
 	
 	//Digit Buttons
-	private var ui_num : [CalcButton] = []
+	//private var ui_num : [InputButton] = []
 	
 	//Size of the Stackview depending on landscape or portrait mode and device type
 	private func StackWidth() -> CGFloat {
@@ -302,8 +329,10 @@ class ViewController: UIViewController, ProtShowResult {
 		for i in 1...9 {
 			let col = 1 + (i-1) % 3
 			let row = 3 - (i-1) / 3 + uistack.count
-			LayoutButtonRaster(row:row, col: col, button: ui_num[i])
+			let b = GetButtonByCmd(cmd: StackInputCmd.ByDigit(dig: i))
+			LayoutButtonRaster(row:row, col: col, button: b!)
 		}
+		LayoutButtonRaster(row:8, col: 1, button: GetButtonByCmd(cmd: .n0)!)
 		
 		LayoutButtonRaster(row:4, col: 0, button: GetButtonByType(type: .Rho)!)
 		LayoutButtonRaster(row:4, col: 1, button: GetButtonByType(type: .Lehman)!)
@@ -317,13 +346,17 @@ class ViewController: UIViewController, ProtShowResult {
 		LayoutButtonRaster(row:6, col: 5, button: GetButtonByType(type: .Mod)!)
 		LayoutButtonRaster(row:5, col: 5, button: GetButtonByType(type: .gcd)!)
 		LayoutButtonRaster(row:5, col: 0, button: GetButtonByType(type: .sqrt)!)
-		LayoutButtonRaster(row:8, col: 1, button: ui_num[0])
+
 		LayoutButtonRaster(row:8, col: 0, button: uiback)
 		LayoutButtonRaster(row:8, col: 0, button: uiclx)
-		LayoutButtonRaster(row:9, col: 1, button: GetButtonByType(type: .Sto1)!)
-		LayoutButtonRaster(row:9, col: 2, button: GetButtonByType(type: .Sto2)!)
-		LayoutButtonRaster(row:9, col: 3, button: GetButtonByType(type: .Sto3)!)
-		LayoutButtonRaster(row:8, col: 2, button: uienter,numcols: 2)
+		
+		//LayoutButtonRaster(row:9, col: 1, button: GetButtonByType(type: .Sto1)!)
+		//LayoutButtonRaster(row:9, col: 2, button: GetButtonByType(type: .Sto2)!)
+		//LayoutButtonRaster(row:9, col: 3, button: GetButtonByType(type: .Sto3)!)
+		LayoutButtonRaster(row:8, col: 2, button: GetButtonByCmd(cmd: .punct)!)
+		LayoutButtonRaster(row:8, col: 3, button: GetButtonByCmd(cmd: .chs)!)
+		LayoutButtonRaster(row:9, col: 1, button: GetButtonByCmd(cmd: .enter)!,numcols: 2)
+		LayoutButtonRaster(row:9, col: 3, button: GetButtonByCmd(cmd: .ee)!)
 		LayoutButtonRaster(row:9, col: 0, button: uishift)
 		LayoutButtonRaster(row:4, col: 5, button: uiesc)
 		LayoutButtonRaster(row:4, col: 5, button: uiundo)
@@ -389,16 +422,25 @@ class ViewController: UIViewController, ProtShowResult {
 		var (registerrows,registerlen) = (1,1)
 		let maxrows = 4 * 2 / visiblestackelems
 		for i in 0..<visiblestackelems {
-			let val = rpn[i]
-			let (valstr,rows) = val.FormatStr(maxrows: maxrows, rowlen: 18)
-			/*
-			let isprime = PrimeCache.shared.IsPrime(p: val)
-			uistackdesc[i].textColor = isprime ? .white : .lightGray
-			*/
+			if i == 0 && !input.IsFinished() {
+				uistack[i].text = input.inputstring
+			} else {
+				let val = rpn[i]
+				let (valstr,rows) = val.FormatStr(maxrows: maxrows, rowlen: 18)
+				uistack[i].text = valstr
+				registerrows = max(registerrows,rows)
+			}
+			
 			uistackdesc[i].text = StackName(index: i)
-			uistack[i].text = valstr
-			registerrows = max(registerrows,rows)
-			registerlen = max(registerlen,valstr.count)
+			if uistack[i].text != nil {
+				registerlen = max(registerlen,uistack[i].text!.count)
+			}
+		}
+		
+		if visiblestackelems == 1 {
+			let val = rpn[0].value
+			let str = val.ExponentialString(base: 10, fix: 0)
+			uistack[0].text = str
 		}
 		
 		//Changes font according to the maximal number of rows per register
@@ -471,7 +513,7 @@ class ViewController: UIViewController, ProtShowResult {
 	//Called by asynchronous Calculation on main thread
 	internal func ShowCalcResult() {
 		asynccalc = nil
-		input.Enter()
+		input.Finish()
 		self.ShowStack()
 		self.ShowButtons(clear : true)
 	}
@@ -513,7 +555,7 @@ class ViewController: UIViewController, ProtShowResult {
 			uiinfotext.ShowText(type: sender.type)
 			return
 		}
-		if ui_num.contains(sender) {
+		if sender is InputButton {
 			uiinfotext.ShowNumInfo()
 		}
 		if sender == uiundo {
@@ -522,7 +564,7 @@ class ViewController: UIViewController, ProtShowResult {
 	}
 	
 	//Actions for Number Input and related Actions
-	@objc func NumberAction(sender: CalcButton!) {
+	@objc func NumberAction(sender: InputButton!) {
 		if isInfo {
 			if sender == uiundo { InfoAction(sender: sender); return }
 			if sender != uishift { InfoAction(sender: sender); return }
@@ -530,33 +572,55 @@ class ViewController: UIViewController, ProtShowResult {
 		}
 		if isInfo { InfoAction(sender: sender)}
 		
-		if sender == uiback {
-			if rpn.stackstate != .valid { rpn.stackstate = .valid }
-			else {
-				input.Back()
-				rpn.x = StackElem(val: input.value)
+		switch  sender.cmd {
+		case .chs:
+			if input.IsFinished() {
+				let chs = -rpn.x.value
+				rpn.pop()
+				rpn.push(x: StackElem(val: chs))
+			} else {
+				input.AppendCmd(cmd : sender.cmd)
+				rpn.x = StackElem(val:input.inputvalue)
+			}
+		case .punct, .ee:
+			if input.IsFinished() {
+				//rpn.pop()
+				rpn.push()
+				input.Begin()
+			}
+			input.AppendCmd(cmd : sender.cmd)
+			rpn.x = StackElem(val:input.inputvalue)
+		case .n0, .n1, .n2, .n3, .n4, .n5, .n6, .n7, .n8, .n9:
+			if input.IsFinished() {
+				//rpn.pop()
+				rpn.push()
+				input.Begin()
+			}
+			input.AppendCmd(cmd : sender.cmd)
+			rpn.x = StackElem(val:input.inputvalue)
+		case .back:
+			if rpn.stackstate != .valid { rpn.stackstate = .valid ; return}
+			if input.IsFinished() { break }
+			input.AppendCmd(cmd: .back)
+			rpn.x = StackElem(val: input.inputvalue)
+		case .enter:
+			if input.IsFinished() {
+				rpn.push(); break
+			}
+			input.AppendCmd(cmd: .enter)
+			rpn.push(val: input.inputvalue)
+			input.Begin()
+		case .unknown:
+			if sender == uishift {
+				shiftmode = !shiftmode
+				ShowButtons()
+				return
+			}
+			if sender == uiundo {
+				if rpnlist.count > 1 {	rpnlist.remove(at: 0) }
 			}
 		}
-		rpn.stackstate = .valid
-		for i in 0...9 {
-			if sender == ui_num[i] {
-				if input.IsFinished() { rpn.push() }
-				input.AppendDigit(dig: i)
-				rpn.x = StackElem(val:input.value)
-			}
-		}
-		if sender == uienter {
-			input.Enter()
-			rpn.push(val: input.value)
-		}
-		if sender == uishift {
-			shiftmode = !shiftmode
-			ShowButtons()
-			return
-		}
-		if sender == uiundo {
-			if rpnlist.count > 1 {	rpnlist.remove(at: 0) }
-		}
+		rpn.stackstate = .valid		
 		ShowStackState()
 		ShowStack()
 		ShowButtons(clear: true)
