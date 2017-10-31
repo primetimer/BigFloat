@@ -24,9 +24,9 @@ class ViewController: UIViewController, ProtShowResult {
 		get { return rpnlist[0] }
 	}
 	private var p : BigUInt = 1
-	private let rho = PrimeFaktorRho()
-	private let shank = PrimeFactorShanks()
-	private let lehman = PrimeFactorLehman()
+	//private let rho = PrimeFaktorRho()
+	//private let shank = PrimeFactorShanks()
+	//private let lehman = PrimeFactorLehman()
 	
 	private var uistate = UILabel()
 	private var uistack : [UILabel] = []
@@ -109,26 +109,8 @@ class ViewController: UIViewController, ProtShowResult {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		do {
-			let x = BigFloat(1)
-			let y = BigFloat(1.5)
-			let q = x / y
-			let s = q.ExponentialString(base: 10, fix: 6)
-			print(q)
-			print("Go")
-		}
 		self.view.backgroundColor = UIColor.black
-		
-		do {
-			let d : Double = 1e10
-			let b = BigFloat(d)
-			var bn = BigFloat(1)
-			for _ in 1...2 {
-				bn = bn / b
-			}			
-			rpn.push(x: StackElem(val: bn))
-		}
-		
+				
 		//The Number Pad
 		for i in 0...9 {
 			CreateInputButton(str: String(i), cmd: StackInputCmd.ByDigit(dig: i))
@@ -187,20 +169,20 @@ class ViewController: UIViewController, ProtShowResult {
 		CreateCalcButton(str: "*", type: .Prod)
 		CreateCalcButton(str: "/", type: .Divide)
 		CreateCalcButton(str: "→π", type: .PNext)
-		CreateCalcButtonShift(str: "→ππ", type: .Twin,unshift : .PNext)
+		//CreateCalcButtonShift(str: "→ππ", type: .Twin,unshift : .PNext)
 		CreateCalcButton(str: "π←", type: .PPrev)
-		CreateCalcButtonShift(str: "→2π+1", type: .SoG,unshift : .PPrev)
-		CreateCalcButton(str: "x*()", type: .Factor)
-		CreateCalcButtonShift(str: "p*q", type: .Factors,unshift : .Factor)
-		CreateCalcButton(str: "squfof", type: .Squfof)
+		//CreateCalcButtonShift(str: "→2π+1", type: .SoG,unshift : .PPrev)
+		//CreateCalcButton(str: "x*()", type: .Factor)
+		//CreateCalcButtonShift(str: "p*q", type: .Factors,unshift : .Factor)
+		//CreateCalcButton(str: "squfof", type: .Squfof)
 		CreateCalcButton(str: "→p", type: .Sto1)
 		CreateCalcButtonShift(str: "←p", type: .Rcl1,unshift : .Sto1)
 		CreateCalcButton(str: "→q", type: .Sto2)
 		CreateCalcButtonShift(str: "←q", type: .Rcl2,unshift : .Sto2)
 		CreateCalcButton(str: "→r", type: .Sto3)
 		CreateCalcButtonShift(str: "←r", type: .Rcl3,unshift : .Sto3)
-		CreateCalcButton(str: "ρ", type: .Rho)
-		CreateCalcButton(str: "a²-b²", type: .Lehman)
+		//CreateCalcButton(str: "ρ", type: .Rho)
+		//CreateCalcButton(str: "a²-b²", type: .Lehman)
 		CreateCalcButton(str: "x<>y", type: .Swap)
 		CreateCalcButton(str: "↓", type: .Pop)
 		CreateCalcButton(str: "%", type: .Mod)
@@ -211,25 +193,19 @@ class ViewController: UIViewController, ProtShowResult {
 		CreateCalcButtonShift(str: "Rnd #", type: .Rnd, unshift: .Hash)
 		CreateCalcButton(str: "√", type: .sqrt)
 		CreateCalcButtonShift(str: "∛", type: .crt, unshift: .sqrt)
+		CreateCalcButton(str: "exp", type: .exp)
+		CreateCalcButtonShift(str: "ln", type: .ln, unshift: .exp)
+		
 		CreateCalcButton(str: "⌘C", type: .CmdC)
 		CreateCalcButtonShift(str: "⌘V", type: .CmdV, unshift : .CmdC)
-		CreateCalcButton(str: "Sexy", type: .Sexy)
-		CreateCalcButton(str: "Cousin", type: .Cousin)
+		//CreateCalcButton(str: "Sexy", type: .Sexy)
+		//CreateCalcButton(str: "Cousin", type: .Cousin)
 		CreateCalcButton(str: "10^x", type: .TenPow)
 		CreateCalcButton(str: "x² ", type: .Square)
 		CreateCalcButton(str: "x³", type: .Cube)
 		CreateCalcButton(str: "M(x)", type: .Mersenne)
 		GetButtonByCmd(cmd: .ee)!.shiftbutton = uipreview
 		GetButtonByCmd(cmd: .enter)!.shiftbutton = GetButtonByType(type: .LastX)
-		/*
-		ui_num[0].shiftbutton = GetButtonByType(type: .TenPow)
-		ui_num[1].shiftbutton = GetButtonByType(type: .Mersenne)
-		ui_num[2].shiftbutton = GetButtonByType(type: .Square)
-		ui_num[3].shiftbutton = GetButtonByType(type: .Cube)
-		ui_num[4].shiftbutton = GetButtonByType(type: .Cousin)
-		ui_num[5].shiftbutton = uipreview
-		ui_num[6].shiftbutton = GetButtonByType(type: .Sexy)
-		*/
 		Layout()
 	}
 	
@@ -333,10 +309,11 @@ class ViewController: UIViewController, ProtShowResult {
 			LayoutButtonRaster(row:row, col: col, button: b!)
 		}
 		LayoutButtonRaster(row:8, col: 1, button: GetButtonByCmd(cmd: .n0)!)
+		LayoutButtonRaster(row:4, col: 0, button: GetButtonByType(type: .exp)!)
 		
-		LayoutButtonRaster(row:4, col: 0, button: GetButtonByType(type: .Rho)!)
-		LayoutButtonRaster(row:4, col: 1, button: GetButtonByType(type: .Lehman)!)
-		LayoutButtonRaster(row:4, col: 2, button: GetButtonByType(type: .Squfof)!)
+		//LayoutButtonRaster(row:4, col: 0, button: GetButtonByType(type: .Rho)!)
+		//LayoutButtonRaster(row:4, col: 1, button: GetButtonByType(type: .Lehman)!)
+		//LayoutButtonRaster(row:4, col: 2, button: GetButtonByType(type: .Squfof)!)
 		LayoutButtonRaster(row:4, col: 3, button: GetButtonByType(type: .Hash)!)
 		LayoutButtonRaster(row:7, col: 5, button: GetButtonByType(type: .PPrev)!)
 		LayoutButtonRaster(row:8, col: 5, button: GetButtonByType(type: .PNext)!)

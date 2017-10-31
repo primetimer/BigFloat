@@ -40,12 +40,12 @@ class InfoView : UITextView {
 		case .PNext:	t = "Next prime number."
 		case .PPrev: 	t = "Previous prime number."
 		case .Rnd: 		t = "Random Number up to x. If x is zero a random number up 10^10 is calculated."
-		case .Twin:  	t = "Next twin-prime in x and y register."
-		case .SoG: 		t = "Next sophie germain prime. y-Register is 2p+1."
-		case .Rho: 		t = "Calculates a factor (not neccesarilly a prime factor) of x with Pollards rho methos. Error is displayed if no factor was found. Consider one of the other factorization methods."
-		case .Squfof:	t = "Calculates a factor (not neccesarilly a prime factor) of x with Shanks method of continued fraction. Error is displayed if no factor was found. Consider one of the other factorization methods. You can stop the calculation with the escape button."
-		case .Lehman: 	t = "Calculates a factor of x with Lehmans method. This is the slowest factorization method, but a result is guaranteed. You can stop the calculation it with the escape button."
-		case .Factor, .Factors:	t = "Not yet implemented"
+		//case .Twin:  	t = "Next twin-prime in x and y register."
+		//case .SoG: 		t = "Next sophie germain prime. y-Register is 2p+1."
+		//case .Rho: 		t = "Calculates a factor (not neccesarilly a prime factor) of x with Pollards rho methos. Error is displayed if no factor was found. Consider one of the other factorization methods."
+		//case .Squfof:	t = "Calculates a factor (not neccesarilly a prime factor) of x with Shanks method of continued fraction. Error is displayed if no factor was found. Consider one of the other factorization methods. You can stop the calculation with the escape button."
+		//case .Lehman: 	t = "Calculates a factor of x with Lehmans method. This is the slowest factorization method, but a result is guaranteed. You can stop the calculation it with the escape button."
+		//case .Factor, .Factors:	t = "Not yet implemented"
 		case .Swap:		t = "Swaps the content of x and y register"
 		case .Pop:		t = "Drops the content of x register"
 		case .Pow:		t = "Power of y by x. A result in a number essentially greater than a number with one hundred digits result in an overflow message."
@@ -63,8 +63,12 @@ class InfoView : UITextView {
 		case .Square:   t = "Square of x"
 		case .Cube:		t = "Cube of x"
 		case .TenPow:	t = "One with x trailing zeros"
-		case .Sexy:     t = "Sexy Prime ( the next prime p, with p + 6  prime )"
-		case .Cousin:   t = "Cousin Prime ( the next prime p, with p + 4  prime )"
+		//case .Sexy:     t = "Sexy Prime ( the next prime p, with p + 6  prime )"
+		//case .Cousin:   t = "Cousin Prime ( the next prime p, with p + 4  prime )"
+		case .exp:
+			t = "Exponential function with base e"
+		case .ln:
+			t = "Natural logarithm"
 		}
 		self.text = t
 	}

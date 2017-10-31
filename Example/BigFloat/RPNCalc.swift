@@ -17,8 +17,8 @@ enum StackState : Int {
 
 enum CalcType : Int {
 	case Undefined,Plus,Minus,Prod,Divide, LastX, Mersenne, Square, Cube, TenPow
-	case PNext, PPrev, Sexy, Cousin, Twin, SoG, Rho, Squfof, Lehman, Factor, Factors
-	case Swap, Pop, Pow, PowMod
+	case PNext, PPrev //, Sexy, Cousin, Twin, SoG, Rho, Squfof, Lehman, Factor, Factors
+	case Swap, Pop, Pow, PowMod, exp, ln
 	case Mod, gcd, sqrt, crt, Hash,Rnd
 	case Sto1,Sto2,Sto3, Rcl1,Rcl2,Rcl3, CmdC, CmdV
 }
@@ -382,7 +382,14 @@ class RPNCalc : CalcCancellable {
 	}
 	
 	private func sqrt() {
-		stackstate = .unimplemented
+		if x.value < BigFloat(0) {
+			stackstate = .error
+			return
+		}
+		let r = BigFloat.sqrt(x: x.value)
+		pop()
+		push(x: StackElem(val: r))
+		stackstate = .valid
 		/*
 		let ans = x.squareRoot()
 		popx()
@@ -390,6 +397,26 @@ class RPNCalc : CalcCancellable {
 				stackstate = .valid
 		*/
 	}
+	
+	private func exp() {
+		if (x.value > BigFloat(1000)) {
+			stackstate = .overflow
+		} else {
+			let r = BigFloat.exp(x: x.value)
+			pop()
+			push(x: StackElem(val: r))
+			stackstate = .valid
+		}
+	}
+	
+	private func ln() {
+		if (x.value <= BigFloat(0)) {
+			stackstate = .overflow
+			return
+		}
+		stackstate = .unimplemented
+	}
+	
 	private	func crt() {
 		stackstate = .unimplemented
 		/*
@@ -470,21 +497,23 @@ class RPNCalc : CalcCancellable {
 		case .gcd:		self.gcd()
 		case .sqrt:		self.sqrt()
 		case .crt:		self.crt()
+		case .exp:		self.exp()
+		case .ln:		self.ln()
 		case .Swap:		self.swap()
 		case .Pop:		self.pop()
 		case .PNext:	self.PNext()
 		case .PPrev:	self.PPrev()
-		case .Sexy:		self.sexy()
-		case .Cousin: 	self.cousin()
+		//case .Sexy:		self.sexy()
+		//case .Cousin: 	self.cousin()
 		case .Pow:		self.pow()
 		case .Mod:		self.mod()
 		case .PowMod:	self.powmod()
-		case .Twin:		self.twin()
-		case .SoG:		self.sog()
-		case .Rho:		self.Rho()
-		case .Squfof:	self.Squfof()
-		case .Lehman:	self.Lehman()
-		case .Factor:	self.factor()
+		//case .Twin:		self.twin()
+		//case .SoG:		self.sog()
+		//case .Rho:		self.Rho()
+		//case .Squfof:	self.Squfof()
+		//case .Lehman:	self.Lehman()
+		//case .Factor:	self.factor()
 		case .Rnd:		self.rnd()
 		case .Hash: 	self.hash()
 		case .Square: 	self.square()
@@ -492,7 +521,7 @@ class RPNCalc : CalcCancellable {
 		case .TenPow:	self.tenpow()
 		case .Mersenne: self.mersenne()
 		case .Undefined:	break
-		case .Factors:	self.factors()
+		//case .Factors:	self.factors()
 		case .Sto1:		sto[0] = x; stackstate = .stored
 		case .Sto2:		sto[1] = x; stackstate = .stored
 		case .Sto3:		sto[2] = x;	stackstate = .stored

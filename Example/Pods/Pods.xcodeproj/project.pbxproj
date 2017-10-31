@@ -28,6 +28,7 @@
 		4F71B22D2CD81CB82155BC5FD4F371C9 /* SipHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF62944C52CBE16C214EBD73BF7D4EB /* SipHashable.swift */; };
 		516AC52F934ADB826CD9384E0B012717 /* BitArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FC34131506EDD30747F91E0740F599 /* BitArray.swift */; };
 		54C037981FA72B65001FF34E /* BigFloatString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C037971FA72B65001FF34E /* BigFloatString.swift */; };
+		54D969351FA8E17600AC8C56 /* BigFloatFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D969341FA8E17600AC8C56 /* BigFloatFunc.swift */; };
 		5729C0812B1B4F006F42F17CAE2639B4 /* Words and Bits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EFA08C9A750D7FF82036E034AD3929 /* Words and Bits.swift */; };
 		574AB36BE3D87CBF8FD32668DC739DB1 /* PrimeCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FD48BD4245A7484B10894BD7A9304 /* PrimeCache.swift */; };
 		5C7087F735C78EE0E636579DBF7723DC /* Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B786EA57F6580C344DAAF1462CB00C /* Comparable.swift */; };
@@ -175,6 +176,7 @@
 		48A9A1D2A2BE521EA7CBEDDD8F8725CC /* PrimeFactors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PrimeFactors-prefix.pch"; sourceTree = "<group>"; };
 		51C171B79EBFD96E9D967C6ECF0BAD15 /* PrimeFactors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PrimeFactors-dummy.m"; sourceTree = "<group>"; };
 		54C037971FA72B65001FF34E /* BigFloatString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BigFloatString.swift; path = BigFloat/Classes/BigFloatString.swift; sourceTree = "<group>"; };
+		54D969341FA8E17600AC8C56 /* BigFloatFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BigFloatFunc.swift; path = BigFloat/Classes/BigFloatFunc.swift; sourceTree = "<group>"; };
 		5503AAA1C99A4D08FF4065A7DDD3DED1 /* SipHasher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SipHasher.swift; path = SipHash/SipHasher.swift; sourceTree = "<group>"; };
 		56C80657830FF133BCC4C04FAC00E098 /* WheelSieve.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WheelSieve.swift; path = PrimeFactors/Classes/WheelSieve.swift; sourceTree = "<group>"; };
 		57A29E020EA2E599389EC86193F5E181 /* BigFloat.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = BigFloat.modulemap; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 		B4B3DEF4312D4C22E286D23A4B8900A0 /* BigFloat */ = {
 			isa = PBXGroup;
 			children = (
+				54D969341FA8E17600AC8C56 /* BigFloatFunc.swift */,
 				D3BF0365483A7846A4901E8E298C6645 /* BigFloat.swift */,
 				54C037971FA72B65001FF34E /* BigFloatString.swift */,
 				9385EA12DFFE4DB922CC7EC75B8C0D21 /* ReplaceMe.swift */,
@@ -743,6 +746,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54D969351FA8E17600AC8C56 /* BigFloatFunc.swift in Sources */,
 				E3029FCFD4260FD3EE434C038557C6C0 /* BigFloat-dummy.m in Sources */,
 				02915C4871279B93A7DF1344094A1914 /* BigFloat.swift in Sources */,
 				54C037981FA72B65001FF34E /* BigFloatString.swift in Sources */,

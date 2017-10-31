@@ -86,34 +86,39 @@ public extension BigFloat {
 		//Bestimme die Ziffern des Vorkommaanteils
 		var intdigits : [Int] = []
 		while int > 0 {
-			let digit = int / div
-			intdigits.append(Int(digit))
+			let digit = Int(int / div)
+			intdigits.append(digit)
 			int = int % div
 			div = div / bbase
 		}
 		
 		// Bestimme den Nachkommanteil
 		//var fracdigits : [Int] = []
+		var lastdigit = 0
 		if fract > BigFloat(0) {
 			let dfactor = log(2) / log(Double(base))
 			var ndigits = fix != 0 ? fix
 				: Swift.max(Int(Double(self.precision) * dfactor)+2, 17)
 			
 			//var fracstarted = false
-			while ndigits > 0 {
+			while ndigits >= 0 {
 				var r: BigInt
 				fract = fract*BigFloat(base)
 				(r, fract) = fract.SplitIntFract()
 				//if r != 0 { fracstarted = true }
-				intdigits.append(Int(r))
-				if fract.isZero() { break }
+				lastdigit = Int(r)
+				intdigits.append(lastdigit)
+				if fract.isZero() {
+					lastdigit = 0	//Kein Runden, da fertig
+					break
+				}
 				ndigits -= 1
 				//if fracstarted { ndigits -= 1 }
 			}
 		}
 		
 		//Runden
-		let lastdigit = intdigits.last!
+		//let lastdigit = intdigits.last!
 		if lastdigit >= base / 2 {
 			intdigits.removeLast()
 			let count = intdigits.count-1

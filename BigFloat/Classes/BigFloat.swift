@@ -15,7 +15,7 @@ public struct BigFloat : ExpressibleByFloatLiteral {
 		return significand == 0
 	}
 	
-	private mutating func normalize() {
+	internal mutating func normalize() {
 		var (s, e) = (significand, exponent)
 		while s != 0 && s & 1 == 0 {
 			s >>= 1
@@ -111,6 +111,12 @@ public struct BigFloat : ExpressibleByFloatLiteral {
 		return d
 	}
 	
+	public static func abs(_ x : BigFloat) -> BigFloat {
+		if x.significand < 0 {
+			return BigFloat(significand: -x.significand,exponent: x.exponent)
+		}
+		return x
+	}
 	public func divide(by:BigFloat, precision:Int=0)->BigFloat {
 		let px = (precision > 0) ? precision : BigFloat.maxprecision
 		let r = by.reciprocal(precision: px)
@@ -141,36 +147,15 @@ public struct BigFloat : ExpressibleByFloatLiteral {
 		let px = 256
 		
 		let n = BigInt(1) << BigInt(px*2+2*significand.bitWidth)
-		
 		let q = n / self.significand
-		print(self.significand,significand.bitWidth,self.exponent)
-		print(n)
-		print(q,q.bitWidth)
+		//print(self.significand,significand.bitWidth,self.exponent)
+		//print(n)
+		//print(q,q.bitWidth)
 		var ans = BigFloat(significand:q, exponent:-ex-q.bitWidth+4)
 		ans.normalize()
 		return ans
 	}
-	
 	/*
-	public func reciprocal(precision:Int=0)->BigFloat {
-		if self.significand == 0 { return self }
-		if self.significand == 1 {
-			return BigFloat(significand:1, exponent:-self.exponent)
-		}
-		// let ex = self.exponent + significand.bitWidth
-		let px = BigFloat.maxprecision
-		//let px = max(self.precision, precision)
-		let n = BigInt(1) << BigInt(px*2 + significand.bitWidth)
-		//print("n",self.exponent,q,
-		let q = n / self.significand
-		var ans = BigFloat(significand:q, exponent:(-self.exponent - 2*px-significand.bitWidth))
-		ans.normalize()
-		ans.truncate(bits: px)
-
-		return ans
-	}
-	*/
-	
 	public func frexp()->(BigFloat, Int)   {
 		return (
 			BigFloat(significand:self.significand, exponent:-(self.significand.bitWidth+1)),
@@ -187,6 +172,7 @@ public struct BigFloat : ExpressibleByFloatLiteral {
 	public static func ldexp(r:BigFloat, _ ex:Int)->BigFloat {
 		return r.ldexp(ex: ex)
 	}
+	*/
 }
 
 public func ==(lhs:BigFloat, rhs:BigFloat)->Bool {
@@ -219,7 +205,9 @@ public func *(lhs:BigFloat, rhs:BigFloat)->BigFloat {
 	let s = lhs.significand * rhs .significand
 	let e = lhs.exponent + rhs.exponent
 	var ans = BigFloat(significand : s, exponent : e)
-	_ = ans.truncate(bits: ans.precision)
+	//let str = ans.ExponentialString(base: 10, fix: 5)
+	ans.normalize()
+	//_ = ans.truncate(bits: ans.precision)
 	return ans
 }
 public func /(lhs:BigFloat, rhs:BigFloat)->BigFloat {
@@ -239,7 +227,9 @@ public func +(lhs:BigFloat, rhs:BigFloat)->BigFloat {
 	}
 	let ex = max(lhs.exponent, rhs.exponent)
 	let sig = ls + rs
-	return BigFloat(significand:sig, exponent:ex - Swift.abs(dx))
+	var ans = BigFloat(significand:sig, exponent:ex - Swift.abs(dx))
+	ans.normalize()
+	return ans
 }
 
 public func -(lhs:BigFloat, rhs:BigFloat)->BigFloat {
