@@ -16,6 +16,56 @@ class Tests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+	
+	func testHypot() {
+		let x = BigFloat(1)
+		let y = BigFloat(1)
+		let h = BigFloat.hypot(x: x, y)
+		let hstr = h.ExponentialString(base: 10, fix: 40)
+		let r2 = BigFloat.sqrt(x: BigFloat(2))
+		let d = BigFloat.abs(h - r2)
+		XCTAssert(d < epsilon)
+		let dstr = d.ExponentialString(base: 10, fix: 40)
+		print(dstr)
+	}
+	
+	func testPiAGMSalaminBrent() {
+		let half = BigFloat(1) / BigFloat(2)
+		var a = BigFloat(1)
+		var b = BigFloat.sqrt(x: half)
+		var t = half*half
+		var p = BigFloat(0)
+		var twopow = BigFloat(1)
+		var partstr = ""
+		for k in 0...5 {
+			let a1 = (a+b)*half
+			let b1 = BigFloat.sqrt(x: a*b)
+			let astr = a1.ExponentialString(base: 10, fix: 40)
+			let bstr = b1.ExponentialString(base: 10, fix: 40)
+			
+			let d = (a-a1)*(a-a1)*twopow
+			t = t - d
+			let tstr = t.ExponentialString(base: 10, fix: 40)
+			p = (a1+b1)*(a1+b1) / BigFloat(4) / t
+			partstr = p.ExponentialString(base: 10, fix: 40)
+			twopow = twopow * BigFloat(2)
+			a = a1
+			b = b1
+			print(String(k), ":", astr, bstr, tstr,partstr)
+		}
+		XCTAssert(partstr == "3.1415926535897932384626433832795028841972E0")
+		/*
+		var sign = 1
+		for k in 0...100 {
+			let summand = BigFloat(4) / BigFloat(sign*(2*k+1))
+			sum = sum + summand
+			let partstr = sum.ExponentialString(base: 10, fix: 40)
+			print(String(k), ":", partstr)
+			sign = -sign
+		}
+		print("Result",sum.ExponentialString(base: 10, fix: 40))
+		*/
+	}
     
     func testBasic() {
         // This is an example of a functional test case.

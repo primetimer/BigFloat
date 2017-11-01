@@ -23,7 +23,7 @@ extension BigUInt {
 		var arr : [String] = []
 		let valstr = String(self)
 		var (str3,pos) = ("",0)
-		for c in valstr.characters.reversed() {
+		for c in valstr.reversed() {
 			(str3,pos) = (String(c) + str3,pos+1)
 			if pos % 3 == 0 {
 				arr.append(str3)

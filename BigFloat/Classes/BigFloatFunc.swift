@@ -47,4 +47,23 @@ extension BigFloat {
 		} while d > epsilon
 		return y0
 	}
+	
+	public static func hypot(x:BigFloat, _ y:BigFloat, precision px:Int=64)->BigFloat {
+		//if let dx = x as? Double { return Self(Double.hypot(dx, y as! Double)) }
+		var (r, l) = (x < BigFloat(0) ? -x : x, y < BigFloat(0) ? -y : y)
+		if r < l { (r, l) = (l, r) }
+		if l.isZero() { return r }
+		let epsilon = BigFloat(significand:1, exponent: -BigFloat.maxprecision / 2)
+		while epsilon < l {
+			var t = l / r
+			t = t * t
+			t = t / (BigFloat(4) + t)
+			r = r + BigFloat(2) * r * t
+			l = l * t
+			_ = r.truncate(bits: BigFloat.maxprecision)
+			_ = l.truncate(bits: BigFloat.maxprecision)
+			// print("r=\(r.toDouble()), l=\(l.toDouble()), epsilon=\(epsilon.toDouble())")
+		}
+		return r.truncate(bits: BigFloat.maxprecision)
+	}
 }

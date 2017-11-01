@@ -8,82 +8,89 @@
 
 /* Begin PBXBuildFile section */
 		011A8B030F310456BA22E30FC2DBFAF1 /* Pods-BigFloat_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7370BB681126F6E6F6A5A375B0490FE5 /* Pods-BigFloat_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		02915C4871279B93A7DF1344094A1914 /* BigFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BF0365483A7846A4901E8E298C6645 /* BigFloat.swift */; };
-		04418F30EC7A4F1E97041C6E9EB26205 /* SipHash-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 90DAE26D89010E4BF73242EF5D4519C8 /* SipHash-dummy.m */; };
-		09BFF2041293248084170F4EA8CF238B /* Bitwise Ops.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9778C14ACA69B3987FDF9490B0C131 /* Bitwise Ops.swift */; };
-		0B211B1199457898FD95BC81998B000A /* BigInt-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF093917CD10935D21B29F6B8B90F6F /* BigInt-dummy.m */; };
+		0392E33B8770395F0AC19C60C6BDC9D7 /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C86AE33C7D4D1D01B6CCF992EC51400 /* SipHash.framework */; };
+		04F9D8FDA2C48B2AF54D1B03F777C400 /* Exponentiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F8F3830033D3639ED61A8306DE91A3 /* Exponentiation.swift */; };
+		0897C3242A19DFB5E4AD582FFBE61389 /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB89A432C291C9C15A50AC84C4C2819B /* Hashable.swift */; };
 		0C61E7E3AB30EBABF7C462F549A76A3F /* Factorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6BFD93F765C389EBE8C586943AE270 /* Factorize.swift */; };
-		10A1B85D8934AC2D5BD9C1D4D0E84111 /* BigInt-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C3E9898B7E230340E7543094DAB6FAE /* BigInt-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0F8E1BFDB0F2EBB0DF0531B1E20C8912 /* SipHash-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 90DAE26D89010E4BF73242EF5D4519C8 /* SipHash-dummy.m */; };
+		10E6EC48216D31FF26F3E4BCF297EE48 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D8D4B4A9B79C764583CED4C371BA29 /* ReplaceMe.swift */; };
+		111152E5A085ADC84E8AE2E5B04502AF /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C86AE33C7D4D1D01B6CCF992EC51400 /* SipHash.framework */; };
 		13A6762DBEDE25AB50F090404F98C68B /* PrimeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87BF6A89274E0BFF2A1B0A06A432921 /* PrimeProtocol.swift */; };
-		13B89DBE9FA72866BA0C8355FEF8CA4F /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C56368098FC8CBFDD7647BC5081D233 /* Codable.swift */; };
 		16D5B66DA17C1EFA4C5C32BF3691797D /* PWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3AB8C3C43AD8C78ADFB0EA93EA95D7 /* PWheel.swift */; };
-		18D96F0CD29CC6B37E5DA8BD15D1EB2A /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C86AE33C7D4D1D01B6CCF992EC51400 /* SipHash.framework */; };
-		195A5D2652A7018971E7AA31D0A66F3C /* Primitive Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B22B3182293E18F5560CA2FF60EB12 /* Primitive Types.swift */; };
-		1AB8E7FBA5C81CA62088C2597328E149 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34323CF20CE12CDD6B600030FCD3A2D8 /* Foundation.framework */; };
-		211399DA25EA5E65BCBBFE1AB2193828 /* RandomUInt64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D10A26F7B823759DE2EABC328C19D8 /* RandomUInt64.swift */; };
-		3109F35878956651EC7FBF0CCF57F594 /* Square Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51419CC916D18897334C6768B4EA21F /* Square Root.swift */; };
+		17CF8E523A41B2392B95D451EF2AEE2B /* Data Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AA390E64EA4990C9A8A955EEFD9973 /* Data Conversion.swift */; };
+		19040BA950A2C47173A5C152EE741574 /* BigInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6284AB2267C04EFFEBFE0F935B9E8181 /* BigInt.swift */; };
+		21F2BBF6492FA07EA4772CD944DB7F2B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34323CF20CE12CDD6B600030FCD3A2D8 /* Foundation.framework */; };
 		37E8FA0D9594996A906550BB1BF433BE /* Pods-BigFloat_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FC9E96C06754B3896850E978949FD9 /* Pods-BigFloat_Example-dummy.m */; };
-		3BD46E72E5E7C9C8F1AD157498F670AE /* BigInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6284AB2267C04EFFEBFE0F935B9E8181 /* BigInt.swift */; };
-		44806722753C2FC23E20DE291112AEB8 /* Prime Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EB9B6F4163B138A7C967328AB6A11A /* Prime Test.swift */; };
-		4F71B22D2CD81CB82155BC5FD4F371C9 /* SipHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF62944C52CBE16C214EBD73BF7D4EB /* SipHashable.swift */; };
+		37FA84C837043071EA11CB481B525F0F /* Square Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51419CC916D18897334C6768B4EA21F /* Square Root.swift */; };
+		39D3EDA522BAB33ADB77110D11D5F798 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34323CF20CE12CDD6B600030FCD3A2D8 /* Foundation.framework */; };
+		3F91A36763865B3AAE8869BA7B75E65A /* Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B786EA57F6580C344DAAF1462CB00C /* Comparable.swift */; };
+		47C1A19728BF7F4C278917C7FFB3689F /* SipHasher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5503AAA1C99A4D08FF4065A7DDD3DED1 /* SipHasher.swift */; };
 		516AC52F934ADB826CD9384E0B012717 /* BitArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FC34131506EDD30747F91E0740F599 /* BitArray.swift */; };
-		54C037981FA72B65001FF34E /* BigFloatString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C037971FA72B65001FF34E /* BigFloatString.swift */; };
-		54D969351FA8E17600AC8C56 /* BigFloatFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D969341FA8E17600AC8C56 /* BigFloatFunc.swift */; };
-		5729C0812B1B4F006F42F17CAE2639B4 /* Words and Bits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EFA08C9A750D7FF82036E034AD3929 /* Words and Bits.swift */; };
+		56BEAF71B38546AC61FC94279761F804 /* Floating Point Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3A7212DE087C381AA891A922B582B /* Floating Point Conversion.swift */; };
 		574AB36BE3D87CBF8FD32668DC739DB1 /* PrimeCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FD48BD4245A7484B10894BD7A9304 /* PrimeCache.swift */; };
-		5C7087F735C78EE0E636579DBF7723DC /* Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B786EA57F6580C344DAAF1462CB00C /* Comparable.swift */; };
+		5958224EFF04A0499D00A2970CCF3C7C /* BigFloat-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F1B446108A923033495E1E7E03D76F96 /* BigFloat-dummy.m */; };
+		5AD0075897D0716C5807DEF2E4C47577 /* Strideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151348F350D6C4B540E70CF93470CD6A /* Strideable.swift */; };
 		6092135EE0C098BF67D73C7B43623CF3 /* UInt128.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CD052B91096141C13601764DC8EB53 /* UInt128.swift */; };
-		677847F479A6D0BD4C1AE29B1758C3E6 /* BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897E76560C29A6C30224DBEC0FD43201 /* BigUInt.swift */; };
+		617651D9AC0E4E7FBEC355A5B821DF1E /* Shifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77A19D2B6A6B6452CA4114394F403F /* Shifts.swift */; };
 		67B5988BDF828CC16096A4EBA3E17215 /* Sieve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006445E6B5DFDE6EC73D2B23C5AB3474 /* Sieve.swift */; };
-		6D20D6047C3913A6E21E432528E62A40 /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3554020372249664A6ADA1E7BCEA0799 /* BigInt.framework */; };
+		67DA8746C945CB197AE756D5CCC8E1D8 /* Primitive Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B22B3182293E18F5560CA2FF60EB12 /* Primitive Types.swift */; };
+		6BEBE62747F4FCF5A16A9EF1F01C11EA /* Multiplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69157951182E7EB9AC2AEF78835637EC /* Multiplication.swift */; };
 		6DD8E27957159CF15CD30A9CC18AD8D8 /* Pollard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FFC6A78EBE8EE6903AB8B2C9DC462D /* Pollard.swift */; };
+		6E3E8734AEFF8472E8535E08013A188A /* Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA07A621D761F920A0018A7238A8A9 /* Addition.swift */; };
+		72DA1F2676835B1E4A58DC0BFA31B036 /* String Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D500E9955B02CC14C622FDF82BCE58 /* String Conversion.swift */; };
 		78612234E1D48E2B7563B6CDF203B6C6 /* UInt128Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53CB0BEB8936AE3134C50F679796FC /* UInt128Extension.swift */; };
 		79B6813F6530C381CD703970E7935AFC /* PrimeFactors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C171B79EBFD96E9D967C6ECF0BAD15 /* PrimeFactors-dummy.m */; };
 		79FE038B877F7BBC1887B426A89E5452 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34323CF20CE12CDD6B600030FCD3A2D8 /* Foundation.framework */; };
 		7CA169A08639FC3647D36B70F41B3E40 /* Pods-BigFloat_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4430814EC61704129E0604F5C109DBF0 /* Pods-BigFloat_Tests-dummy.m */; };
-		83933D710CF53319944D3F029D353635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34323CF20CE12CDD6B600030FCD3A2D8 /* Foundation.framework */; };
-		83B813E742D47FC505E6BE6F49F5CEF0 /* Multiplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69157951182E7EB9AC2AEF78835637EC /* Multiplication.swift */; };
-		85F4776408E1B1C20C713236EFD92602 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE87CAB756693D2046BD4FF649EC500 /* GCD.swift */; };
-		8A1E36755A21868C447A38591401344D /* SipHasher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5503AAA1C99A4D08FF4065A7DDD3DED1 /* SipHasher.swift */; };
+		83536775A0251198B9CCA81163E09FEE /* BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897E76560C29A6C30224DBEC0FD43201 /* BigUInt.swift */; };
+		89E9EA1058EB96DC245BAF32BD3C1F5B /* Integer Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FD69E82AA9528D486AF8FD3D02130D /* Integer Conversion.swift */; };
 		8B2464698FD418F23D982922214EA1DF /* Lehman.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C03EE23BAD63C0597509A082C272F0 /* Lehman.swift */; };
+		8D37FFCF4383E4505CB04D68DBD4F53C /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE87CAB756693D2046BD4FF649EC500 /* GCD.swift */; };
 		8EFB232D6D80A70CEE499FA0A8094B29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34323CF20CE12CDD6B600030FCD3A2D8 /* Foundation.framework */; };
+		8F6A22751EE22B9928E5A1928DB42440 /* BigFloat-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 92FF7036AD888997E89FB42F5EB72CD3 /* BigFloat-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8FB45CFAF8B36AA81DE4AAC6BEC13F3D /* SipHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF62944C52CBE16C214EBD73BF7D4EB /* SipHashable.swift */; };
 		95FA051237FD894DDEC1BF8FEAF139B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34323CF20CE12CDD6B600030FCD3A2D8 /* Foundation.framework */; };
-		9A0C059A7F5DD8E977B9625BF29B3D10 /* SipHash-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D3449BA244EF4EB6E3F95FF44CBFA34 /* SipHash-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		96178A3A90F052DF31A0DA1729DB1C85 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C86AA7449BC2D342C387966E92ED4 /* Random.swift */; };
+		9A4AB0A6521EE3B9E2C8DFF7383D7416 /* SipHash-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D3449BA244EF4EB6E3F95FF44CBFA34 /* SipHash-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9DC8C122E6C63A786F85AEF0087F5CB5 /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C86AE33C7D4D1D01B6CCF992EC51400 /* SipHash.framework */; };
+		9E838F42F20A52F1E2C75F41145225FF /* Words and Bits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EFA08C9A750D7FF82036E034AD3929 /* Words and Bits.swift */; };
 		A1C7879656278C467E59D377A414219F /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3554020372249664A6ADA1E7BCEA0799 /* BigInt.framework */; };
-		A8D595DE5CC7C166E2F00E505635F9EF /* Integer Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FD69E82AA9528D486AF8FD3D02130D /* Integer Conversion.swift */; };
+		A2B3B0283490319C93690CD30445A88F /* Bitwise Ops.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9778C14ACA69B3987FDF9490B0C131 /* Bitwise Ops.swift */; };
+		A85BD7D515EEEBFF7712EA8ECE9A7B0F /* BigFloatFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41BE1210009502D25A5709B58437772 /* BigFloatFunc.swift */; };
 		A960466FFAEEEB2644A89D6BC3CEF49E /* PUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D89AA9B1ABD603FA959EC79662704 /* PUtil.swift */; };
 		AA4C21937B80E6F982D37DA8BABDDF0C /* WheelSieve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C80657830FF133BCC4C04FAC00E098 /* WheelSieve.swift */; };
-		AAFF9A32D0794E86F4A7FBAE91AC665E /* Subtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F6068263770152697FA8EA6D5A940 /* Subtraction.swift */; };
-		B2BF666EAD2E120322DEB8815EEE66E4 /* BigFloat-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 69D1C02025507C9B1D8883C67FEA814E /* BigFloat-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B78E93AA272C111D382940CD43B64257 /* Exponentiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F8F3830033D3639ED61A8306DE91A3 /* Exponentiation.swift */; };
-		C3DC07DA75B1FE1D21ED0169605B86A9 /* String Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D500E9955B02CC14C622FDF82BCE58 /* String Conversion.swift */; };
-		C4EAC518E3C58BDFD570223355B5749D /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9385EA12DFFE4DB922CC7EC75B8C0D21 /* ReplaceMe.swift */; };
+		BE3BEE5A92AF48B034541AC22DBC97D0 /* Subtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F6068263770152697FA8EA6D5A940 /* Subtraction.swift */; };
+		C054C62EC9EEFA6123F34A2B739BB09C /* BigFloatString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69C0D00B2ED796716E2F5EFDC3C0BB8 /* BigFloatString.swift */; };
+		C089278645AD34482259860BAFB674A3 /* RandomUInt64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D10A26F7B823759DE2EABC328C19D8 /* RandomUInt64.swift */; };
+		C377F5BDBDE497863A8903771E7D2C47 /* Division.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C57497652E37BDF54EA416868C0AF /* Division.swift */; };
+		C5A812E64161AB234B42B325BF5A715B /* BigInt-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C3E9898B7E230340E7543094DAB6FAE /* BigInt-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C8E4B53D20593ED38E05BD3447AC22F3 /* FactorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A20A05A797A5D73D79273EFE9E973E5 /* FactorStrategy.swift */; };
+		C9860A8ADFD10B4998F8DD6E38C4B8A7 /* BigInt-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF093917CD10935D21B29F6B8B90F6F /* BigInt-dummy.m */; };
+		D06F7CCE856EC999EB4D8DC32A77D446 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34323CF20CE12CDD6B600030FCD3A2D8 /* Foundation.framework */; };
+		D1EA8154903935FD85E3703708F6B9F6 /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3554020372249664A6ADA1E7BCEA0799 /* BigInt.framework */; };
 		D3E419E5F5976C03E60AA87F84332120 /* Shanks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C695CE1A6947B82A3F6EC89E91475017 /* Shanks.swift */; };
 		D4B47DD5EE7C4DF11C8A64D8832128AF /* TrialDivision.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA599144489DF143F0DD739C8746B88 /* TrialDivision.swift */; };
 		D7184DB6E50C01B2E97E7560DB455234 /* PrimeFactors-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 05C15CA5334600B268A0441D90E11F60 /* PrimeFactors-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D98011847BC4D5D31E5580D5B76F773C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34323CF20CE12CDD6B600030FCD3A2D8 /* Foundation.framework */; };
-		DCB63F86DDF3C5256EDEA465E210CCF1 /* Division.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C57497652E37BDF54EA416868C0AF /* Division.swift */; };
+		D939F5BBAD40D97739026B738550B070 /* BigFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956F399B3A1F34627EFF5F76256E358 /* BigFloat.swift */; };
 		DE16887A6766BE48DDBCDC6D35BF0B43 /* MillerRabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CB42FE369BA7C2DA4AE0329D69F402 /* MillerRabin.swift */; };
-		DEDFE6216FFC6EFC200C60CC38CFECAD /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB89A432C291C9C15A50AC84C4C2819B /* Hashable.swift */; };
-		E05B8DAD8BAB411B2161DBBA13E71AC8 /* Data Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AA390E64EA4990C9A8A955EEFD9973 /* Data Conversion.swift */; };
-		E3029FCFD4260FD3EE434C038557C6C0 /* BigFloat-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4306C6679F4E68D80AD16FB34B81DE /* BigFloat-dummy.m */; };
-		E7C44489AB3B8949FC58BBDFC432B656 /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C86AE33C7D4D1D01B6CCF992EC51400 /* SipHash.framework */; };
-		EB0BA85ABF3B856BE3BCAA04B18031C5 /* Floating Point Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3A7212DE087C381AA891A922B582B /* Floating Point Conversion.swift */; };
 		EC610B7DCB705178E26FED91C7F8D0EB /* Pods-BigFloat_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D147D34335EA22AFF9EBE16CA8C117EE /* Pods-BigFloat_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F03C31DEABCFA8C51932BBE32711B668 /* Strideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151348F350D6C4B540E70CF93470CD6A /* Strideable.swift */; };
-		F1ED2E51AA10273D1A8DAA795A684E0F /* Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA07A621D761F920A0018A7238A8A9 /* Addition.swift */; };
-		FA375B27463D9ABDF1E8C3C37E694391 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C86AA7449BC2D342C387966E92ED4 /* Random.swift */; };
-		FF8D2089F76D43F79109C47AB6B49A68 /* Shifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77A19D2B6A6B6452CA4114394F403F /* Shifts.swift */; };
+		EE11AE0ED2F5BF35CE9FC7BEB9B6AE6A /* Prime Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EB9B6F4163B138A7C967328AB6A11A /* Prime Test.swift */; };
+		FC97158B152BEC3D71480E0E70D24971 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C56368098FC8CBFDD7647BC5081D233 /* Codable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0E1AB3D5C180D5CD0349D642ABF16549 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C11E58F37107C6399E8CBF8E258BDD7;
+			remoteInfo = SipHash;
+		};
 		0FC045864F9F56DB98547B5CA2EA6F96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 013D9EAA0152531B1B2EE4DDC016DDA0;
+			remoteGlobalIDString = 9B5DD8DA1A5B3471809A8554824BC410;
 			remoteInfo = BigFloat;
 		};
 		3508777DD049E07AA165DA711EB920D0 /* PBXContainerItemProxy */ = {
@@ -97,50 +104,43 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6F002211C27888CE01D00AD56991C745;
-			remoteInfo = BigInt;
-		};
-		4D34858AD8F323E8CEE590B7BF70A474 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6F002211C27888CE01D00AD56991C745;
+			remoteGlobalIDString = 804E993EEEE381403239C992804A3EFA;
 			remoteInfo = BigInt;
 		};
 		538ED7BDADBE80F37D6EE1A175A7E823 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DDEA550A5E814D8CA2BD1999EC22697;
+			remoteGlobalIDString = 4C11E58F37107C6399E8CBF8E258BDD7;
 			remoteInfo = SipHash;
 		};
-		760ABA81637C32289C93858F2402CF2D /* PBXContainerItemProxy */ = {
+		7730CB3F7732F5C59116CE6BD640A688 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DDEA550A5E814D8CA2BD1999EC22697;
-			remoteInfo = SipHash;
-		};
-		7DE6DEABBD633C18D661D06C3DFCEA90 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DDEA550A5E814D8CA2BD1999EC22697;
+			remoteGlobalIDString = 4C11E58F37107C6399E8CBF8E258BDD7;
 			remoteInfo = SipHash;
 		};
 		AC603328334BA6CD2AE71782BA6E67B9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6F002211C27888CE01D00AD56991C745;
+			remoteGlobalIDString = 804E993EEEE381403239C992804A3EFA;
 			remoteInfo = BigInt;
 		};
 		B68E7BA11A432BA4A31DD9DABF1EFBEF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DDEA550A5E814D8CA2BD1999EC22697;
+			remoteGlobalIDString = 4C11E58F37107C6399E8CBF8E258BDD7;
 			remoteInfo = SipHash;
+		};
+		DD72BA45D879132AD576E9FC2DE5E2B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 804E993EEEE381403239C992804A3EFA;
+			remoteInfo = BigInt;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -149,9 +149,9 @@
 		03E561EEEDA474FAD602BC0B77BBF192 /* Pods-BigFloat_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BigFloat_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		0525F04500E9E964B8BC3279D9A9E7CF /* BigInt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BigInt.xcconfig; sourceTree = "<group>"; };
 		05C15CA5334600B268A0441D90E11F60 /* PrimeFactors-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PrimeFactors-umbrella.h"; sourceTree = "<group>"; };
-		0A3A9C1CA6B6034742FBA540D61D3953 /* BigFloat.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BigFloat.xcconfig; sourceTree = "<group>"; };
 		0C56368098FC8CBFDD7647BC5081D233 /* Codable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Codable.swift; path = sources/Codable.swift; sourceTree = "<group>"; };
 		0C86AE33C7D4D1D01B6CCF992EC51400 /* SipHash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SipHash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DB4DAC3791223A6A3D713615CA2813D /* BigFloat.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = BigFloat.modulemap; sourceTree = "<group>"; };
 		0E8AA78F69B9D0AD96E5228C8157588D /* SipHash.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SipHash.xcconfig; sourceTree = "<group>"; };
 		11F8F3830033D3639ED61A8306DE91A3 /* Exponentiation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Exponentiation.swift; path = sources/Exponentiation.swift; sourceTree = "<group>"; };
 		151348F350D6C4B540E70CF93470CD6A /* Strideable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Strideable.swift; path = sources/Strideable.swift; sourceTree = "<group>"; };
@@ -174,21 +174,19 @@
 		44571A25E524DB62399CABBC9DBA80B0 /* Pods-BigFloat_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BigFloat_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		47EB9B6F4163B138A7C967328AB6A11A /* Prime Test.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Prime Test.swift"; path = "sources/Prime Test.swift"; sourceTree = "<group>"; };
 		48A9A1D2A2BE521EA7CBEDDD8F8725CC /* PrimeFactors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PrimeFactors-prefix.pch"; sourceTree = "<group>"; };
+		4956F399B3A1F34627EFF5F76256E358 /* BigFloat.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BigFloat.swift; path = BigFloat/Classes/BigFloat.swift; sourceTree = "<group>"; };
 		51C171B79EBFD96E9D967C6ECF0BAD15 /* PrimeFactors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PrimeFactors-dummy.m"; sourceTree = "<group>"; };
-		54C037971FA72B65001FF34E /* BigFloatString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BigFloatString.swift; path = BigFloat/Classes/BigFloatString.swift; sourceTree = "<group>"; };
-		54D969341FA8E17600AC8C56 /* BigFloatFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BigFloatFunc.swift; path = BigFloat/Classes/BigFloatFunc.swift; sourceTree = "<group>"; };
 		5503AAA1C99A4D08FF4065A7DDD3DED1 /* SipHasher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SipHasher.swift; path = SipHash/SipHasher.swift; sourceTree = "<group>"; };
 		56C80657830FF133BCC4C04FAC00E098 /* WheelSieve.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WheelSieve.swift; path = PrimeFactors/Classes/WheelSieve.swift; sourceTree = "<group>"; };
-		57A29E020EA2E599389EC86193F5E181 /* BigFloat.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = BigFloat.modulemap; sourceTree = "<group>"; };
 		58CD052B91096141C13601764DC8EB53 /* UInt128.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UInt128.swift; path = PrimeFactors/Classes/UInt128.swift; sourceTree = "<group>"; };
 		59D500E9955B02CC14C622FDF82BCE58 /* String Conversion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String Conversion.swift"; path = "sources/String Conversion.swift"; sourceTree = "<group>"; };
+		5AE55F925469FC9D8BF36994008683A6 /* BigFloat.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BigFloat.xcconfig; sourceTree = "<group>"; };
 		5FB301592E5E1BD0ABC25F4B6AE0C544 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		625F6068263770152697FA8EA6D5A940 /* Subtraction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Subtraction.swift; path = sources/Subtraction.swift; sourceTree = "<group>"; };
 		6284AB2267C04EFFEBFE0F935B9E8181 /* BigInt.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BigInt.swift; path = sources/BigInt.swift; sourceTree = "<group>"; };
 		6535EA2102CEE02986349A55668359C3 /* Pods-BigFloat_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BigFloat_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		66B786EA57F6580C344DAAF1462CB00C /* Comparable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Comparable.swift; path = sources/Comparable.swift; sourceTree = "<group>"; };
 		69157951182E7EB9AC2AEF78835637EC /* Multiplication.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Multiplication.swift; path = sources/Multiplication.swift; sourceTree = "<group>"; };
-		69D1C02025507C9B1D8883C67FEA814E /* BigFloat-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BigFloat-umbrella.h"; sourceTree = "<group>"; };
 		6A20A05A797A5D73D79273EFE9E973E5 /* FactorStrategy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FactorStrategy.swift; path = PrimeFactors/Classes/FactorStrategy.swift; sourceTree = "<group>"; };
 		6DE088621E51F22E566D853884E41F61 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E3AB8C3C43AD8C78ADFB0EA93EA95D7 /* PWheel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PWheel.swift; path = PrimeFactors/Classes/PWheel.swift; sourceTree = "<group>"; };
@@ -204,11 +202,13 @@
 		90DAE26D89010E4BF73242EF5D4519C8 /* SipHash-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SipHash-dummy.m"; sourceTree = "<group>"; };
 		90DE2B74876059F4CF3EF168AF3A6BAF /* PrimeFactors.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = PrimeFactors.modulemap; sourceTree = "<group>"; };
 		92DAF15565D8F45D8FC2CA2EF47160AE /* PrimeFactors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PrimeFactors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9385EA12DFFE4DB922CC7EC75B8C0D21 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReplaceMe.swift; path = BigFloat/Classes/ReplaceMe.swift; sourceTree = "<group>"; };
+		92FF7036AD888997E89FB42F5EB72CD3 /* BigFloat-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BigFloat-umbrella.h"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A616179EDE377DB288EAA755785DAB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94FC34131506EDD30747F91E0740F599 /* BitArray.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BitArray.swift; path = PrimeFactors/Classes/BitArray.swift; sourceTree = "<group>"; };
 		9BB83C9B9E2DF2AD4DEE757B6C303AC3 /* BigFloat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BigFloat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C3E9898B7E230340E7543094DAB6FAE /* BigInt-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BigInt-umbrella.h"; sourceTree = "<group>"; };
+		9D0720BBD024642B9A63E38855B414DC /* BigFloat-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BigFloat-prefix.pch"; sourceTree = "<group>"; };
 		9D3449BA244EF4EB6E3F95FF44CBFA34 /* SipHash-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SipHash-umbrella.h"; sourceTree = "<group>"; };
 		9F53134A88659D4B39427242FBCD8E27 /* Pods-BigFloat_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BigFloat_Example-resources.sh"; sourceTree = "<group>"; };
 		A10E8A5BA1D70D43BD8CFE2F2FBF18DF /* Pods-BigFloat_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BigFloat_Tests-resources.sh"; sourceTree = "<group>"; };
@@ -219,10 +219,7 @@
 		A7B4B8AACC94041411BEBCDA8F93BD8B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8B22B3182293E18F5560CA2FF60EB12 /* Primitive Types.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Primitive Types.swift"; path = "SipHash/Primitive Types.swift"; sourceTree = "<group>"; };
 		A9269E7117508BDE797A51FE00CDEB38 /* SipHash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SipHash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9714F932F8DB92FA06EB4864F75C4B2 /* BigFloat-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BigFloat-prefix.pch"; sourceTree = "<group>"; };
-		AB4306C6679F4E68D80AD16FB34B81DE /* BigFloat-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BigFloat-dummy.m"; sourceTree = "<group>"; };
 		AE6BFD93F765C389EBE8C586943AE270 /* Factorize.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Factorize.swift; path = PrimeFactors/Classes/Factorize.swift; sourceTree = "<group>"; };
-		AF6E97AF2A3F5BAF4DDFE8353E243925 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF717CF07A799644773053AE822D381E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4AA390E64EA4990C9A8A955EEFD9973 /* Data Conversion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Data Conversion.swift"; path = "sources/Data Conversion.swift"; sourceTree = "<group>"; };
 		BA9C86AA7449BC2D342C387966E92ED4 /* Random.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Random.swift; path = sources/Random.swift; sourceTree = "<group>"; };
@@ -230,41 +227,27 @@
 		C0C7582CBA9A421C24294E96E0422689 /* Pods-BigFloat_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BigFloat_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		C2FC9E96C06754B3896850E978949FD9 /* Pods-BigFloat_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BigFloat_Example-dummy.m"; sourceTree = "<group>"; };
 		C695CE1A6947B82A3F6EC89E91475017 /* Shanks.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Shanks.swift; path = PrimeFactors/Classes/Shanks.swift; sourceTree = "<group>"; };
+		C7D8D4B4A9B79C764583CED4C371BA29 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReplaceMe.swift; path = BigFloat/Classes/ReplaceMe.swift; sourceTree = "<group>"; };
 		C87BF6A89274E0BFF2A1B0A06A432921 /* PrimeProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PrimeProtocol.swift; path = PrimeFactors/Classes/PrimeProtocol.swift; sourceTree = "<group>"; };
 		CB77A19D2B6A6B6452CA4114394F403F /* Shifts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Shifts.swift; path = sources/Shifts.swift; sourceTree = "<group>"; };
 		CC5C57497652E37BDF54EA416868C0AF /* Division.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Division.swift; path = sources/Division.swift; sourceTree = "<group>"; };
 		CCE87CAB756693D2046BD4FF649EC500 /* GCD.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GCD.swift; path = sources/GCD.swift; sourceTree = "<group>"; };
 		D147D34335EA22AFF9EBE16CA8C117EE /* Pods-BigFloat_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BigFloat_Tests-umbrella.h"; sourceTree = "<group>"; };
-		D3BF0365483A7846A4901E8E298C6645 /* BigFloat.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BigFloat.swift; path = BigFloat/Classes/BigFloat.swift; sourceTree = "<group>"; };
 		DB89A432C291C9C15A50AC84C4C2819B /* Hashable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Hashable.swift; path = sources/Hashable.swift; sourceTree = "<group>"; };
 		DDDA07A621D761F920A0018A7238A8A9 /* Addition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Addition.swift; path = sources/Addition.swift; sourceTree = "<group>"; };
 		DEA599144489DF143F0DD739C8746B88 /* TrialDivision.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TrialDivision.swift; path = PrimeFactors/Classes/TrialDivision.swift; sourceTree = "<group>"; };
+		E41BE1210009502D25A5709B58437772 /* BigFloatFunc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BigFloatFunc.swift; path = BigFloat/Classes/BigFloatFunc.swift; sourceTree = "<group>"; };
 		E84BE30419DF0FD8617083BC81DB1634 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E86BADCECF5E6C76928A02495BEA30F0 /* Pods-BigFloat_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-BigFloat_Example.modulemap"; sourceTree = "<group>"; };
+		F1B446108A923033495E1E7E03D76F96 /* BigFloat-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BigFloat-dummy.m"; sourceTree = "<group>"; };
 		F2B74657C0957E9CA84B0C6DA5405CE5 /* Pods-BigFloat_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BigFloat_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		F2C03EE23BAD63C0597509A082C272F0 /* Lehman.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Lehman.swift; path = PrimeFactors/Classes/Lehman.swift; sourceTree = "<group>"; };
 		F403F09B4E108299FB1ABAF33FC6C30F /* SipHash.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SipHash.modulemap; sourceTree = "<group>"; };
+		F69C0D00B2ED796716E2F5EFDC3C0BB8 /* BigFloatString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BigFloatString.swift; path = BigFloat/Classes/BigFloatString.swift; sourceTree = "<group>"; };
 		FC9778C14ACA69B3987FDF9490B0C131 /* Bitwise Ops.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Bitwise Ops.swift"; path = "sources/Bitwise Ops.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0029165AB95A46C1F3CD1C84F5E74C10 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D98011847BC4D5D31E5580D5B76F773C /* Foundation.framework in Frameworks */,
-				E7C44489AB3B8949FC58BBDFC432B656 /* SipHash.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3FA65DCE43497187797112D60BCBE86D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1AB8E7FBA5C81CA62088C2597328E149 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		68A29961BF1D479B403848E2B33A5F64 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -272,16 +255,6 @@
 				A1C7879656278C467E59D377A414219F /* BigInt.framework in Frameworks */,
 				95FA051237FD894DDEC1BF8FEAF139B6 /* Foundation.framework in Frameworks */,
 				9DC8C122E6C63A786F85AEF0087F5CB5 /* SipHash.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6E2B2798B4C058AD852044D22E00F918 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6D20D6047C3913A6E21E432528E62A40 /* BigInt.framework in Frameworks */,
-				83933D710CF53319944D3F029D353635 /* Foundation.framework in Frameworks */,
-				18D96F0CD29CC6B37E5DA8BD15D1EB2A /* SipHash.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +266,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7717470A60B7126783A950436C8A2BF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39D3EDA522BAB33ADB77110D11D5F798 /* Foundation.framework in Frameworks */,
+				0392E33B8770395F0AC19C60C6BDC9D7 /* SipHash.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B2AA527D96402C33FB43B585888AEB86 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -301,23 +283,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E1147880F903376EA720143B1CA0F925 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1EA8154903935FD85E3703708F6B9F6 /* BigInt.framework in Frameworks */,
+				21F2BBF6492FA07EA4772CD944DB7F2B /* Foundation.framework in Frameworks */,
+				111152E5A085ADC84E8AE2E5B04502AF /* SipHash.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB3F159EE02A737E5DE9A3C6D75C6D10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D06F7CCE856EC999EB4D8DC32A77D446 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		016C28D09E1E0A9E653CA434749612C1 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				57A29E020EA2E599389EC86193F5E181 /* BigFloat.modulemap */,
-				0A3A9C1CA6B6034742FBA540D61D3953 /* BigFloat.xcconfig */,
-				AB4306C6679F4E68D80AD16FB34B81DE /* BigFloat-dummy.m */,
-				A9714F932F8DB92FA06EB4864F75C4B2 /* BigFloat-prefix.pch */,
-				69D1C02025507C9B1D8883C67FEA814E /* BigFloat-umbrella.h */,
-				AF6E97AF2A3F5BAF4DDFE8353E243925 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/BigFloat";
-			sourceTree = "<group>";
-		};
 		26A05AB7BDEDF98B1404B0342321EFBF /* Pods-BigFloat_Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +334,19 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/PrimeFactors";
+			sourceTree = "<group>";
+		};
+		37B5861766B09D6741DD57F41951446D /* BigFloat */ = {
+			isa = PBXGroup;
+			children = (
+				4956F399B3A1F34627EFF5F76256E358 /* BigFloat.swift */,
+				E41BE1210009502D25A5709B58437772 /* BigFloatFunc.swift */,
+				F69C0D00B2ED796716E2F5EFDC3C0BB8 /* BigFloatString.swift */,
+				C7D8D4B4A9B79C764583CED4C371BA29 /* ReplaceMe.swift */,
+				C9C15129553FFC1F1ECD6A6755B7DE5F /* Support Files */,
+			);
+			name = BigFloat;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		3E195E17EC91DB70AA9B12ACA2C21F9C /* Frameworks */ = {
@@ -454,11 +453,19 @@
 			path = BigInt;
 			sourceTree = "<group>";
 		};
+		73378B369D1E86EA51389C49A63878D9 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				37B5861766B09D6741DD57F41951446D /* BigFloat */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				CC4E8CC5E90150725952917BB02AC4E9 /* Development Pods */,
+				73378B369D1E86EA51389C49A63878D9 /* Development Pods */,
 				3E195E17EC91DB70AA9B12ACA2C21F9C /* Frameworks */,
 				897D5E629F5330FCECCF122125DD00C0 /* Pods */,
 				E4459AE55257C27EB637D1C04E1EEBA4 /* Products */,
@@ -476,25 +483,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		B4B3DEF4312D4C22E286D23A4B8900A0 /* BigFloat */ = {
+		C9C15129553FFC1F1ECD6A6755B7DE5F /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				54D969341FA8E17600AC8C56 /* BigFloatFunc.swift */,
-				D3BF0365483A7846A4901E8E298C6645 /* BigFloat.swift */,
-				54C037971FA72B65001FF34E /* BigFloatString.swift */,
-				9385EA12DFFE4DB922CC7EC75B8C0D21 /* ReplaceMe.swift */,
-				016C28D09E1E0A9E653CA434749612C1 /* Support Files */,
+				0DB4DAC3791223A6A3D713615CA2813D /* BigFloat.modulemap */,
+				5AE55F925469FC9D8BF36994008683A6 /* BigFloat.xcconfig */,
+				F1B446108A923033495E1E7E03D76F96 /* BigFloat-dummy.m */,
+				9D0720BBD024642B9A63E38855B414DC /* BigFloat-prefix.pch */,
+				92FF7036AD888997E89FB42F5EB72CD3 /* BigFloat-umbrella.h */,
+				93A616179EDE377DB288EAA755785DAB /* Info.plist */,
 			);
-			name = BigFloat;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		CC4E8CC5E90150725952917BB02AC4E9 /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B4B3DEF4312D4C22E286D23A4B8900A0 /* BigFloat */,
-			);
-			name = "Development Pods";
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/BigFloat";
 			sourceTree = "<group>";
 		};
 		E03B08637A14AC520ECC3D06228C0502 /* Targets Support Files */ = {
@@ -556,6 +556,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		286F10CA05AF3D6CBFD378D1C8F6F609 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A4AB0A6521EE3B9E2C8DFF7383D7416 /* SipHash-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		36206D9A28202E82BD22F22C40CA64B6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -564,19 +572,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4C7437AC7C172673ADB95EBB7D5B4AF0 /* Headers */ = {
+		89E48418EB8AB001E7FF19C5BD917F1B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2BF666EAD2E120322DEB8815EEE66E4 /* BigFloat-umbrella.h in Headers */,
+				C5A812E64161AB234B42B325BF5A715B /* BigInt-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2D5AA226A21A6DA0B986A1571AF37EE /* Headers */ = {
+		DBCAD15B54F392411876CB6403519E24 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10A1B85D8934AC2D5BD9C1D4D0E84111 /* BigInt-umbrella.h in Headers */,
+				8F6A22751EE22B9928E5A1928DB42440 /* BigFloat-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,36 +596,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FB3CFCFB237B1D852CD90E1EA7465D92 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9A0C059A7F5DD8E977B9625BF29B3D10 /* SipHash-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		013D9EAA0152531B1B2EE4DDC016DDA0 /* BigFloat */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 20C24F6A476E127D9FDFEFEF31F50B65 /* Build configuration list for PBXNativeTarget "BigFloat" */;
-			buildPhases = (
-				19561199DBF8DC794D466E01FD74FFD7 /* Sources */,
-				6E2B2798B4C058AD852044D22E00F918 /* Frameworks */,
-				4C7437AC7C172673ADB95EBB7D5B4AF0 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B9CC64DB0FCD2598B84B6F1E89A26535 /* PBXTargetDependency */,
-				E7380C1EE2910B6B4FB671BDF414C64E /* PBXTargetDependency */,
-			);
-			name = BigFloat;
-			productName = BigFloat;
-			productReference = 9BB83C9B9E2DF2AD4DEE757B6C303AC3 /* BigFloat.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		4660C3B0DF9A7989B69F93DC692172B6 /* PrimeFactors */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 175073CE2601CDE722949A360F81B24B /* Build configuration list for PBXNativeTarget "PrimeFactors" */;
@@ -637,13 +618,13 @@
 			productReference = 92DAF15565D8F45D8FC2CA2EF47160AE /* PrimeFactors.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		6DDEA550A5E814D8CA2BD1999EC22697 /* SipHash */ = {
+		4C11E58F37107C6399E8CBF8E258BDD7 /* SipHash */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AB1F2A0CB23D610C3462868711A995AC /* Build configuration list for PBXNativeTarget "SipHash" */;
+			buildConfigurationList = 20063398A4F468357E52163B7C38C25B /* Build configuration list for PBXNativeTarget "SipHash" */;
 			buildPhases = (
-				C170DE874337CC2A93DA79587D1D2718 /* Sources */,
-				3FA65DCE43497187797112D60BCBE86D /* Frameworks */,
-				FB3CFCFB237B1D852CD90E1EA7465D92 /* Headers */,
+				D1EE6A399E7BF56A936085B334DAFA1E /* Sources */,
+				FB3F159EE02A737E5DE9A3C6D75C6D10 /* Frameworks */,
+				286F10CA05AF3D6CBFD378D1C8F6F609 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -654,22 +635,41 @@
 			productReference = A9269E7117508BDE797A51FE00CDEB38 /* SipHash.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		6F002211C27888CE01D00AD56991C745 /* BigInt */ = {
+		804E993EEEE381403239C992804A3EFA /* BigInt */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9268184C91E68903C0DC7AF1BAFEF386 /* Build configuration list for PBXNativeTarget "BigInt" */;
+			buildConfigurationList = 3B6411287F1D17D67C2CDDA70DDFD7BF /* Build configuration list for PBXNativeTarget "BigInt" */;
 			buildPhases = (
-				64260F8FD1BC9AD44CCCAC51A50D5123 /* Sources */,
-				0029165AB95A46C1F3CD1C84F5E74C10 /* Frameworks */,
-				D2D5AA226A21A6DA0B986A1571AF37EE /* Headers */,
+				785296B4DF68AFB452E1C0C697863195 /* Sources */,
+				7717470A60B7126783A950436C8A2BF5 /* Frameworks */,
+				89E48418EB8AB001E7FF19C5BD917F1B /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				10FFDC1B90A99540664AE9694A11EADF /* PBXTargetDependency */,
+				1FC71C91AB4CE45DBD4602DA140017F0 /* PBXTargetDependency */,
 			);
 			name = BigInt;
 			productName = BigInt;
 			productReference = A579C72BD089FA249AAED93A9E656A66 /* BigInt.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9B5DD8DA1A5B3471809A8554824BC410 /* BigFloat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E26849DAF286EA36753FFCF3D37E9B32 /* Build configuration list for PBXNativeTarget "BigFloat" */;
+			buildPhases = (
+				64D740442F43A769430330F61E1310A0 /* Sources */,
+				E1147880F903376EA720143B1CA0F925 /* Frameworks */,
+				DBCAD15B54F392411876CB6403519E24 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0A9CBD283028E7CE4EF585D1068FD82A /* PBXTargetDependency */,
+				A14FE92395866D7910FAE4C00D71BA3D /* PBXTargetDependency */,
+			);
+			name = BigFloat;
+			productName = BigFloat;
+			productReference = 9BB83C9B9E2DF2AD4DEE757B6C303AC3 /* BigFloat.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		D2A5A041622F403FB2F05C43672BB53B /* Pods-BigFloat_Tests */ = {
@@ -717,7 +717,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0910;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -731,56 +731,26 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				013D9EAA0152531B1B2EE4DDC016DDA0 /* BigFloat */,
-				6F002211C27888CE01D00AD56991C745 /* BigInt */,
+				9B5DD8DA1A5B3471809A8554824BC410 /* BigFloat */,
+				804E993EEEE381403239C992804A3EFA /* BigInt */,
 				F32C4E972B7D3092346C3A7C514DCD6F /* Pods-BigFloat_Example */,
 				D2A5A041622F403FB2F05C43672BB53B /* Pods-BigFloat_Tests */,
 				4660C3B0DF9A7989B69F93DC692172B6 /* PrimeFactors */,
-				6DDEA550A5E814D8CA2BD1999EC22697 /* SipHash */,
+				4C11E58F37107C6399E8CBF8E258BDD7 /* SipHash */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		19561199DBF8DC794D466E01FD74FFD7 /* Sources */ = {
+		64D740442F43A769430330F61E1310A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54D969351FA8E17600AC8C56 /* BigFloatFunc.swift in Sources */,
-				E3029FCFD4260FD3EE434C038557C6C0 /* BigFloat-dummy.m in Sources */,
-				02915C4871279B93A7DF1344094A1914 /* BigFloat.swift in Sources */,
-				54C037981FA72B65001FF34E /* BigFloatString.swift in Sources */,
-				C4EAC518E3C58BDFD570223355B5749D /* ReplaceMe.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		64260F8FD1BC9AD44CCCAC51A50D5123 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F1ED2E51AA10273D1A8DAA795A684E0F /* Addition.swift in Sources */,
-				0B211B1199457898FD95BC81998B000A /* BigInt-dummy.m in Sources */,
-				3BD46E72E5E7C9C8F1AD157498F670AE /* BigInt.swift in Sources */,
-				677847F479A6D0BD4C1AE29B1758C3E6 /* BigUInt.swift in Sources */,
-				09BFF2041293248084170F4EA8CF238B /* Bitwise Ops.swift in Sources */,
-				13B89DBE9FA72866BA0C8355FEF8CA4F /* Codable.swift in Sources */,
-				5C7087F735C78EE0E636579DBF7723DC /* Comparable.swift in Sources */,
-				E05B8DAD8BAB411B2161DBBA13E71AC8 /* Data Conversion.swift in Sources */,
-				DCB63F86DDF3C5256EDEA465E210CCF1 /* Division.swift in Sources */,
-				B78E93AA272C111D382940CD43B64257 /* Exponentiation.swift in Sources */,
-				EB0BA85ABF3B856BE3BCAA04B18031C5 /* Floating Point Conversion.swift in Sources */,
-				85F4776408E1B1C20C713236EFD92602 /* GCD.swift in Sources */,
-				DEDFE6216FFC6EFC200C60CC38CFECAD /* Hashable.swift in Sources */,
-				A8D595DE5CC7C166E2F00E505635F9EF /* Integer Conversion.swift in Sources */,
-				83B813E742D47FC505E6BE6F49F5CEF0 /* Multiplication.swift in Sources */,
-				44806722753C2FC23E20DE291112AEB8 /* Prime Test.swift in Sources */,
-				FA375B27463D9ABDF1E8C3C37E694391 /* Random.swift in Sources */,
-				FF8D2089F76D43F79109C47AB6B49A68 /* Shifts.swift in Sources */,
-				3109F35878956651EC7FBF0CCF57F594 /* Square Root.swift in Sources */,
-				F03C31DEABCFA8C51932BBE32711B668 /* Strideable.swift in Sources */,
-				C3DC07DA75B1FE1D21ED0169605B86A9 /* String Conversion.swift in Sources */,
-				AAFF9A32D0794E86F4A7FBAE91AC665E /* Subtraction.swift in Sources */,
-				5729C0812B1B4F006F42F17CAE2639B4 /* Words and Bits.swift in Sources */,
+				5958224EFF04A0499D00A2970CCF3C7C /* BigFloat-dummy.m in Sources */,
+				D939F5BBAD40D97739026B738550B070 /* BigFloat.swift in Sources */,
+				A85BD7D515EEEBFF7712EA8ECE9A7B0F /* BigFloatFunc.swift in Sources */,
+				C054C62EC9EEFA6123F34A2B739BB09C /* BigFloatString.swift in Sources */,
+				10E6EC48216D31FF26F3E4BCF297EE48 /* ReplaceMe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,15 +762,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C170DE874337CC2A93DA79587D1D2718 /* Sources */ = {
+		785296B4DF68AFB452E1C0C697863195 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				195A5D2652A7018971E7AA31D0A66F3C /* Primitive Types.swift in Sources */,
-				211399DA25EA5E65BCBBFE1AB2193828 /* RandomUInt64.swift in Sources */,
-				04418F30EC7A4F1E97041C6E9EB26205 /* SipHash-dummy.m in Sources */,
-				4F71B22D2CD81CB82155BC5FD4F371C9 /* SipHashable.swift in Sources */,
-				8A1E36755A21868C447A38591401344D /* SipHasher.swift in Sources */,
+				6E3E8734AEFF8472E8535E08013A188A /* Addition.swift in Sources */,
+				C9860A8ADFD10B4998F8DD6E38C4B8A7 /* BigInt-dummy.m in Sources */,
+				19040BA950A2C47173A5C152EE741574 /* BigInt.swift in Sources */,
+				83536775A0251198B9CCA81163E09FEE /* BigUInt.swift in Sources */,
+				A2B3B0283490319C93690CD30445A88F /* Bitwise Ops.swift in Sources */,
+				FC97158B152BEC3D71480E0E70D24971 /* Codable.swift in Sources */,
+				3F91A36763865B3AAE8869BA7B75E65A /* Comparable.swift in Sources */,
+				17CF8E523A41B2392B95D451EF2AEE2B /* Data Conversion.swift in Sources */,
+				C377F5BDBDE497863A8903771E7D2C47 /* Division.swift in Sources */,
+				04F9D8FDA2C48B2AF54D1B03F777C400 /* Exponentiation.swift in Sources */,
+				56BEAF71B38546AC61FC94279761F804 /* Floating Point Conversion.swift in Sources */,
+				8D37FFCF4383E4505CB04D68DBD4F53C /* GCD.swift in Sources */,
+				0897C3242A19DFB5E4AD582FFBE61389 /* Hashable.swift in Sources */,
+				89E9EA1058EB96DC245BAF32BD3C1F5B /* Integer Conversion.swift in Sources */,
+				6BEBE62747F4FCF5A16A9EF1F01C11EA /* Multiplication.swift in Sources */,
+				EE11AE0ED2F5BF35CE9FC7BEB9B6AE6A /* Prime Test.swift in Sources */,
+				96178A3A90F052DF31A0DA1729DB1C85 /* Random.swift in Sources */,
+				617651D9AC0E4E7FBEC355A5B821DF1E /* Shifts.swift in Sources */,
+				37FA84C837043071EA11CB481B525F0F /* Square Root.swift in Sources */,
+				5AD0075897D0716C5807DEF2E4C47577 /* Strideable.swift in Sources */,
+				72DA1F2676835B1E4A58DC0BFA31B036 /* String Conversion.swift in Sources */,
+				BE3BEE5A92AF48B034541AC22DBC97D0 /* Subtraction.swift in Sources */,
+				9E838F42F20A52F1E2C75F41145225FF /* Words and Bits.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -809,6 +797,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				37E8FA0D9594996A906550BB1BF433BE /* Pods-BigFloat_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1EE6A399E7BF56A936085B334DAFA1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67DA8746C945CB197AE756D5CCC8E1D8 /* Primitive Types.swift in Sources */,
+				C089278645AD34482259860BAFB674A3 /* RandomUInt64.swift in Sources */,
+				0F8E1BFDB0F2EBB0DF0531B1E20C8912 /* SipHash-dummy.m in Sources */,
+				8FB45CFAF8B36AA81DE4AAC6BEC13F3D /* SipHashable.swift in Sources */,
+				47C1A19728BF7F4C278917C7FFB3689F /* SipHasher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -839,23 +839,35 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		10FFDC1B90A99540664AE9694A11EADF /* PBXTargetDependency */ = {
+		0A9CBD283028E7CE4EF585D1068FD82A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BigInt;
+			target = 804E993EEEE381403239C992804A3EFA /* BigInt */;
+			targetProxy = DD72BA45D879132AD576E9FC2DE5E2B4 /* PBXContainerItemProxy */;
+		};
+		1FC71C91AB4CE45DBD4602DA140017F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SipHash;
-			target = 6DDEA550A5E814D8CA2BD1999EC22697 /* SipHash */;
-			targetProxy = 7DE6DEABBD633C18D661D06C3DFCEA90 /* PBXContainerItemProxy */;
+			target = 4C11E58F37107C6399E8CBF8E258BDD7 /* SipHash */;
+			targetProxy = 7730CB3F7732F5C59116CE6BD640A688 /* PBXContainerItemProxy */;
 		};
 		623E519FEBFFCA42CD446B7CDED095FD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SipHash;
-			target = 6DDEA550A5E814D8CA2BD1999EC22697 /* SipHash */;
+			target = 4C11E58F37107C6399E8CBF8E258BDD7 /* SipHash */;
 			targetProxy = 538ED7BDADBE80F37D6EE1A175A7E823 /* PBXContainerItemProxy */;
 		};
 		984ABB6CB2E3370F64F9D4FAF567A579 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = BigInt;
-			target = 6F002211C27888CE01D00AD56991C745 /* BigInt */;
+			target = 804E993EEEE381403239C992804A3EFA /* BigInt */;
 			targetProxy = AC603328334BA6CD2AE71782BA6E67B9 /* PBXContainerItemProxy */;
+		};
+		A14FE92395866D7910FAE4C00D71BA3D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SipHash;
+			target = 4C11E58F37107C6399E8CBF8E258BDD7 /* SipHash */;
+			targetProxy = 0E1AB3D5C180D5CD0349D642ABF16549 /* PBXContainerItemProxy */;
 		};
 		ABE6AC890F14222387A28A1598BC045A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -863,74 +875,27 @@
 			target = 4660C3B0DF9A7989B69F93DC692172B6 /* PrimeFactors */;
 			targetProxy = 3508777DD049E07AA165DA711EB920D0 /* PBXContainerItemProxy */;
 		};
-		B9CC64DB0FCD2598B84B6F1E89A26535 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BigInt;
-			target = 6F002211C27888CE01D00AD56991C745 /* BigInt */;
-			targetProxy = 4D34858AD8F323E8CEE590B7BF70A474 /* PBXContainerItemProxy */;
-		};
 		DAA69F0626467BC7E202EE12948408BB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = BigFloat;
-			target = 013D9EAA0152531B1B2EE4DDC016DDA0 /* BigFloat */;
+			target = 9B5DD8DA1A5B3471809A8554824BC410 /* BigFloat */;
 			targetProxy = 0FC045864F9F56DB98547B5CA2EA6F96 /* PBXContainerItemProxy */;
 		};
 		DC7534CF189A13D36E85C2B07969D171 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = BigInt;
-			target = 6F002211C27888CE01D00AD56991C745 /* BigInt */;
+			target = 804E993EEEE381403239C992804A3EFA /* BigInt */;
 			targetProxy = 4A3EB84777E9AE6DA54BAE5F78E81099 /* PBXContainerItemProxy */;
-		};
-		E7380C1EE2910B6B4FB671BDF414C64E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SipHash;
-			target = 6DDEA550A5E814D8CA2BD1999EC22697 /* SipHash */;
-			targetProxy = 760ABA81637C32289C93858F2402CF2D /* PBXContainerItemProxy */;
 		};
 		FE5A9E34B5BBB394BAC50CD96692F4B2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SipHash;
-			target = 6DDEA550A5E814D8CA2BD1999EC22697 /* SipHash */;
+			target = 4C11E58F37107C6399E8CBF8E258BDD7 /* SipHash */;
 			targetProxy = B68E7BA11A432BA4A31DD9DABF1EFBEF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		07EFC3AC922AFDCCFDF23CD4C8D1C04F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E8AA78F69B9D0AD96E5228C8157588D /* SipHash.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SipHash/SipHash-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SipHash/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SipHash/SipHash.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SipHash;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		157AF0CD5E5AB2A2E74D3B8ECD865185 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -983,6 +948,41 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		1E4B06501C24B0622B9EF19F472B47A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E8AA78F69B9D0AD96E5228C8157588D /* SipHash.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SipHash/SipHash-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SipHash/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SipHash/SipHash.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SipHash;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		21644614BA8FDA048DEE2E7F25DD6A6E /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1058,42 +1058,7 @@
 			};
 			name = Debug;
 		};
-		7D497518597228E246373580CC00F327 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A3A9C1CA6B6034742FBA540D61D3953 /* BigFloat.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BigFloat/BigFloat-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BigFloat/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BigFloat/BigFloat.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = BigFloat;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		9046E0F03B1A9C9F590F7CB8CC83AD5A /* Debug */ = {
+		3F917F8AC0732ABE9F18C33AF1ED1A23 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0525F04500E9E964B8BC3279D9A9E7CF /* BigInt.xcconfig */;
 			buildSettings = {
@@ -1128,9 +1093,9 @@
 			};
 			name = Debug;
 		};
-		AF9E4C3B025D78B5A0F0B196C49E2FCD /* Release */ = {
+		6761AEC5972398D46D7845616B27EE72 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A3A9C1CA6B6034742FBA540D61D3953 /* BigFloat.xcconfig */;
+			baseConfigurationReference = 0E8AA78F69B9D0AD96E5228C8157588D /* SipHash.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1144,14 +1109,14 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BigFloat/BigFloat-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BigFloat/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SipHash/SipHash-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SipHash/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BigFloat/BigFloat.modulemap";
+				MODULEMAP_FILE = "Target Support Files/SipHash/SipHash.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = BigFloat;
+				PRODUCT_NAME = SipHash;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -1162,6 +1127,76 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		6A8AABDFED70140E67256DC86D7F740F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0525F04500E9E964B8BC3279D9A9E7CF /* BigInt.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/BigInt/BigInt-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BigInt/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BigInt/BigInt.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = BigInt;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6F05F1BF46898C8E44DA73651FAAA898 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5AE55F925469FC9D8BF36994008683A6 /* BigFloat.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/BigFloat/BigFloat-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BigFloat/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BigFloat/BigFloat.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = BigFloat;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		BD2428EEC927732BD4791837FEAFBB58 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1308,44 +1343,9 @@
 			};
 			name = Release;
 		};
-		E3B578223028F98FDC01866006C5AE06 /* Debug */ = {
+		E5E589967AFB3161C25E129E56EFCEB4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E8AA78F69B9D0AD96E5228C8157588D /* SipHash.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SipHash/SipHash-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SipHash/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SipHash/SipHash.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = SipHash;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		EABEEDAB9A58667E9BED48A3E569CEFF /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0525F04500E9E964B8BC3279D9A9E7CF /* BigInt.xcconfig */;
+			baseConfigurationReference = 5AE55F925469FC9D8BF36994008683A6 /* BigFloat.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1359,14 +1359,14 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BigInt/BigInt-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BigInt/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/BigFloat/BigFloat-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BigFloat/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BigInt/BigInt.modulemap";
+				MODULEMAP_FILE = "Target Support Files/BigFloat/BigFloat.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = BigInt;
+				PRODUCT_NAME = BigFloat;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -1456,11 +1456,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		20C24F6A476E127D9FDFEFEF31F50B65 /* Build configuration list for PBXNativeTarget "BigFloat" */ = {
+		20063398A4F468357E52163B7C38C25B /* Build configuration list for PBXNativeTarget "SipHash" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7D497518597228E246373580CC00F327 /* Debug */,
-				AF9E4C3B025D78B5A0F0B196C49E2FCD /* Release */,
+				1E4B06501C24B0622B9EF19F472B47A9 /* Debug */,
+				6761AEC5972398D46D7845616B27EE72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1474,20 +1474,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9268184C91E68903C0DC7AF1BAFEF386 /* Build configuration list for PBXNativeTarget "BigInt" */ = {
+		3B6411287F1D17D67C2CDDA70DDFD7BF /* Build configuration list for PBXNativeTarget "BigInt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9046E0F03B1A9C9F590F7CB8CC83AD5A /* Debug */,
-				EABEEDAB9A58667E9BED48A3E569CEFF /* Release */,
+				3F917F8AC0732ABE9F18C33AF1ED1A23 /* Debug */,
+				6A8AABDFED70140E67256DC86D7F740F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AB1F2A0CB23D610C3462868711A995AC /* Build configuration list for PBXNativeTarget "SipHash" */ = {
+		E26849DAF286EA36753FFCF3D37E9B32 /* Build configuration list for PBXNativeTarget "BigFloat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E3B578223028F98FDC01866006C5AE06 /* Debug */,
-				07EFC3AC922AFDCCFDF23CD4C8D1C04F /* Release */,
+				6F05F1BF46898C8E44DA73651FAAA898 /* Debug */,
+				E5E589967AFB3161C25E129E56EFCEB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
