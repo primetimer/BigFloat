@@ -195,6 +195,7 @@ class ViewController: UIViewController, ProtShowResult {
 		CreateCalcButtonShift(str: "∛", type: .crt, unshift: .sqrt)
 		CreateCalcButton(str: "exp", type: .exp)
 		CreateCalcButtonShift(str: "ln", type: .ln, unshift: .exp)
+		CreateCalcButton(str: "π", type: .pi)
 		
 		CreateCalcButton(str: "⌘C", type: .CmdC)
 		CreateCalcButtonShift(str: "⌘V", type: .CmdV, unshift : .CmdC)
@@ -204,6 +205,7 @@ class ViewController: UIViewController, ProtShowResult {
 		CreateCalcButton(str: "x² ", type: .Square)
 		CreateCalcButton(str: "x³", type: .Cube)
 		CreateCalcButton(str: "M(x)", type: .Mersenne)
+		GetButtonByCmd(cmd: .n3)!.shiftbutton = GetButtonByType(type: .pi)
 		GetButtonByCmd(cmd: .ee)!.shiftbutton = uipreview
 		GetButtonByCmd(cmd: .enter)!.shiftbutton = GetButtonByType(type: .LastX)
 		Layout()

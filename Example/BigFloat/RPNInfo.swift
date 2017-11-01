@@ -65,6 +65,7 @@ class InfoView : UITextView {
 		case .TenPow:	t = "One with x trailing zeros"
 		//case .Sexy:     t = "Sexy Prime ( the next prime p, with p + 6  prime )"
 		//case .Cousin:   t = "Cousin Prime ( the next prime p, with p + 4  prime )"
+			case .pi:		t = "pi"
 		case .exp:
 			t = "Exponential function with base e"
 		case .ln:

@@ -85,11 +85,11 @@ public extension BigFloat {
 		
 		//Bestimme die Ziffern des Vorkommaanteils
 		var intdigits : [Int] = []
+		
 		while int > 0 {
-			let digit = Int(int / div)
-			intdigits.append(digit)
-			int = int % div
-			div = div / bbase
+			let digit = Int(int % bbase)
+			intdigits.insert(digit, at: 0)
+			int = int / bbase
 		}
 		
 		// Bestimme den Nachkommanteil

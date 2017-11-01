@@ -18,7 +18,7 @@ enum StackState : Int {
 enum CalcType : Int {
 	case Undefined,Plus,Minus,Prod,Divide, LastX, Mersenne, Square, Cube, TenPow
 	case PNext, PPrev //, Sexy, Cousin, Twin, SoG, Rho, Squfof, Lehman, Factor, Factors
-	case Swap, Pop, Pow, PowMod, exp, ln
+	case Swap, Pop, Pow, PowMod, exp, ln, pi
 	case Mod, gcd, sqrt, crt, Hash,Rnd
 	case Sto1,Sto2,Sto3, Rcl1,Rcl2,Rcl3, CmdC, CmdV
 }
@@ -409,12 +409,20 @@ class RPNCalc : CalcCancellable {
 		}
 	}
 	
+	private func pi() {
+		let pi = BigFloatConstant.pi
+		push(x: StackElem(val :pi))
+	}
+	
 	private func ln() {
 		if (x.value <= BigFloat(0)) {
 			stackstate = .overflow
 			return
 		}
-		stackstate = .unimplemented
+		let lnval = BigFloat.ln(x: x.value)
+		pop()
+		push(x: StackElem(val:lnval))
+		stackstate = .valid
 	}
 	
 	private	func crt() {
@@ -437,37 +445,72 @@ class RPNCalc : CalcCancellable {
 	}
 	
 	private func cmdc() {
-		stackstate = .unimplemented
-		/*
 		let pasteBoard = UIPasteboard.general
-		pasteBoard.string = String(x.value)
+		pasteBoard.string = x.value.ExponentialString(base: 10, fix: 100)
 		stackstate = .copied
-		*/
 	}
 	private func cmdv() {
-		stackstate = .unimplemented
-		/*
 		let pasteBoard = UIPasteboard.general
 		var numstr = ""
-		var len = 0
+		var fracstr = ""
+		var expstr = ""
+		var expmode = false
+		var fracmode = false
+		
+		var value = BigFloat(0)
+		
 		if  let str = pasteBoard.string {
 			for c in Array(str) {
 				switch c {
 				case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
-					numstr = numstr + String(c)
-					len = len + 1
+					if expmode {
+						expstr = expstr+String(c)
+					} else if fracmode {
+						fracstr = fracstr + String(c) }
+					else {
+						numstr = numstr + String(c)
+					}
+				case ".":
+					if !expmode { fracmode = true }
+				case "E":
+					expmode = true
 				default:
 					break
 				}
-				if len > 100 { stackstate = .overflow; return }
 			}
-			
-			
-			if let nr = BigUInt(numstr) {
-				push(x: nr)
+				
+				if numstr.count > 100 { stackstate = .overflow; return }
+				if let i = BigInt(numstr) {
+					value = BigFloat(i)
+				}
+				if let f = BigInt(fracstr) {
+					let b = BigFloat(10)
+					var bpow = BigFloat(1)
+					for _ in 1...fracstr.count {
+						bpow = bpow * b
+					}
+					value = value + BigFloat(f) / bpow
+				}
+				
+				if let e = BigInt(expstr) {
+					if e > BigInt(1000)  { stackstate = .overflow; return }
+					if e < BigInt(-1000) { stackstate = .overflow; return }
+					let eint = Int(e)
+					let b = BigFloat(10)
+					var bpow = BigFloat(1)
+					if eint > 0 {
+						for _ in 1...eint { bpow = bpow * b }
+						value = value * bpow
+					}
+					if eint < 0 {
+						for _ in 1 ... -eint { bpow = bpow * b }
+						value = value / bpow
+					}
+				}
 			}
-		}
-		*/
+			push(x: StackElem(val: value))
+			stackstate = .copied
+		
 	}
 	
 	private func rnd() {
@@ -497,6 +540,7 @@ class RPNCalc : CalcCancellable {
 		case .gcd:		self.gcd()
 		case .sqrt:		self.sqrt()
 		case .crt:		self.crt()
+		case .pi:		self.pi()
 		case .exp:		self.exp()
 		case .ln:		self.ln()
 		case .Swap:		self.swap()

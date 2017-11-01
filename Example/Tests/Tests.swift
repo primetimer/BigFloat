@@ -5,7 +5,7 @@ import BigFloat
 
 class Tests: XCTestCase {
 	
-	let epsilon : BigFloat = BigFloat(Double(1E-100))
+	let epsilon : BigFloat = BigFloat(Double(1E-50))
     
     override func setUp() {
         super.setUp()
@@ -17,11 +17,49 @@ class Tests: XCTestCase {
         super.tearDown()
     }
 	
+	func testLn() {
+		
+		do {
+			let x = BigFloat(2)
+			let ln2 = BigFloat.ln(x: x)
+			let ln2str = ln2.ExponentialString(base: 10, fix: 40)
+			print("ln2:",ln2str)
+			let ref = "6.9314718055994530941723212145817656807550E-1"
+			XCTAssert(ln2str == ref,"ln : Pass ln2")
+		}
+		
+		do {
+			let e = BigFloat.exp(x: BigFloat(1))
+			var x = BigFloat(1)
+			//print("e:",x.ExponentialString(base: 10, fix: 40))
+			for k in 0...32 {
+				let lnx = BigFloat.ln(x: x)
+				//let lnxstr = lnx.ExponentialString(base: 10, fix: 40)
+				//print(String(k), "ln(e^k):",lnxstr)
+				x = x * e
+				let ref = BigFloat(k)
+				let d = BigFloat.abs(lnx-ref)
+				XCTAssert(d < epsilon)
+			}
+			
+			x = BigFloat(1)
+			for k in 0...40 {
+				let lnx = BigFloat.ln(x: x)
+				//let lnxstr = lnx.ExponentialString(base: 10, fix: 40)
+				//print(String(k), "ln(e^-k):",lnxstr)
+				x = x / e
+				let ref = BigFloat(-k)
+				let d = BigFloat.abs(lnx-ref)
+				XCTAssert(d < epsilon)
+			}
+		}
+	}
+	
 	func testHypot() {
 		let x = BigFloat(1)
 		let y = BigFloat(1)
 		let h = BigFloat.hypot(x: x, y)
-		let hstr = h.ExponentialString(base: 10, fix: 40)
+		//let hstr = h.ExponentialString(base: 10, fix: 40)
 		let r2 = BigFloat.sqrt(x: BigFloat(2))
 		let d = BigFloat.abs(h - r2)
 		XCTAssert(d < epsilon)
@@ -54,6 +92,24 @@ class Tests: XCTestCase {
 			print(String(k), ":", astr, bstr, tstr,partstr)
 		}
 		XCTAssert(partstr == "3.1415926535897932384626433832795028841972E0")
+		
+		let pireal = BigFloatConstant.pi
+		let prealstr = pireal.ExponentialString(base: 10, fix: 40)
+		XCTAssert(partstr == prealstr)
+		
+		do {
+			let piatan = BigFloat(4)*BigFloat.atan(x: BigFloat(1))
+			let piatanstr = piatan.ExponentialString(base: 10, fix: 40)
+			XCTAssert(partstr == piatanstr)
+		}
+		do {
+			let piatan2 = BigFloat(4)*BigFloat.atan(x: BigFloat(0.5))
+			let piatan3 = BigFloat(4)*BigFloat.atan(x: BigFloat(1) / BigFloat(3))
+			let piatan = piatan2 + piatan3
+			let piatanstr = piatan.ExponentialString(base: 10, fix: 40)
+			XCTAssert(partstr == piatanstr)
+		}
+		
 		/*
 		var sign = 1
 		for k in 0...100 {
