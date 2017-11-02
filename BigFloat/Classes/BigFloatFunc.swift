@@ -24,15 +24,15 @@ public class BigFloatConstant {
 			var t = half*half
 			var p = BigFloat(0)
 			var twopow = BigFloat(1)
-			var partstr = ""
+			//var partstr = ""
 			while true {
 				let a1 = (a+b)*half
 				let b1 = BigFloat.sqrt(x: a*b)
-				let astr = a1.ExponentialString(base: 10, fix: 40)
-				let bstr = b1.ExponentialString(base: 10, fix: 40)
+				//let astr = a1.ExponentialString(base: 10, fix: 40)
+				//let bstr = b1.ExponentialString(base: 10, fix: 40)
 				let d = (a-a1)*(a-a1)*twopow
 				t = t - d
-				let tstr = t.ExponentialString(base: 10, fix: 40)
+				//let tstr = t.ExponentialString(base: 10, fix: 40)
 				let p1 = (a1+b1)*(a1+b1) / BigFloat(4) / t
 				let dif = BigFloat.abs(p1-p)
 				if dif < epsilon { return p1 }
@@ -41,8 +41,8 @@ public class BigFloatConstant {
 				a = a1
 				b = b1
 				p = p1
-				partstr = p.ExponentialString(base: 10, fix: 40)
-				print(astr, bstr, tstr,partstr)
+				//partstr = p.ExponentialString(base: 10, fix: 40)
+				//print(astr, bstr, tstr,partstr)
 			}
 		}
 	}
@@ -186,7 +186,7 @@ extension BigFloat {
 		let m = xx.significand.bitWidth + xx.exponent + 1
 		let xm = BigFloat(significand: 1, exponent: -m)
 		let xf = xm*xx
-		let xfstr = xf.ExponentialString(base: 10, fix: 40)
+		//let xfstr = xf.ExponentialString(base: 10, fix: 40)
 		//print(xfstr)
 		let l = inner_log(xf,px)
 		let logi = BigFloat(m)*ln2
@@ -199,5 +199,12 @@ extension BigFloat {
 		
 		return ans
 		
+	}
+	
+	// ln(a^b) = b * ln(a) --> a^b = exp(b*ln(a))
+	public static func pow(x:BigFloat, _ y:BigFloat,  bits:Int = 64)->BigFloat  {
+		let xx = y*BigFloat.ln(x: x)
+		let ans = BigFloat.exp(x: xx)
+		return ans
 	}
 }

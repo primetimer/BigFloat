@@ -87,8 +87,9 @@ class StackInput {
 			if ee * eesign > 0 {
 				radixpow = BigFloat(1)
 				for _ in 0 ..< ee {
-					temp = temp * radixpow
+					radixpow = radixpow * BigFloat(radix)
 				}
+				temp = temp * radixpow
 			}
 			if ee*eesign < 0 {
 				radixpow = BigFloat(1)

@@ -157,26 +157,15 @@ class RPNCalc : CalcCancellable {
 	}
 
 	private func pow() {
-		stackstate = .unimplemented
-		/*
-		if x > bitMax && (y>1) {
-			stackstate = .overflow; return
-		}
-		if x == BigUInt(0) && y == BigUInt(0) {
+		if x.value == BigFloat(0) && y.value == BigFloat(0) {
 			stackstate = .error
 			return
 		}
-		if (x * BigUInt(y.bitWidth) > 2*bitMax) && (y>1)  {
-			stackstate = .overflow
-			return
-		}
-		
-		let z = y.power(Int(x))
+		let z = BigFloat.pow(x: y.value,x.value)
 		popx()
 		pop()
-		push(x:z)
+		push(val: z)
 		stackstate = .valid
-		*/
 	}
 	
 	private func square() {

@@ -5,7 +5,7 @@ import BigFloat
 
 class Tests: XCTestCase {
 	
-	let epsilon : BigFloat = BigFloat(Double(1E-50))
+	let epsilon : BigFloat = BigFloat(Double(1E-100))
     
     override func setUp() {
         super.setUp()
