@@ -141,7 +141,9 @@ class StackInput {
 				eestr = String(ee*eesign)
 			}
 			if sign < 0 { str = "-" + str }
-			return str + eestr
+			let ans = str + eestr
+			if ans == "" { return "0" }
+			return ans
 		}
 	}
 
