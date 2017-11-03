@@ -16,15 +16,17 @@ enum StackState : Int {
 }
 
 enum CalcType : Int {
-	case Undefined,Plus,Minus,Prod,Divide, LastX, Mersenne, Square, Cube, TenPow
-	case PNext, PPrev //, Sexy, Cousin, Twin, SoG, Rho, Squfof, Lehman, Factor, Factors
-	case Swap, Pop, Pow, PowMod, exp, ln, pi
+	case Undefined,Plus,Minus,Prod,Divide, LastX, Mersenne, Square, Cube, TenPow, Inv
+	case Sin, Cos, Tan, aSin, aCos, aTan
+	case PNext, PPrev
+	case Swap, Pop, Pow, PowMod, exp, ln, pi, log
 	case Mod, gcd, sqrt, crt, Hash,Rnd
-	case Sto1,Sto2,Sto3, Rcl1,Rcl2,Rcl3, CmdC, CmdV
+	case Sto1, Rcl1, CmdC, CmdV
 }
 
 class RPNCalc : CalcCancellable {
 	
+	private var storeage = ForthStorage()
 	override public init() {
 		super.init()
 		pcalc.canceldelegate = self
@@ -49,13 +51,6 @@ class RPNCalc : CalcCancellable {
 	
 	func push(x: StackElem) {
 		stack.insert(x, at: 0)
-		/*
-		if x.bitWidth > bitMax {
-			self.stackstate = .overflow
-		} else {
-			self.stackstate = .valid
-		}
-		*/
 	}
 	
 	func push(num: BigInt) {
@@ -398,6 +393,17 @@ class RPNCalc : CalcCancellable {
 		}
 	}
 	
+	private func invers() {
+		if x.value == BigFloat(0) {
+			stackstate = .error
+		} else {
+			let xinv = BigFloat(1) / x.value
+			pop()
+			push(x: StackElem(val: xinv))
+			stackstate = .valid
+		}
+	}
+	
 	private func pi() {
 		let pi = BigFloatConstant.pi
 		push(x: StackElem(val :pi))
@@ -512,8 +518,34 @@ class RPNCalc : CalcCancellable {
 		*/
 	}
 	
+	private func unimplemented() {
+		stackstate = .unimplemented
+	}
+	
 	private func lastX() {
 		push(x: lastx)
+	}
+	
+	private func store() {
+		if x.type != .Alpha {
+			stackstate = .error
+			return
+		}
+		storeage.Store(key: x.alpha, elem: y)
+		pop()
+		pop()
+		stackstate = .stored
+	}
+	
+	private func rcl() {
+		if x.type != .Alpha {
+			stackstate = .error
+			return
+		}
+		let elem = storeage.Recall(key: x.alpha)
+		pop()
+		push(x: elem)
+		stackstate = .valid
 	}
 
 	func Calculation(type : CalcType)
@@ -555,12 +587,24 @@ class RPNCalc : CalcCancellable {
 		case .Mersenne: self.mersenne()
 		case .Undefined:	break
 		//case .Factors:	self.factors()
-		case .Sto1:		sto[0] = x; stackstate = .stored
-		case .Sto2:		sto[1] = x; stackstate = .stored
-		case .Sto3:		sto[2] = x;	stackstate = .stored
-		case .Rcl1:		push(x: sto[0]); stackstate = .valid
-		case .Rcl2:		push(x: sto[1]); stackstate = .valid
-		case .Rcl3:		push(x: sto[2]); stackstate = .valid
+		case .Sto1:		store()
+		case .Rcl1:		rcl()
+		case .Sin:
+			unimplemented()
+		case .Cos:
+			unimplemented()
+		case .Tan:
+			unimplemented()
+		case .aSin:
+			unimplemented()
+		case .aCos:
+			unimplemented()
+		case .aTan:
+			unimplemented()
+		case .log:
+			unimplemented()
+		case .Inv:
+			invers()
 		}
 	}
 

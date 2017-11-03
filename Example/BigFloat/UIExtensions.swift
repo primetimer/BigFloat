@@ -24,6 +24,26 @@ extension UIView {
 	}
 }
 
+class AlphaButton : UIButton {
+	
+	private (set) var keystr : String = ""
+	private (set) var key : Int = 0
+	convenience init (key : Int) {
+		
+		self.init()
+		self.key = key
+		let c = Character(UnicodeScalar(key)!)
+		self.keystr = String(c)
+		self.setTitle(self.keystr, for: .normal)
+		self.titleLabel?.font = self.titleLabel?.font.withSize(14)
+	}
+	init () {
+		super.init(frame : .zero)
+		setTitleColor(.cyan, for: .normal)
+	}
+	
+	required init?(coder aDecoder: NSCoder) {		fatalError("init(coder:) has not been implemented") }
+}
 class CalcButton : UIButton {
 	private (set) var type : CalcType = .Undefined
 	var shiftbutton : CalcButton? = nil	//If there is a second action when Shift ist pressed

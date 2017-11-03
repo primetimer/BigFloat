@@ -10,7 +10,7 @@ import Foundation
 import BigInt
 import BigFloat
 
-enum EnterMode : Int {	case Begin, Enter, Finished, Punct, EE }
+enum EnterMode : Int {	case Begin, Enter, Finished, Punct, EE , Alpha }
 enum StackInputCmd : Int {
 	case n0
 	case n1, n2, n3, n4, n5, n6, n7, n8, n9
@@ -20,6 +20,7 @@ enum StackInputCmd : Int {
 	case unknown
 	case enter
 	case back
+	case alpha
 }
 
 extension StackInputCmd {
@@ -46,6 +47,15 @@ class StackInput {
 	private var mode = EnterMode.Begin
 	private var pos = 0
 	
+	var inputelem : StackElem {
+		get {
+			if mode == .Alpha {
+				return StackElem(alpha: _alphastring)
+			}
+			return StackElem(val: inputvalue)
+		}
+	}
+	
 	var inputvalue : BigFloat {
 		get {
 			var radixpow = BigFloat(radix)
@@ -56,7 +66,7 @@ class StackInput {
 			var state = EnterMode.Begin
 			for cmd in cmdstack {
 				switch cmd {
-				case .enter:
+				case .enter, .alpha:
 					return temp
 				case .chs:
 					if state != EnterMode.EE {
@@ -75,6 +85,8 @@ class StackInput {
 						ee = ee * radix + cmd.rawValue
 					case .Begin, .Enter, .Finished:
 						temp = temp * BigFloat(radix) + BigFloat(cmd.rawValue)
+					case .Alpha:	//never come here
+						break
 					}
 				case .ee:
 					state = EnterMode.EE
@@ -102,10 +114,12 @@ class StackInput {
 			temp = temp * BigFloat(sign)
 			return temp
 		}
-		
 	}
+	
+	private var _alphastring = ""
 	var inputstring : String {
 		get {
+			if mode == .Alpha { return "'" + _alphastring + "'" }
 			var str = ""
 			var eestr = ""
 			var ee : Int = 0
@@ -114,7 +128,7 @@ class StackInput {
 			var state = EnterMode.Begin
 			for cmd in cmdstack {
 				switch cmd {
-				case .enter, .back: break
+				case .enter, .back, .alpha : break
 				case .chs:
 					if state == .EE {
 						eesign = -eesign
@@ -153,22 +167,20 @@ class StackInput {
 	func Finish() {
 		mode = .Finished
 	}
-	/*
-	func AppendDigit(dig : Int) {
-		if mode != .Enter { cmdstack.removeAll() }
-		//if dig == 0 && mode == .Begin { return }
-		mode = .Enter
-		let cmd = StackInputCmd.ByDigit(dig: dig)
-		cmdstack.append(cmd)
+
+	func AppendAlpha(keystr: String) {
+		if mode == .Finished { _alphastring = "" }
+		mode = .Alpha
+		_alphastring = _alphastring + String(keystr)
 	}
-	*/
+	
 	func AppendCmd(cmd: StackInputCmd) {
 		if mode == .Finished { cmdstack.removeAll() }
 		switch cmd {
 		case .punct:
 			if !cmdstack.contains(.punct) { cmdstack.append(.punct) }
 			mode = .Punct
-		case .enter:
+		case .enter, .alpha:
 			mode = .Finished
 		case .back:
 			Back()
@@ -188,9 +200,16 @@ class StackInput {
 	func Begin() {
 		mode = .Begin
 		cmdstack.removeAll()
+		_alphastring = ""
 	}
 	
 	private func Back() {
+		if mode == .Alpha {
+			if _alphastring.count > 0 {
+				_alphastring.removeLast()
+			}
+			return
+		}
 		if cmdstack.count > 0 {
 			cmdstack.removeLast()
 		}

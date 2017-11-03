@@ -54,8 +54,8 @@ class InfoView : UITextView {
 		case .gcd:		t = "Greatest common divisor of x and y."
 		case .sqrt:		t = "Square Root. Greatest number r with r*r <= x."
 		case .crt:		t = "Cubic Root. Greatest number r with r^3 <= x."
-		case .Sto1, .Sto2, .Sto3: 	t = "Store x in one of three extra registers p, q or r."
-		case .Rcl1,.Rcl2,.Rcl3:		t = "Recalls one of the variables p,q or r into the x-register"
+		case .Sto1: 	t = "Enter a variable name in x and store the current value of y."
+		case .Rcl1:		t = "Enter a variable name in x and recall the previous stored value"
 		case .CmdC:		t = "Copies the x-Register in the Clipboard for use in other applications."
 		case .CmdV:		t = "Pastes the content of the clipboard into the x Register"
 		case .Hash:		t = "Hash Value of x"
@@ -63,6 +63,10 @@ class InfoView : UITextView {
 		case .Square:   t = "Square of x"
 		case .Cube:		t = "Cube of x"
 		case .TenPow:	t = "One with x trailing zeros"
+		case .Sin:		t = "Sinus (in radian)"
+		case .Cos:		t = "Cosinus (in radioan)"
+		case .Tan:		t = "Tangens (in radian)"
+			
 		//case .Sexy:     t = "Sexy Prime ( the next prime p, with p + 6  prime )"
 		//case .Cousin:   t = "Cousin Prime ( the next prime p, with p + 4  prime )"
 			case .pi:		t = "pi"
@@ -70,6 +74,16 @@ class InfoView : UITextView {
 			t = "Exponential function with base e"
 		case .ln:
 			t = "Natural logarithm"
+		case .aSin:
+			t = "Arcus Sinus (in radian)"
+		case .aCos:
+			t = "Arcus Cosinus (in radian)"
+		case .aTan:
+			t = "Arcus Tangens (in radian)"
+		case .log:
+			t = "Logarithmus (base 10)"
+		case .Inv:
+			t = "Reciproke value"
 		}
 		self.text = t
 	}

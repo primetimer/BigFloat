@@ -19,6 +19,12 @@ class ViewController: UIViewController, ProtShowResult {
 		get { return _shiftmode }
 	}
 	
+	private var _alphamode : Bool = false
+	private var alphamode : Bool {
+		set { _alphamode = newValue; ShowButtons() }
+		get { return _alphamode }
+	}
+	
 	private var rpnlist : [RPNCalc] = [RPNCalc()]
 	private var rpn : RPNCalc {
 		get { return rpnlist[0] }
@@ -33,16 +39,14 @@ class ViewController: UIViewController, ProtShowResult {
 	private var uistackdesc : [UILabel] = []
 	private var uiback = InputButton(cmd: .back)
 	private var uiclx = CalcButton(type: .Undefined)
-	//private var uienter = InputButton(cmd: .enter)
 	private var uipreview = CalcButton()
 	private var uiundo = InputButton(cmd: .unknown)
 	private let uishift = InputButton(cmd: .unknown)
-	//private var uipunct = InputButton(cmd: .punct)
-	//private var uichs = InputButton(cmd: .chs)
-	//private var uiee = InputButton(cmd: .ee)
+	private let uialpha = InputButton(cmd: .alpha)
 	private let uiesc = CalcButton(type : .Undefined)
 	private let uiinfo = CalcButton(type : .Undefined)
 	private var buttonarr : [CalcButton] = []
+	private var alphaarr : [AlphaButton] = []
 	private var uiinfotext = InfoView()
 	
 	func CreateInputButton(str: String, cmd : StackInputCmd) {
@@ -145,6 +149,7 @@ class ViewController: UIViewController, ProtShowResult {
 		
 		view.addSubview(uipreview)
 		view.addSubview(uishift)
+		view.addSubview(uialpha)
 		view.addSubview(uiesc)
 		view.addSubview(uiundo)
 		view.addSubview(uiinfo)
@@ -157,6 +162,8 @@ class ViewController: UIViewController, ProtShowResult {
 		uipreview.addTarget(self, action: #selector(PreviewAction), for: .touchUpInside)
 		uishift.setTitle(("⇧"), for: .normal)
 		uishift.addTarget(self, action: #selector(NumberAction), for: .touchUpInside)
+		uialpha.setTitle(("α"), for: .normal)
+		uialpha.addTarget(self, action: #selector(NumberAction), for: .touchUpInside)
 		uiesc.setTitle(("ESC"), for: .normal)
 		uiesc.addTarget(self, action: #selector(EscapeAction), for: .touchUpInside)
 		uiinfo.setTitle("ℹ︎", for: .normal)
@@ -168,29 +175,34 @@ class ViewController: UIViewController, ProtShowResult {
 		CreateCalcButton(str: "-", type: .Minus)
 		CreateCalcButton(str: "*", type: .Prod)
 		CreateCalcButton(str: "/", type: .Divide)
-		CreateCalcButton(str: "→π", type: .PNext)
+		CreateCalcButton(str: "sin", type: .Sin)
+		CreateCalcButton(str: "cos", type: .Cos)
+		CreateCalcButton(str: "tan", type: .Tan)
+		CreateCalcButtonShift(str: "asin", type: .aSin,unshift: .Sin)
+		CreateCalcButtonShift(str: "acos", type: .aCos,unshift: .Cos)
+		CreateCalcButtonShift(str: "atan", type: .aTan,unshift: .Tan)
+		CreateCalcButton(str: "1/x", type: .Inv)
+		
+		
+		//CreateCalcButton(str: "→π", type: .PNext)
 		//CreateCalcButtonShift(str: "→ππ", type: .Twin,unshift : .PNext)
-		CreateCalcButton(str: "π←", type: .PPrev)
+		//CreateCalcButton(str: "π←", type: .PPrev)
 		//CreateCalcButtonShift(str: "→2π+1", type: .SoG,unshift : .PPrev)
 		//CreateCalcButton(str: "x*()", type: .Factor)
 		//CreateCalcButtonShift(str: "p*q", type: .Factors,unshift : .Factor)
 		//CreateCalcButton(str: "squfof", type: .Squfof)
-		CreateCalcButton(str: "→p", type: .Sto1)
-		CreateCalcButtonShift(str: "←p", type: .Rcl1,unshift : .Sto1)
-		CreateCalcButton(str: "→q", type: .Sto2)
-		CreateCalcButtonShift(str: "←q", type: .Rcl2,unshift : .Sto2)
-		CreateCalcButton(str: "→r", type: .Sto3)
-		CreateCalcButtonShift(str: "←r", type: .Rcl3,unshift : .Sto3)
+		CreateCalcButton(str: "STO", type: .Sto1)
+		CreateCalcButton(str: "RCL", type: .Rcl1)
 		//CreateCalcButton(str: "ρ", type: .Rho)
 		//CreateCalcButton(str: "a²-b²", type: .Lehman)
 		CreateCalcButton(str: "x<>y", type: .Swap)
 		CreateCalcButton(str: "↓", type: .Pop)
 		CreateCalcButton(str: "%", type: .Mod)
-		CreateCalcButton(str: "gcd", type: .gcd)
+		//CreateCalcButton(str: "gcd", type: .gcd)
 		CreateCalcButton(str: "y^x", type: .Pow)
-		CreateCalcButtonShift(str: "z^y%x", type: .PowMod, unshift: .Pow)
-		CreateCalcButton(str: "#", type : .Hash)
-		CreateCalcButtonShift(str: "Rnd #", type: .Rnd, unshift: .Hash)
+		//CreateCalcButtonShift(str: "z^y%x", type: .PowMod, unshift: .Pow)
+		//CreateCalcButton(str: "#", type : .Hash)
+		//CreateCalcButtonShift(str: "Rnd #", type: .Rnd, unshift: .Hash)
 		CreateCalcButton(str: "√", type: .sqrt)
 		CreateCalcButtonShift(str: "∛", type: .crt, unshift: .sqrt)
 		CreateCalcButton(str: "exp", type: .exp)
@@ -239,12 +251,12 @@ class ViewController: UIViewController, ProtShowResult {
 		return self.view.frame.width - StackWidth()
 	}
 	
-	private func LayoutButtonRaster(row : Int, col : Int, button: CalcButton, numcols : Int = 1) {
+	private func LayoutButtonRaster(row : Int, col : Int, button: UIButton, numcols : Int = 1) {
 		let w = GetNumpadFrameWidth()
 		let h = view.frame.height
 		let x0 = landscape ? StackWidth() + 20 : 20
 		let row0 = landscape ? 4 : 0
-		let parts = landscape ? 6 : 10
+		let parts = landscape ? 7 : 11
 		let wpart = (w-40) / 6
 		let hpart = (h-40) / CGFloat(parts)
 		let x = x0 + CGFloat(col) * wpart
@@ -262,7 +274,7 @@ class ViewController: UIViewController, ProtShowResult {
 	}
 	private func RegisterHeight() -> CGFloat {
 		let viewh = view.frame.height - 40
-		let parts = landscape ? 4.0 : 10.0
+		let parts = landscape ? 4.0 : 11.0
 		let regh = viewh / CGFloat(parts) * 4 / CGFloat(visiblestackelems)
 		return regh
 	}
@@ -310,41 +322,104 @@ class ViewController: UIViewController, ProtShowResult {
 			let b = GetButtonByCmd(cmd: StackInputCmd.ByDigit(dig: i))
 			LayoutButtonRaster(row:row, col: col, button: b!)
 		}
-		LayoutButtonRaster(row:8, col: 1, button: GetButtonByCmd(cmd: .n0)!)
-		LayoutButtonRaster(row:4, col: 0, button: GetButtonByType(type: .exp)!)
 		
-		//LayoutButtonRaster(row:4, col: 0, button: GetButtonByType(type: .Rho)!)
-		//LayoutButtonRaster(row:4, col: 1, button: GetButtonByType(type: .Lehman)!)
-		//LayoutButtonRaster(row:4, col: 2, button: GetButtonByType(type: .Squfof)!)
-		LayoutButtonRaster(row:4, col: 3, button: GetButtonByType(type: .Hash)!)
-		LayoutButtonRaster(row:7, col: 5, button: GetButtonByType(type: .PPrev)!)
-		LayoutButtonRaster(row:8, col: 5, button: GetButtonByType(type: .PNext)!)
-		LayoutButtonRaster(row:4, col: 4, button: GetButtonByType(type: .Pow)!)
-		LayoutButtonRaster(row:7, col: 0, button: GetButtonByType(type: .Swap)!)
-		LayoutButtonRaster(row:6, col: 0, button: GetButtonByType(type: .Pop)!)
-		LayoutButtonRaster(row:6, col: 5, button: GetButtonByType(type: .Mod)!)
-		LayoutButtonRaster(row:5, col: 5, button: GetButtonByType(type: .gcd)!)
-		LayoutButtonRaster(row:5, col: 0, button: GetButtonByType(type: .sqrt)!)
+		var row = 10
+		LayoutButtonRaster(row:row, col: 0, button: uialpha)
+		
+		LayoutButtonRaster(row:row, col: 0, button: uiclx)
+		LayoutButtonRaster(row:row, col: 1, button: GetButtonByCmd(cmd: .enter)!,numcols: 2)
+		LayoutButtonRaster(row:row, col: 3, button: GetButtonByCmd(cmd: .ee)!)
+		LayoutButtonRaster(row:row, col: 4, button: GetButtonByType(type: .CmdC)!)
+		LayoutButtonRaster(row:row, col: 5, button: uiinfo)
+		row = row - 1
+		LayoutButtonRaster(row:row, col: 0, button: uiback)
 
-		LayoutButtonRaster(row:8, col: 0, button: uiback)
-		LayoutButtonRaster(row:8, col: 0, button: uiclx)
+		LayoutButtonRaster(row:row, col: 1, button: GetButtonByCmd(cmd: .n0)!)
+		LayoutButtonRaster(row:row, col: 2, button: GetButtonByCmd(cmd: .punct)!)
+		LayoutButtonRaster(row:row, col: 3, button: GetButtonByCmd(cmd: .chs)!)
+		LayoutButtonRaster(row:row, col: 4, button: GetButtonByType(type: .Plus)!)
+		LayoutButtonRaster(row:row, col: 5, button: GetButtonByType(type: .Sto1)!)
+		
+		row = row - 1
+				LayoutButtonRaster(row:row, col: 0, button: uishift)
+		LayoutButtonRaster(row:row, col: 1, button: GetButtonByCmd(cmd: .n1)!)
+		LayoutButtonRaster(row:row, col: 2, button: GetButtonByCmd(cmd: .n2)!)
+		LayoutButtonRaster(row:row, col: 3, button: GetButtonByCmd(cmd: .n3)!)
+		LayoutButtonRaster(row:row, col: 4, button: GetButtonByType(type: .Minus)!)
+		LayoutButtonRaster(row:row, col: 5, button: GetButtonByType(type: .Rcl1)!)
+		
+		row = row - 1
+		LayoutButtonRaster(row:row, col: 0, button: GetButtonByType(type: .Swap)!)
+		LayoutButtonRaster(row:row, col: 1, button: GetButtonByCmd(cmd: .n4)!)
+		LayoutButtonRaster(row:row, col: 2, button: GetButtonByCmd(cmd: .n5)!)
+		LayoutButtonRaster(row:row, col: 3, button: GetButtonByCmd(cmd: .n6)!)
+		LayoutButtonRaster(row:row, col: 4, button: GetButtonByType(type: .Prod)!)
+		
+		row = row - 1
+		LayoutButtonRaster(row:row, col: 0, button: GetButtonByType(type: .Pop)!)
+		LayoutButtonRaster(row:row, col: 1, button: GetButtonByCmd(cmd: .n7)!)
+		LayoutButtonRaster(row:row, col: 2, button: GetButtonByCmd(cmd: .n8)!)
+		LayoutButtonRaster(row:row, col: 3, button: GetButtonByCmd(cmd: .n9)!)
+		LayoutButtonRaster(row:row, col: 4, button: GetButtonByType(type: .Divide)!)
+		
+		row = row - 1
+		LayoutButtonRaster(row:row, col: 0, button: GetButtonByType(type: .Inv)!)
+		LayoutButtonRaster(row:row, col: 1, button: GetButtonByType(type: .Pow)!)
+		LayoutButtonRaster(row:row, col: 2, button: GetButtonByType(type: .sqrt)!)
+		LayoutButtonRaster(row:row, col: 3, button: GetButtonByType(type: .Sin)!)
+		LayoutButtonRaster(row:row, col: 4, button: GetButtonByType(type: .Cos)!)
+		LayoutButtonRaster(row:row, col: 5, button: GetButtonByType(type: .Tan)!)
+		
+		row = row - 1
+		LayoutButtonRaster(row:row, col: 0, button: GetButtonByType(type: .exp)!)
+		LayoutButtonRaster(row:row, col: 1, button: GetButtonByType(type: .TenPow)!)
 		
 		//LayoutButtonRaster(row:9, col: 1, button: GetButtonByType(type: .Sto1)!)
 		//LayoutButtonRaster(row:9, col: 2, button: GetButtonByType(type: .Sto2)!)
 		//LayoutButtonRaster(row:9, col: 3, button: GetButtonByType(type: .Sto3)!)
-		LayoutButtonRaster(row:8, col: 2, button: GetButtonByCmd(cmd: .punct)!)
-		LayoutButtonRaster(row:8, col: 3, button: GetButtonByCmd(cmd: .chs)!)
-		LayoutButtonRaster(row:9, col: 1, button: GetButtonByCmd(cmd: .enter)!,numcols: 2)
-		LayoutButtonRaster(row:9, col: 3, button: GetButtonByCmd(cmd: .ee)!)
-		LayoutButtonRaster(row:9, col: 0, button: uishift)
+		
 		LayoutButtonRaster(row:4, col: 5, button: uiesc)
 		LayoutButtonRaster(row:4, col: 5, button: uiundo)
-		LayoutButtonRaster(row:8, col: 4, button: GetButtonByType(type: .Plus)!)
-		LayoutButtonRaster(row:7, col: 4, button: GetButtonByType(type: .Minus)!)
-		LayoutButtonRaster(row:6, col: 4, button: GetButtonByType(type: .Prod)!)
-		LayoutButtonRaster(row:5, col: 4, button: GetButtonByType(type: .Divide)!)
-		LayoutButtonRaster(row:9, col: 4, button: GetButtonByType(type: .CmdC)!)
-		LayoutButtonRaster(row:9, col: 5, button: uiinfo)
+		
+		LayoutAlpha()
+	}
+	
+	private func findAlphaKey(key : Int) -> AlphaButton {
+		for a in alphaarr {
+			if a.key == key { return a }
+		}
+		let b = AlphaButton(key : key)
+		b.addTarget(self, action: #selector(AlphaAction), for: .touchUpInside)
+		alphaarr.append(b)
+		view.addSubview(b)
+		return b
+	}
+	
+	private func LayoutAlpha() {
+		for key in 65 ... 90 {
+			let row = 4 + (key - 65) / 6
+			let col = (key - 65) % 6
+			let b = findAlphaKey(key: key)
+			LayoutButtonRaster(row: row, col: col, button: b)
+		}
+		for keynum in 48 ... 57 {
+			let key = 90 - 65 + keynum - 48 + 1
+			let row = 4 + key  / 6
+			let col = key % 6
+			let b = findAlphaKey(key: keynum)
+			LayoutButtonRaster(row: row, col: col, button: b)
+		}
+		do {
+			let b = findAlphaKey(key: 32)
+			b.setTitle("SPC", for: .normal)
+			LayoutButtonRaster(row: 10, col: 1, button: b)
+		}
+		do {
+			let b = findAlphaKey(key: 59)	//Semikolon
+			b.setTitle(";", for: .normal)
+			LayoutButtonRaster(row: 10, col: 2, button: b)
+		}
+		
 	}
 	
 	//This timer is used for a blinking busy signal
@@ -396,7 +471,7 @@ class ViewController: UIViewController, ProtShowResult {
 	
 	private func ShowStack() {
 		ShowStackState()
-		
+
 		//Calculates the maximal len of the registers
 		var (registerrows,registerlen) = (1,1)
 		let maxrows = 4 * 2 / visiblestackelems
@@ -441,6 +516,23 @@ class ViewController: UIViewController, ProtShowResult {
 			asynccalc?.cancel()
 			asynccalc = nil
 		}
+		if alphamode {
+			for b in buttonarr {
+				b.isHidden = true }
+			for a in alphaarr {
+				a.isHidden = false
+			}
+			uishift.isHidden = true
+			uialpha.isHidden = false
+			return
+		}
+		else {
+			for a in alphaarr {
+				a.isHidden = true
+			}
+			uishift.isHidden = false
+		}
+		
 		if shiftmode {
 			uishift.setTitleColor(.yellow, for: .normal)
 			uiback.isHidden = true
@@ -460,6 +552,9 @@ class ViewController: UIViewController, ProtShowResult {
 					b.isHidden = false
 					shift.isHidden = true
 				}
+			}
+			else {
+				b.isHidden = false
 			}
 		}
 	}
@@ -530,6 +625,10 @@ class ViewController: UIViewController, ProtShowResult {
 			uiinfotext.ShiftInfo()
 			return
 		}
+		if sender == uialpha {
+			uiinfotext.ShiftInfo()
+			return
+		}
 		if sender.type != .Undefined {
 			uiinfotext.ShowText(type: sender.type)
 			return
@@ -587,8 +686,23 @@ class ViewController: UIViewController, ProtShowResult {
 				rpn.push(); break
 			}
 			input.AppendCmd(cmd: .enter)
-			rpn.push(val: input.inputvalue)
+			rpn.push(x: input.inputelem)
 			input.Begin()
+		case .alpha:
+			if alphamode {
+				if !input.inputstring.isEmpty
+				{
+					rpn.x = input.inputelem
+					input.Finish()
+				}
+				alphamode = false
+			} else {
+				input.AppendCmd(cmd: .enter)
+				rpn.push(x: input.inputelem)
+				alphamode = true
+				input.Begin()
+			}
+
 		case .unknown:
 			if sender == uishift {
 				shiftmode = !shiftmode
@@ -599,8 +713,7 @@ class ViewController: UIViewController, ProtShowResult {
 				if rpnlist.count > 1 {	rpnlist.remove(at: 0) }
 			}
 		}
-		rpn.stackstate = .valid		
-		ShowStackState()
+		rpn.stackstate = .valid
 		ShowStack()
 		ShowButtons(clear: true)
 	}
@@ -612,6 +725,12 @@ class ViewController: UIViewController, ProtShowResult {
 		while rpnlist.count > 1 {	rpnlist.remove(at: 1) }
 		ShowStack()
 		ShowButtons(clear: true)
+	}
+	@objc func AlphaAction(sender: AlphaButton) {
+		alphamode = true
+		input.AppendAlpha(keystr: sender.keystr)
+		rpn.x = StackElem(alpha: input.inputstring)
+		ShowStack()
 	}
 	
 	@objc func PreviewAction() {
