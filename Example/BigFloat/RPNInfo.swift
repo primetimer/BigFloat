@@ -28,7 +28,7 @@ class InfoView : UITextView {
 		return false
 	}
 	
-	func ShowText(type : CalcType) {
+	func ShowText(type : RPNCalcCmd) {
 		var t = ""
 		switch type {
 		case .Undefined: ShowNumInfo()
@@ -84,6 +84,18 @@ class InfoView : UITextView {
 			t = "Logarithmus (base 10)"
 		case .Inv:
 			t = "Reciproke value"
+		case .lower:
+			t = "One if  x < y else Zero"
+		case .greater:
+			t = "One if  x > y else Zero"
+		case .equal:
+			t = "One if  x equals y else Zero"
+		case .unequal:
+			t = "One if  x does not equal y else Zero"
+		case .lowerequal:
+			t = "One if  x loewer equal y else Zero"
+		case .greaterequal:
+			t = "One if  x greater equal y else Zero"
 		}
 		self.text = t
 	}

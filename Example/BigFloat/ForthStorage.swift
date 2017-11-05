@@ -10,6 +10,8 @@ import Foundation
 
 class ForthStorage {
 	
+	static var shared = ForthStorage()
+	
 	var dict : Dictionary<String,StackElem> = [:]
 	
 	func Store(key : String, elem: StackElem) {
@@ -30,6 +32,44 @@ class ForthStorage {
 		return StackElem()
 	}
 	
-	init() {
+	private init() {
 	}
 }
+
+/*
+class ForthExecuter {
+
+	var rpn : RPNCalc!
+	init(rpn : RPNCalc) {
+		self.rpn = rpn
+	}
+	
+	func Execute(prog : ProgLine)
+	{
+		var lasttype = ProgInputType.enter
+		
+		var input = StackInput()
+		for c in prog.cmdstack {
+			switch c.type {
+				
+			case .rpn:
+				Calculation(type: c.rpncmd!)
+			case .digit:
+				if c.type != lasttype { input = NumberInput() }
+				input.SendCmd(cmd: c.numcmd)
+			case .char:
+				<#code#>
+			case .enter:
+				<#code#>
+			case .ifcond:
+				<#code#>
+			case .thencond:
+				<#code#>
+			case .elsecond:
+				<#code#>
+			}
+			
+		}
+	}
+}
+*/

@@ -15,19 +15,71 @@ enum StackState : Int {
 	case valid = 0, stored, cancelled, error, overflow, busy , prime, unimplemented, factorized, copied
 }
 
-enum CalcType : Int {
+enum RPNCalcCmd : Int, CustomStringConvertible {
 	case Undefined,Plus,Minus,Prod,Divide, LastX, Mersenne, Square, Cube, TenPow, Inv
 	case Sin, Cos, Tan, aSin, aCos, aTan
 	case PNext, PPrev
 	case Swap, Pop, Pow, PowMod, exp, ln, pi, log
 	case Mod, gcd, sqrt, crt, Hash,Rnd
 	case Sto1, Rcl1, CmdC, CmdV
+	case lower,greater,equal,unequal,lowerequal,greaterequal
+	
+	var description : String {
+		switch self {
+			case .LastX:	return "LastX"
+			case .CmdC: 	return "⌘C"
+			case .CmdV:		return "⌘V"
+			case .Plus:		return "+"
+			case .Minus:	return "-"
+			case .Prod:		return "*"
+			case .Divide:	return "/"
+			case .gcd:		return "gcd"
+			case .sqrt:		return "√"
+			case .crt:		return "∛"
+			case .pi:		return "π"
+			case .exp:		return "exp"
+			case .ln:		return "ln"
+			case .Swap:		return "x<>y"
+			case .Pop:		return "↓"
+			case .PNext:	return "→π"
+			case .PPrev:	return "π←"
+			case .Pow:		return "y^x"
+			case .Mod:		return "%"
+			case .PowMod:	return "z^y%x"
+			case .Rnd:		return "Rnd #"
+			case .Hash: 	return "#"
+			case .Square: 	return "x²"
+			case .Cube:		return "x³"
+			case .TenPow:	return "10^x"
+			case .Mersenne: return "M"
+			case .Undefined:
+							return "undefined"
+			case .Sto1:		return "!"
+			case .Rcl1:		return "?"
+			case .Sin: 		return "sin"
+			case .Cos: 		return "cos"
+			case .Tan:		return "tan"
+			case .aSin:		return "asin"
+			case .aCos:		return "acos"
+			case .aTan:		return "atan"
+			case .log:		return "log"
+			case .Inv:		return "1/x"
+		case .lower:		return "<"
+		case .greater:		return ">"
+		case .equal:        return "="
+		case .unequal:      return "!="
+		case .lowerequal:   return "<="
+		case .greaterequal: return ">="
+		}
+	}
 }
+
 
 class RPNCalc : CalcCancellable {
 	
-	private var storeage = ForthStorage()
+	private var storeage : ForthStorage
 	override public init() {
+		storeage = ForthStorage.shared
 		super.init()
 		pcalc.canceldelegate = self
 	}
@@ -547,8 +599,74 @@ class RPNCalc : CalcCancellable {
 		push(x: elem)
 		stackstate = .valid
 	}
+	
+	private func equal() {
+		var compared = false
+		if x.type == .Alpha { compared = x.alpha == y.alpha }
+		if x.type == .BigFloat { compared = x.value == y.value }
+		stackstate = .valid
+		pop()
+		pop()
+		let result = compared ? BigFloat(1) : BigFloat(0)
+		push(x: StackElem(val: result))
+	}
+	
+	private func unequal() {
+		var compared = false
+		if x.type == .Alpha { compared = x.alpha != y.alpha }
+		if x.type == .BigFloat { compared = !(x.value == y.value) }
+		stackstate = .valid
+		pop()
+		pop()
+		let result = compared ? BigFloat(1) : BigFloat(0)
+		push(x: StackElem(val: result))
+	}
+	
+	private func greater() {
+		var compared = false
+		if x.type == .Alpha { compared = x.alpha > y.alpha }
+		if x.type == .BigFloat { compared = x.value > y.value }
+		stackstate = .valid
+		pop()
+		pop()
+		let result = compared ? BigFloat(1) : BigFloat(0)
+		push(x: StackElem(val: result))
+	}
+	
+	private func lower() {
+		var compared = false
+		if x.type == .Alpha { compared = x.alpha < y.alpha }
+		if x.type == .BigFloat { compared = x.value < y.value }
+		stackstate = .valid
+		pop()
+		pop()
+		let result = compared ? BigFloat(1) : BigFloat(0)
+		push(x: StackElem(val: result))
+	}
+	
+	private func greaterequal() {
+		var compared = false
+		if x.type == .Alpha { compared = x.alpha >= y.alpha }
+		if x.type == .BigFloat { compared = x.value >= y.value }
+		stackstate = .valid
+		pop()
+		pop()
+		let result = compared ? BigFloat(1) : BigFloat(0)
+		push(x: StackElem(val: result))
+	}
+	
+	private func lowerequal() {
+		var compared = false
+		if x.type == .Alpha { compared = x.alpha <= y.alpha }
+		if x.type == .BigFloat { compared = x.value <= y.value }
+		stackstate = .valid
+		pop()
+		pop()
+		let result = compared ? BigFloat(1) : BigFloat(0)
+		push(x: StackElem(val: result))
+	}
 
-	func Calculation(type : CalcType)
+	func Calculation(type : RPNCalcCmd)
 	{
 		switch type {
 		case .LastX:	lastX()
@@ -605,6 +723,18 @@ class RPNCalc : CalcCancellable {
 			unimplemented()
 		case .Inv:
 			invers()
+		case .lower:
+			lower()
+		case .greater:
+			greater()
+		case .equal:
+			equal()
+		case .unequal:
+			unequal()
+		case .lowerequal:
+			lowerequal()
+		case .greaterequal:
+			greaterequal()
 		}
 	}
 

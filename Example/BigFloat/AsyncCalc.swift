@@ -20,7 +20,7 @@ class AsyncCalc: Operation, CalcCancelProt {
 		return isCancelled
 	}
 	
-	private var type : CalcType!
+	private var type : RPNCalcCmd!
 	private var rpn : RPNCalc!
 	var resultdelegate : ProtShowResult? = nil
 	
@@ -61,7 +61,7 @@ class AsyncCalc: Operation, CalcCancelProt {
 		}
 	}
 	
-	init(rpn: RPNCalc, type : CalcType) {
+	init(rpn: RPNCalc, type : RPNCalcCmd) {
 		self.rpn = rpn
 		self.type = type
 	}

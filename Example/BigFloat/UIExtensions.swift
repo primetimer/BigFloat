@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+
+
 extension UIView {
 	var x : CGFloat {
 		get { return self.frame.origin.x}
@@ -26,18 +28,26 @@ extension UIView {
 
 class AlphaButton : UIButton {
 	
-	private (set) var keystr : String = ""
-	private (set) var key : Int = 0
+	private (set) var alphacmd : AlphaInputCmd
+	var keystr : String {
+		get {
+			let c = Character(UnicodeScalar(alphacmd.key)!)
+			return String(c)
+		}
+	}
+	var key : Int {
+		get {
+			return alphacmd.key
+		}
+	}
 	convenience init (key : Int) {
-		
 		self.init()
-		self.key = key
-		let c = Character(UnicodeScalar(key)!)
-		self.keystr = String(c)
+		self.alphacmd = AlphaInputCmd(key: key)
 		self.setTitle(self.keystr, for: .normal)
 		self.titleLabel?.font = self.titleLabel?.font.withSize(14)
 	}
 	init () {
+		self.alphacmd = AlphaInputCmd(key: 0)
 		super.init(frame : .zero)
 		setTitleColor(.cyan, for: .normal)
 	}
@@ -45,9 +55,10 @@ class AlphaButton : UIButton {
 	required init?(coder aDecoder: NSCoder) {		fatalError("init(coder:) has not been implemented") }
 }
 class CalcButton : UIButton {
-	private (set) var type : CalcType = .Undefined
+	var type : RPNCalcCmd = .Undefined
 	var shiftbutton : CalcButton? = nil	//If there is a second action when Shift ist pressed
-	convenience init (type : CalcType) {
+	var unshiftbutton : CalcButton? = nil
+	convenience init (type : RPNCalcCmd) {
 		self.init()
 		self.type = type
 		switch  type {
@@ -64,12 +75,44 @@ class CalcButton : UIButton {
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-class InputButton : CalcButton {
+class ProgButton : CalcButton {
+	private (set) var stmt : ProgInputCmd? = nil
+	init (stmt : ProgInputCmd) {
+		super.init()
+		self.stmt = stmt
+		self.type = .Undefined
+		setTitle(stmt.description, for: .normal)
+	}
 	
-	private (set) var cmd : StackInputCmd = .unknown
-	convenience init (cmd : StackInputCmd) {
-		self.init()
+	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}
+
+
+class InputCmdButton : CalcButton {
+	private (set) var cmd : NumInputCmd
+	init (cmd : NumInputCmd) {
 		self.cmd = cmd
+		super.init()
 		self.titleLabel?.font = self.titleLabel?.font.withSize(14)
+	}
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+}
+
+class SpecialButton : CalcButton {	
+	private (set) var cmd : SpecialInputCmd
+	init (cmd : SpecialInputCmd) {
+		self.cmd = cmd
+		super.init()
+		self.setTitle(cmd.cmd.description, for: .normal)
+		self.titleLabel?.font = self.titleLabel?.font.withSize(14)
+	}
+	convenience init (key: KeyBoardSpecialCmd) {
+		let cmd = SpecialInputCmd(cmd: key)
+		self.init(cmd : cmd)
+	}
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
 	}
 }

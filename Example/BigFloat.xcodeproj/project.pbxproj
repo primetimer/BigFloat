@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5447591A1FAC47A30033B821 /* ForthStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544759191FAC47A30033B821 /* ForthStorage.swift */; };
+		5447591C1FADC1A30033B821 /* NumberInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5447591B1FADC1A30033B821 /* NumberInput.swift */; };
+		5447591E1FADC75D0033B821 /* AlphaInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5447591D1FADC75D0033B821 /* AlphaInput.swift */; };
+		544759201FAE11C20033B821 /* SpecialInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5447591F1FAE11C20033B821 /* SpecialInput.swift */; };
+		544759221FAF35EC0033B821 /* ProgInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544759211FAF35EC0033B821 /* ProgInput.swift */; };
 		546D65631FA46A5C00FAA00B /* digital-7mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 546D65561FA46A5B00FAA00B /* digital-7mono.ttf */; };
 		546D65641FA46A5C00FAA00B /* AsyncCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D65571FA46A5B00FAA00B /* AsyncCalc.swift */; };
 		546D65651FA46A5C00FAA00B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546D65591FA46A5B00FAA00B /* LaunchScreen.xib */; };
@@ -45,6 +49,10 @@
 		264007136F393EA5277B8530 /* Pods_BigFloat_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigFloat_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2B696A04D5D49213640971 /* Pods-BigFloat_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigFloat_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigFloat_Tests/Pods-BigFloat_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		544759191FAC47A30033B821 /* ForthStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForthStorage.swift; sourceTree = "<group>"; };
+		5447591B1FADC1A30033B821 /* NumberInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInput.swift; sourceTree = "<group>"; };
+		5447591D1FADC75D0033B821 /* AlphaInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphaInput.swift; sourceTree = "<group>"; };
+		5447591F1FAE11C20033B821 /* SpecialInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialInput.swift; sourceTree = "<group>"; };
+		544759211FAF35EC0033B821 /* ProgInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgInput.swift; sourceTree = "<group>"; };
 		546D65561FA46A5B00FAA00B /* digital-7mono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7mono.ttf"; sourceTree = "<group>"; };
 		546D65571FA46A5B00FAA00B /* AsyncCalc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncCalc.swift; sourceTree = "<group>"; };
 		546D655A1FA46A5B00FAA00B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -138,10 +146,14 @@
 		607FACD21AFB9204008FA782 /* Example for BigFloat */ = {
 			isa = PBXGroup;
 			children = (
+				54B8A3151FA49BB90015CEA3 /* StackInput.swift */,
+				5447591B1FADC1A30033B821 /* NumberInput.swift */,
+				5447591D1FADC75D0033B821 /* AlphaInput.swift */,
+				544759211FAF35EC0033B821 /* ProgInput.swift */,
+				5447591F1FAE11C20033B821 /* SpecialInput.swift */,
 				544759191FAC47A30033B821 /* ForthStorage.swift */,
 				546D65571FA46A5B00FAA00B /* AsyncCalc.swift */,
 				54B8A3131FA46C7D0015CEA3 /* StackElem.swift */,
-				54B8A3151FA49BB90015CEA3 /* StackInput.swift */,
 				546D65581FA46A5B00FAA00B /* Base.lproj */,
 				546D65621FA46A5C00FAA00B /* digital-7.ttf */,
 				546D65561FA46A5B00FAA00B /* digital-7mono.ttf */,
@@ -428,15 +440,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5447591C1FADC1A30033B821 /* NumberInput.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				54B8A3161FA49BB90015CEA3 /* StackInput.swift in Sources */,
 				546D656B1FA46A5C00FAA00B /* UIExtensions.swift in Sources */,
 				546D656A1FA46A5C00FAA00B /* Extensions.swift in Sources */,
+				5447591E1FADC75D0033B821 /* AlphaInput.swift in Sources */,
+				544759221FAF35EC0033B821 /* ProgInput.swift in Sources */,
 				54B8A3141FA46C7D0015CEA3 /* StackElem.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				546D65641FA46A5C00FAA00B /* AsyncCalc.swift in Sources */,
 				5447591A1FAC47A30033B821 /* ForthStorage.swift in Sources */,
 				546D65681FA46A5C00FAA00B /* RPNCalc.swift in Sources */,
+				544759201FAE11C20033B821 /* SpecialInput.swift in Sources */,
 				546D65691FA46A5C00FAA00B /* RPNInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

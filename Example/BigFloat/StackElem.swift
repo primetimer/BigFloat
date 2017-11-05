@@ -17,6 +17,7 @@ struct StackElem  {
 	private var _num : BigInt? = nil
 	private var _value : BigFloat? = nil
 	private var _alpha : String? = nil
+	private var _prog : ProgLine? = nil
 	
 	var num : BigInt {
 		set { _num = newValue; type = .BigInt }
@@ -26,7 +27,13 @@ struct StackElem  {
 	}
 	var value : BigFloat {
 		set { _value = newValue; type = .BigFloat }
-		get { if _value == nil { return BigFloat(0) }
+		get { if _value == nil {
+				if _alpha != nil {
+					let storedelem = ForthStorage.shared.Recall(key: _alpha!)
+					return storedelem.value
+				}
+				return BigFloat(0)
+			}
 			return _value!
 		}
 	}
@@ -35,6 +42,16 @@ struct StackElem  {
 		set { _alpha = newValue; type = .Alpha }
 		get { if _alpha == nil { return ""}
 			return _alpha!
+		}
+	}
+	
+	var prog : ProgLine {
+		set { _prog = newValue; type = .ProgCmd }
+		get {
+			if _prog == nil {
+				return ProgLine()
+			}
+			return _prog!
 		}
 	}
 	
@@ -55,12 +72,19 @@ struct StackElem  {
 		_alpha = alpha
 	}
 	
+	init(progline : ProgLine) {
+		type = .ProgCmd
+		_prog = progline
+	}
+	
 	enum StackType {
-		case BigInt, BigFloat, Unknown, Alpha
+		case BigInt, BigFloat, Unknown, Alpha, ProgCmd
 	}
 	
 	func FormatStr(maxrows: Int, rowlen: Int) -> (String,rows: Int) {
 		switch type {
+		case .ProgCmd:
+			return (String(describing: prog),1)
 		case .Alpha:
 			return (alpha,1)
 		case .BigFloat:
@@ -82,6 +106,8 @@ extension StackElem : CustomStringConvertible {
 			return String(describing: value)
 		case .Alpha:
 			return alpha
+		case .ProgCmd:
+			return "Cmd"
 		case .Unknown:
 			return "Unknown"
 		}
