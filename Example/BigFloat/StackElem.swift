@@ -10,6 +10,10 @@ import Foundation
 import BigInt
 import BigFloat
 
+enum StackType {
+	case BigInt, BigFloat, Unknown, Alpha, ProgLine, ProgCmd
+}
+
 struct StackElem  {
 	var fix : Int = 6 //Anzahl Nachkommastellen
 	var type : StackType
@@ -17,7 +21,8 @@ struct StackElem  {
 	private var _num : BigInt? = nil
 	private var _value : BigFloat? = nil
 	private var _alpha : String? = nil
-	private var _prog : ProgLine? = nil
+	private var _progline : ProgLine? = nil
+	private var _progcmd : RPNCalcCmd? = nil
 	
 	var num : BigInt {
 		set { _num = newValue; type = .BigInt }
@@ -44,14 +49,20 @@ struct StackElem  {
 			return _alpha!
 		}
 	}
-	
-	var prog : ProgLine {
-		set { _prog = newValue; type = .ProgCmd }
+	var rpncmd: RPNCalcCmd {
+		set { _progcmd = newValue; type = .ProgCmd }
 		get {
-			if _prog == nil {
+			if _progcmd == nil { return .Undefined }
+			return _progcmd!
+		}
+	}
+	var prog : ProgLine {
+		set { _progline = newValue; type = .ProgLine }
+		get {
+			if _progline == nil {
 				return ProgLine()
 			}
-			return _prog!
+			return _progline!
 		}
 	}
 	
@@ -73,18 +84,18 @@ struct StackElem  {
 	}
 	
 	init(progline : ProgLine) {
-		type = .ProgCmd
-		_prog = progline
+		type = .ProgLine
+		_progline = progline
 	}
 	
-	enum StackType {
-		case BigInt, BigFloat, Unknown, Alpha, ProgCmd
-	}
+	
 	
 	func FormatStr(maxrows: Int, rowlen: Int) -> (String,rows: Int) {
 		switch type {
 		case .ProgCmd:
-			return (String(describing: prog),1)
+			return (RPNCalcDict.shared.String(cmd: rpncmd),1)
+		case .ProgLine:
+			return (":" + String(describing: prog) + ";" ,1)
 		case .Alpha:
 			return (alpha,1)
 		case .BigFloat:
@@ -100,14 +111,16 @@ struct StackElem  {
 extension StackElem : CustomStringConvertible {
 	public var description: String {
 		switch type {
+		case .ProgCmd:
+			return String(describing: rpncmd)
 		case .BigInt:
 			return String(num)
 		case .BigFloat:
 			return String(describing: value)
 		case .Alpha:
 			return alpha
-		case .ProgCmd:
-			return "Cmd"
+		case .ProgLine:
+			return String(describing: prog)
 		case .Unknown:
 			return "Unknown"
 		}

@@ -22,12 +22,12 @@ enum KeyBoardView {
 
 class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 	func InputHasStarted() {
-		print("Has Started")
+		//print("Has Started")
 		rpn.push()
 	}
 	
 	func InputHasFinished() {
-		print("Has Finished")
+		//print("Has Finished")
 		let inputelem = input.GetStackElem()
 		rpn.x = inputelem
 		//rpn.push(x: inputelem)
@@ -511,12 +511,12 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 			if i == 0 && !input.IsFinished() {
 				let str = input.GetInputString()
 				uistack[i].text = str
-				print(i, str, "Input")
+				//print(i, str, "Input")
 			} else {
 				let val = rpn[i]
 				let (valstr,rows) = val.FormatStr(maxrows: maxrows, rowlen: 18)
 				uistack[i].text = valstr
-				print(i,valstr)
+				//print(i,valstr)
 				registerrows = max(registerrows,rows)
 			}
 			
@@ -631,10 +631,14 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 			return
 		}
 		input.Finish()
+		StartCalculation(cmd: sender.type)
+	}
 		
-		//Create Copy of Stack for undo action
-		rpnlist.insert(rpn.Copy(), at: 1)
-		while rpnlist.count > 10 { rpnlist.remove(at: 10)}
+	private func StartCalculation(cmd: RPNCalcCmd) {
+		
+			//Create Copy of Stack for undo action
+			rpnlist.insert(rpn.Copy(), at: 1)
+			while rpnlist.count > 10 { rpnlist.remove(at: 10)}
 		
 		switch inputmode {
 		case .prog:
@@ -647,7 +651,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 			
 			//Calculation runs asynchrous (as best as i can)
 			let queue = OperationQueue()
-			asynccalc = AsyncCalc(rpn: rpn, type: sender.type)
+			asynccalc = AsyncCalc(rpn: rpn, type: cmd)
 			ShowStackState()
 			asynccalc?.resultdelegate = self
 			queue.addOperation(asynccalc!)
@@ -656,6 +660,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		case .none:
 			break
 		}
+			
 	}
 	
 	//Called by asynchronous Calculation on main thread
@@ -724,10 +729,19 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 				ShowStack()
 				return
 			}
-			if input.IsFinished() {
-				rpn.push()
+			
+			switch rpn.x.type {
+			case .ProgCmd, .ProgLine:
+				let forth = ForthExecuter(rpn: rpn)
+				forth.Execute()
+			
+			case .BigInt, .BigFloat, .Alpha, .Unknown:
+				if input.IsFinished() {
+					rpn.push()
+				}
+				input.Finish()
 			}
-			input.Finish()
+			
 			if keyboardview != .prog { 	keyboardview = .num }
 			
 		case .preview:
@@ -744,7 +758,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 			ClearAction()
 			
 		case .undo:
-			if asynccalc == nil && rpnlist.count > 0 {
+			if asynccalc == nil && rpnlist.count > 1 {
 				rpnlist.removeFirst()
 			}
 			
@@ -761,8 +775,12 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 			ShowStack()
 			return
 		}
-		input.SendCmd(cmd: sender.cmd)
-		rpn.stackstate = .valid
+		if input.IsFinished() && (sender.cmd.type == .chs)  {
+			StartCalculation(cmd: .negate)
+		} else {
+			input.SendCmd(cmd: sender.cmd)
+			rpn.stackstate = .valid
+		}
 		ShowStack()
 	}
 	

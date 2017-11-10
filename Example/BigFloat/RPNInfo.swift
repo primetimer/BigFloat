@@ -32,6 +32,7 @@ class InfoView : UITextView {
 		var t = ""
 		switch type {
 		case .Undefined: ShowNumInfo()
+		case .negate:	t = "Change Sign of number"
 		case .LastX:	t = "Restore X-Register after operation"
 		case .Plus: 	t = "Adds the x and y register."
 		case .Minus: 	t = "Subtrats x from y. Negative Numbers are not allowed."

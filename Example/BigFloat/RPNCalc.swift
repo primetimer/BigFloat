@@ -15,67 +15,17 @@ enum StackState : Int {
 	case valid = 0, stored, cancelled, error, overflow, busy , prime, unimplemented, factorized, copied
 }
 
-enum RPNCalcCmd : Int, CustomStringConvertible {
-	case Undefined,Plus,Minus,Prod,Divide, LastX, Mersenne, Square, Cube, TenPow, Inv
-	case Sin, Cos, Tan, aSin, aCos, aTan
-	case PNext, PPrev
-	case Swap, Pop, Pow, PowMod, exp, ln, pi, log
-	case Mod, gcd, sqrt, crt, Hash,Rnd
-	case Sto1, Rcl1, CmdC, CmdV
-	case lower,greater,equal,unequal,lowerequal,greaterequal
-	
-	var description : String {
-		switch self {
-			case .LastX:	return "LastX"
-			case .CmdC: 	return "⌘C"
-			case .CmdV:		return "⌘V"
-			case .Plus:		return "+"
-			case .Minus:	return "-"
-			case .Prod:		return "*"
-			case .Divide:	return "/"
-			case .gcd:		return "gcd"
-			case .sqrt:		return "√"
-			case .crt:		return "∛"
-			case .pi:		return "π"
-			case .exp:		return "exp"
-			case .ln:		return "ln"
-			case .Swap:		return "x<>y"
-			case .Pop:		return "↓"
-			case .PNext:	return "→π"
-			case .PPrev:	return "π←"
-			case .Pow:		return "y^x"
-			case .Mod:		return "%"
-			case .PowMod:	return "z^y%x"
-			case .Rnd:		return "Rnd #"
-			case .Hash: 	return "#"
-			case .Square: 	return "x²"
-			case .Cube:		return "x³"
-			case .TenPow:	return "10^x"
-			case .Mersenne: return "M"
-			case .Undefined:
-							return "undefined"
-			case .Sto1:		return "!"
-			case .Rcl1:		return "?"
-			case .Sin: 		return "sin"
-			case .Cos: 		return "cos"
-			case .Tan:		return "tan"
-			case .aSin:		return "asin"
-			case .aCos:		return "acos"
-			case .aTan:		return "atan"
-			case .log:		return "log"
-			case .Inv:		return "1/x"
-		case .lower:		return "<"
-		case .greater:		return ">"
-		case .equal:        return "="
-		case .unequal:      return "!="
-		case .lowerequal:   return "<="
-		case .greaterequal: return ">="
+class RPNCalc : CalcCancellable, CustomStringConvertible {
+	var description: String {
+		get {
+			var ans = "StackDump:\n"
+			for s in stack {
+				ans = ans + s.description + "\n"
+			}
+			return ans
 		}
 	}
-}
-
-
-class RPNCalc : CalcCancellable {
+	
 	
 	private var storeage : ForthStorage
 	override public init() {
@@ -90,7 +40,6 @@ class RPNCalc : CalcCancellable {
 		for val in stack {
 			copy.stack.append(val)
 		}
-		copy.sto = self.sto
 		return copy
 	}
 	
@@ -98,8 +47,7 @@ class RPNCalc : CalcCancellable {
 	private var bitMax = 1024
 	var stackstate = StackState.valid
 	var stack : [StackElem] = []
-	private var sto : [StackElem] = [StackElem(),StackElem(),StackElem()]
-	private var lastx = StackElem()
+	var lastx = StackElem()
 	
 	func push(x: StackElem) {
 		stack.insert(x, at: 0)
@@ -108,9 +56,9 @@ class RPNCalc : CalcCancellable {
 	func push(num: BigInt) {
 		stack.insert(StackElem(num: num), at: 0)
 		if num.bitWidth > bitMax {
-		self.stackstate = .overflow
+			self.stackstate = .overflow
 		} else {
-		self.stackstate = .valid
+			self.stackstate = .valid
 		}
 	}
 	func push(val: BigFloat) {
@@ -144,7 +92,7 @@ class RPNCalc : CalcCancellable {
 		}
 		return stack[index]
 	}
-
+	
 	var x : StackElem {
 		get {
 			if stack.count > 0 { return stack[0] } else { return StackElem() }
@@ -202,7 +150,7 @@ class RPNCalc : CalcCancellable {
 		push(num: BigInt(ans))
 		stackstate = .prime
 	}
-
+	
 	private func pow() {
 		if x.value == BigFloat(0) && y.value == BigFloat(0) {
 			stackstate = .error
@@ -243,22 +191,46 @@ class RPNCalc : CalcCancellable {
 		stackstate = .unimplemented
 		/*
 		if x < BigUInt(bitMax) {
-			let m = BigUInt(2).power(Int(x)) - 1
-			popx()
-			push(x: m)
-			stackstate = .valid
+		let m = BigUInt(2).power(Int(x)) - 1
+		popx()
+		push(x: m)
+		stackstate = .valid
 		} else {
-			stackstate = .overflow
+		stackstate = .overflow
 		}
 		*/
 	}
 	
 	private func plus() {
-		let sum = x.value + y.value
-		popx()
-		pop()
-		push(val: sum)
-		stackstate = .valid
+		if x.type == .Alpha {
+			if y.type == .Alpha {
+				let sum : String = x.alpha + y.alpha
+				popx()
+				pop()
+				let sumelem = StackElem(alpha: sum)
+				push(x: sumelem)
+			}
+		}
+		if x.type == .ProgLine {
+			if y.type == .ProgLine {
+				var sum = ProgLine()
+				sum.append(add: x.prog)
+				sum.append(add: y.prog)
+				let sumelem = StackElem(progline: sum)
+				popx()
+				pop()
+				push(x: sumelem)
+			}
+		}
+		if x.type == .BigFloat {
+			if y.type == .BigFloat {
+				let sum = x.value + y.value
+				popx()
+				pop()
+				push(val: sum)
+				stackstate = .valid
+			}
+		}
 	}
 	private func minus() {
 		let dif = y.value - x.value
@@ -292,16 +264,16 @@ class RPNCalc : CalcCancellable {
 		let rho = PrimeFaktorRho()
 		rho.canceldelegate = self
 		if !x.isPrime() {
-			let factor = rho.GetFactor(n: x)
-			if factor < x && factor >= 2 {
-				push(x: factor)
-				stackstate = .valid
-			}
-			else {
-				stackstate = .error
-			}
+		let factor = rho.GetFactor(n: x)
+		if factor < x && factor >= 2 {
+		push(x: factor)
+		stackstate = .valid
+		}
+		else {
+		stackstate = .error
+		}
 		} else {
-			stackstate = .prime
+		stackstate = .prime
 		}
 		*/
 	}
@@ -312,13 +284,13 @@ class RPNCalc : CalcCancellable {
 		let shanks = PrimeFactorShanks()
 		shanks.canceldelegate = self
 		if !x.isPrime() {
-			let factor = shanks.GetFactor(n: x)
-			if factor < x && factor >= 2 {
-				push(x: factor)
-				stackstate = .valid
-			}
+		let factor = shanks.GetFactor(n: x)
+		if factor < x && factor >= 2 {
+		push(x: factor)
+		stackstate = .valid
+		}
 		} else {
-			stackstate = .prime
+		stackstate = .prime
 		}
 		*/
 	}
@@ -329,13 +301,13 @@ class RPNCalc : CalcCancellable {
 		let lehman = PrimeFactorLehman()
 		lehman.canceldelegate = self
 		if !x.isPrime() {
-			let factor = lehman.GetFactor(n: x)
-			if factor < x && factor >= 2 {
-				push(x: factor)
-				stackstate = .valid
-			}
+		let factor = lehman.GetFactor(n: x)
+		if factor < x && factor >= 2 {
+		push(x: factor)
+		stackstate = .valid
+		}
 		} else {
-			stackstate = .prime
+		stackstate = .prime
 		}
 		*/
 	}
@@ -357,9 +329,9 @@ class RPNCalc : CalcCancellable {
 		var p = pcalc.NextPrime(n: x)
 		var p6 = p + 6
 		while true {
-			if pcalc.IsPrime(n: p6) { break }
-			p = pcalc.NextPrime(n: p)
-			p6 = p + 6
+		if pcalc.IsPrime(n: p6) { break }
+		p = pcalc.NextPrime(n: p)
+		p6 = p + 6
 		}
 		popx()
 		push(x: p6)
@@ -367,32 +339,38 @@ class RPNCalc : CalcCancellable {
 		stackstate = .prime
 		*/
 	}
+	
+	private func negate() {
+		let neg = -self.x.value
+		pop()
+		push(val: neg)
+	}
 	private func cousin() {
 		stackstate = .unimplemented
-/*
+		/*
 		var p = pcalc.NextPrime(n: x)
 		var p4 = p + 4
 		while true {
-			if pcalc.IsPrime(n: p4) { break }
-			p = pcalc.NextPrime(n: p)
-			p4 = p + 4
+		if pcalc.IsPrime(n: p4) { break }
+		p = pcalc.NextPrime(n: p)
+		p4 = p + 4
 		}
 		popx()
 		push(x: p4)
 		push(x: p)
 		stackstate = .prime
-*/
+		*/
 	}
 	
 	private func sog() {
 		stackstate = .unimplemented
-/*
+		/*
 		let sog = pcalc.NextSoG(n: x)
 		popx()
 		push(x: 2*sog+1)
 		push(x: sog)
 		stackstate = .prime
-*/
+		*/
 	}
 	
 	private func factor() {
@@ -430,7 +408,7 @@ class RPNCalc : CalcCancellable {
 		let ans = x.squareRoot()
 		popx()
 		push(x: ans)
-				stackstate = .valid
+		stackstate = .valid
 		*/
 	}
 	
@@ -484,90 +462,16 @@ class RPNCalc : CalcCancellable {
 	
 	private func hash() {
 		stackstate = .unimplemented
-/*
+		/*
 		let hash = x.hashValue.toUint()
 		popx()
 		push(x: BigUInt(hash))
-*/
+		*/
 	}
 	
-	private func cmdc() {
-		let pasteBoard = UIPasteboard.general
-		pasteBoard.string = x.value.ExponentialString(base: 10, fix: 100)
-		stackstate = .copied
-	}
-	private func cmdv() {
-		let pasteBoard = UIPasteboard.general
-		var numstr = ""
-		var fracstr = ""
-		var expstr = ""
-		var expmode = false
-		var fracmode = false
-		
-		var value = BigFloat(0)
-		
-		if  let str = pasteBoard.string {
-			for c in Array(str) {
-				switch c {
-				case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
-					if expmode {
-						expstr = expstr+String(c)
-					} else if fracmode {
-						fracstr = fracstr + String(c) }
-					else {
-						numstr = numstr + String(c)
-					}
-				case ".":
-					if !expmode { fracmode = true }
-				case "E":
-					expmode = true
-				default:
-					break
-				}
-			}
-				
-				if numstr.count > 100 { stackstate = .overflow; return }
-				if let i = BigInt(numstr) {
-					value = BigFloat(i)
-				}
-				if let f = BigInt(fracstr) {
-					let b = BigFloat(10)
-					var bpow = BigFloat(1)
-					for _ in 1...fracstr.count {
-						bpow = bpow * b
-					}
-					value = value + BigFloat(f) / bpow
-				}
-				
-				if let e = BigInt(expstr) {
-					if e > BigInt(1000)  { stackstate = .overflow; return }
-					if e < BigInt(-1000) { stackstate = .overflow; return }
-					let eint = Int(e)
-					let b = BigFloat(10)
-					var bpow = BigFloat(1)
-					if eint > 0 {
-						for _ in 1...eint { bpow = bpow * b }
-						value = value * bpow
-					}
-					if eint < 0 {
-						for _ in 1 ... -eint { bpow = bpow * b }
-						value = value / bpow
-					}
-				}
-			}
-			push(x: StackElem(val: value))
-			stackstate = .copied
-		
-	}
 	
 	private func rnd() {
 		stackstate = .unimplemented
-		/*
-		let limit = (x==0) ? 10000000000 : x
-		let r = BigUInt.randomInteger(lessThan: limit)
-		popx()
-		push(x: r)
-		*/
 	}
 	
 	private func unimplemented() {
@@ -665,10 +569,21 @@ class RPNCalc : CalcCancellable {
 		let result = compared ? BigFloat(1) : BigFloat(0)
 		push(x: StackElem(val: result))
 	}
-
+	
+	private func cmdc() {
+		let pasteboard = RPNCalcPasteBoard(rpncalc: self)
+		pasteboard.cmdc()
+	}
+	
+	private func cmdv() {
+		let pasteboard = RPNCalcPasteBoard(rpncalc: self)
+		pasteboard.cmdv()
+	}
+	
 	func Calculation(type : RPNCalcCmd)
 	{
 		switch type {
+		case .negate: 	negate()
 		case .LastX:	lastX()
 		case .CmdC: 	cmdc()
 		case .CmdV:		cmdv()
@@ -686,16 +601,16 @@ class RPNCalc : CalcCancellable {
 		case .Pop:		self.pop()
 		case .PNext:	self.PNext()
 		case .PPrev:	self.PPrev()
-		//case .Sexy:		self.sexy()
+			//case .Sexy:		self.sexy()
 		//case .Cousin: 	self.cousin()
 		case .Pow:		self.pow()
 		case .Mod:		self.mod()
 		case .PowMod:	self.powmod()
-		//case .Twin:		self.twin()
-		//case .SoG:		self.sog()
-		//case .Rho:		self.Rho()
-		//case .Squfof:	self.Squfof()
-		//case .Lehman:	self.Lehman()
+			//case .Twin:		self.twin()
+			//case .SoG:		self.sog()
+			//case .Rho:		self.Rho()
+			//case .Squfof:	self.Squfof()
+			//case .Lehman:	self.Lehman()
 		//case .Factor:	self.factor()
 		case .Rnd:		self.rnd()
 		case .Hash: 	self.hash()
@@ -737,5 +652,130 @@ class RPNCalc : CalcCancellable {
 			greaterequal()
 		}
 	}
-
+	
 }
+
+class RPNCalcPasteBoard : StackInputDelegate {
+	
+	var rpn : RPNCalc!
+	let input = StackInput()
+	init (rpncalc : RPNCalc) {
+		self.rpn = rpncalc
+		input.inputdelegate = self
+	}
+	func cmdc() {
+		let pasteBoard = UIPasteboard.general
+		pasteBoard.string = rpn.x.description
+		rpn.stackstate = .copied
+	}
+	
+	private func wordtype(s: String) -> StackType {
+		
+		if let _ = RPNCalcDict.shared.dict[s] {
+			return StackType.ProgCmd
+		}
+		if let c = s.first {
+			switch c {
+			case ":": return StackType.ProgLine
+			case ".","0","1","2","3","4","5","6","7","8","9":
+				return StackType.BigFloat
+			default:
+				return StackType.Alpha
+			}
+		}
+		return .Unknown
+	}
+	
+	private func parseword(w: String, type: StackType) -> [InputCmd] {
+		
+		var ret : [InputCmd] = []
+		let scalars = w.unicodeScalars
+		if scalars.isEmpty { return ret }
+		
+		switch type {
+		case .ProgCmd:
+			if let cmd = RPNCalcDict.shared.dict[w] {
+				rpn.Calculation(type: cmd)
+				//ret.append(ProgInputCmd(rpncmd: cmd))
+			}
+		case .BigFloat:
+			for c in scalars {
+				switch c {
+				case "0":
+					ret.append(NumInputCmd(digit: 0))
+				case "1":
+					ret.append(NumInputCmd(digit: 1))
+				case "2":
+					ret.append(NumInputCmd(digit: 2))
+				case "3":
+					ret.append(NumInputCmd(digit: 3))
+				case "4":
+					ret.append(NumInputCmd(digit: 4))
+				case "5":
+					ret.append(NumInputCmd(digit: 5))
+				case "6":
+					ret.append(NumInputCmd(digit: 6))
+				case "7":
+					ret.append(NumInputCmd(digit: 7))
+				case "8":
+					ret.append(NumInputCmd(digit: 8))
+				case "9":
+					ret.append(NumInputCmd(digit: 9))
+				case ".":
+					ret.append(NumInputCmd(type: .punct))
+				case "E":
+					ret.append(NumInputCmd(type: .ee))
+				case "-":
+					ret.append(NumInputCmd(type: .chs))
+				default:
+					return ret
+				}
+			}
+		case .Alpha:
+			for c in scalars {
+				ret.append(AlphaInputCmd(key: Int(c.value)))
+			}
+		case .BigInt:
+			break
+		case .ProgLine:
+			break
+		case .Unknown:
+			break
+		}
+		return ret
+	}
+	
+	func cmdv() {
+		let pasteBoard = UIPasteboard.general
+		guard let str = pasteBoard.string else { return }
+		let words = str.components(separatedBy: " ")
+		
+		for w in words {
+			let type = wordtype(s: w)
+			let cmds = parseword(w: w,type: type)
+			for cmd in cmds {
+				input.SendCmd(cmd: cmd)
+			}
+			input.Finish()
+		}
+	}
+	
+	func InputHasFinished() {
+		//print("Has Finished")
+		let inputelem = input.GetStackElem()
+		if inputelem.type == .ProgCmd {
+			rpn.Calculation(type: inputelem.rpncmd)
+		} else {
+			rpn.x = inputelem
+		}
+		//rpn.push(x: inputelem)
+		//ShowStack()
+	}
+	
+	func InputHasStarted() {
+		//print("Has Started")
+		rpn.push()
+	}
+	
+}
+

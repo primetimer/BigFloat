@@ -33,13 +33,43 @@ enum ProgInputType {
 	}
 }
 
-typealias ProgLine = ProgInput
+struct ProgLine : CustomStringConvertible {
+	
+	init() { }
+	init(cmdstack : [ProgInputCmd]) {
+		for c in cmdstack {
+			self.cmdstack.append(c)
+		}
+	}
+	mutating func append(add: ProgLine) {
+		for c in add.cmdstack {
+			self.cmdstack.append(c)
+		}
+	}
+	var cmdstack : [ProgInputCmd] = []
+
+	
+	var description: String {
+		get {
+			var ans = ""
+			var lasttype = ProgInputType.enter
+			for c in cmdstack {
+				if c.type != lasttype { ans = ans + " " }
+				ans = ans + c.description
+				lasttype = c.type
+			}
+			return ans
+		}
+	}
+	
+}
 
 class ProgInputCmd : InputCmd {
 	private (set) var type :  ProgInputType
 	private (set) var rpncmd :  RPNCalcCmd? = nil
 	private (set) var numcmd : NumInputCmd? = nil
 	private (set) var alpcmd : AlphaInputCmd? = nil
+	
 	init(type : ProgInputType) {
 		self.type = type
 		super.init(inputtype: .prog)
@@ -65,30 +95,35 @@ class ProgInputCmd : InputCmd {
 		super.init(inputtype: .prog)
 	}
 	
-	var description : String {
+	override var description : String {
 		switch self.type {
 		case .rpn:
-				return rpncmd!.description
+			return rpncmd!.description
 		case .ifcond, .thencond, .elsecond :
-				return self.type.description
+			return self.type.description
 		case .digit:
-				return self.numcmd!.description
+			return self.numcmd!.description
 		case .char:
-				return self.alpcmd!.description
+			return self.alpcmd!.description
 		case .enter:
-				return "⏎"
+			return "⏎"
 		}
 	}
 }
 
-class ProgInput : StackInputProt {
+class ProgInput : StackInputProt, CustomStringConvertible {
+	var description: String {
+		get {
+			return GetInputValue()
+		}
+	}
 	var cmdstack : [ProgInputCmd] = []
 	
 	func GetStackElem() -> StackElem {
-		return StackElem(alpha: GetInputValue())
+		return StackElem(progline: ProgLine(cmdstack: cmdstack))
 	}
 	func GetInputString() -> String {
-		return "'" + GetInputValue() + "'"
+		return ":" + GetInputValue() + ""
 	}
 	
 	private func GetInputValue() -> String {

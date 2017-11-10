@@ -22,7 +22,7 @@ class ForthStorage {
 	}
 	
 	func Recall(key: String) -> StackElem {
-	
+		
 		if let elem = dict[key] {
 			let temp = elem.value
 			let tstr = temp.ExponentialString(base: 10, fix: 10)
@@ -36,40 +36,68 @@ class ForthStorage {
 	}
 }
 
-/*
-class ForthExecuter {
-
+class ForthExecuter : StackInputDelegate {
+	
 	var rpn : RPNCalc!
-	init(rpn : RPNCalc) {
-		self.rpn = rpn
+	var input = StackInput()
+	
+	func InputHasStarted() {
+		//print("Has Started")
+		rpn.push()
+		print(rpn)
 	}
 	
-	func Execute(prog : ProgLine)
+	func InputHasFinished() {
+		//print("prog input Has Finished")
+		let inputelem = input.GetStackElem()
+		rpn.x = inputelem
+		print(rpn)
+	}
+	
+	init(rpn : RPNCalc) {
+		self.rpn = rpn
+		input.inputdelegate = self
+	}
+	
+	func Execute()
 	{
-		var lasttype = ProgInputType.enter
+		let cmdstack = rpn.x.prog.cmdstack
+		let lastx = rpn.x
+		print("Execute", rpn.description)
+		input.Finish()
+		rpn.pop()
+		print("Popo", rpn.description)
 		
-		var input = StackInput()
-		for c in prog.cmdstack {
+		if cmdstack.isEmpty { return }
+		for c in cmdstack {
+			print("Cmd:" + c.description + rpn.description)
 			switch c.type {
-				
 			case .rpn:
-				Calculation(type: c.rpncmd!)
+				print("Prefinish", rpn.description)
+				input.Finish()
+				print("RpnCmd:", rpn.description)
+				rpn.Calculation(type: c.rpncmd!)
 			case .digit:
-				if c.type != lasttype { input = NumberInput() }
-				input.SendCmd(cmd: c.numcmd)
+				input.SendCmd(cmd: c.numcmd!)
 			case .char:
-				<#code#>
+				input.SendCmd(cmd: c.alpcmd!)
 			case .enter:
-				<#code#>
+				if input.IsFinished() {
+					rpn.push()
+				}
+				input.Finish()
 			case .ifcond:
-				<#code#>
+				print("Unimplemented")
+				
 			case .thencond:
-				<#code#>
+				print("Unimplemented")
 			case .elsecond:
-				<#code#>
+				print("Unimplemented")
+				
 			}
-			
 		}
+		rpn.lastx = lastx
 	}
 }
-*/
+
+
