@@ -262,7 +262,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		
 		//LinkButtons(b: GetButtonByCmd(cmd:.n3)!, shift: GetCalcButton(type: .pi)!)
 		//LinkButtons(b: GetInputButton(cmd: .ee), shift: GetS
-		LinkButtons(b: GetSpecialButton(key: .enter) , shift: GetCalcButton(type: .LastX))
+		LinkButtons(b: GetSpecialButton(key: .enter) , shift: GetSpecialButton(key: .preview))
 		Layout()
 	}
 	
@@ -367,6 +367,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		LayoutButtonRaster(row:row, col: 4, button: GetCalcButton(type: .CmdC))
 		LayoutButtonRaster(row:row, col: 5, button: GetSpecialButton(key: .info))
 		row = row - 1
+		LayoutButtonRaster(row:row, col: 0, button: GetCalcButton(type: .LastX))
 		LayoutButtonRaster(row:row, col: 1, button: GetInputButton(cmd: NumInputCmd(digit : 0)))
 		LayoutButtonRaster(row:row, col: 2, button: GetInputButton(cmd: NumInputCmd(type: .punct)))
 		LayoutButtonRaster(row:row, col: 3, button: GetInputButton(cmd: NumInputCmd(type: .chs)))
@@ -417,6 +418,8 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		LayoutButtonRaster(row:4, col: 4, button: GetSpecialButton(key: .undo))
 		LayoutButtonRaster(row:row, col: 5, button: GetSpecialButton(key: .back))
 		LayoutButtonRaster(row:row, col: 5, button: GetSpecialButton(key: .clx))
+		
+		
 		
 		//Layout Shifted Buttons {
 		for b in buttonarr {
@@ -511,12 +514,10 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 			if i == 0 && !input.IsFinished() {
 				let str = input.GetInputString()
 				uistack[i].text = str
-				//print(i, str, "Input")
 			} else {
 				let val = rpn[i]
 				let (valstr,rows) = val.FormatStr(maxrows: maxrows, rowlen: 18)
 				uistack[i].text = valstr
-				//print(i,valstr)
 				registerrows = max(registerrows,rows)
 			}
 			
@@ -528,7 +529,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		
 		if visiblestackelems == 1 {
 			let val = rpn[0].value
-			let str = val.ExponentialString(base: 10, fix: 0)
+			let str = val.autoString(10, fix: 200)
 			uistack[0].text = str
 		}
 		

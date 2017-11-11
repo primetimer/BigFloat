@@ -13,6 +13,7 @@
 		544759201FAE11C20033B821 /* SpecialInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5447591F1FAE11C20033B821 /* SpecialInput.swift */; };
 		544759221FAF35EC0033B821 /* ProgInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544759211FAF35EC0033B821 /* ProgInput.swift */; };
 		544759241FB393FE0033B821 /* RPNCalcCmd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544759231FB393FE0033B821 /* RPNCalcCmd.swift */; };
+		544759261FB72EFD0033B821 /* StringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544759251FB72EFD0033B821 /* StringTest.swift */; };
 		546D65631FA46A5C00FAA00B /* digital-7mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 546D65561FA46A5B00FAA00B /* digital-7mono.ttf */; };
 		546D65641FA46A5C00FAA00B /* AsyncCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D65571FA46A5B00FAA00B /* AsyncCalc.swift */; };
 		546D65651FA46A5C00FAA00B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546D65591FA46A5B00FAA00B /* LaunchScreen.xib */; };
@@ -55,6 +56,7 @@
 		5447591F1FAE11C20033B821 /* SpecialInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialInput.swift; sourceTree = "<group>"; };
 		544759211FAF35EC0033B821 /* ProgInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgInput.swift; sourceTree = "<group>"; };
 		544759231FB393FE0033B821 /* RPNCalcCmd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPNCalcCmd.swift; sourceTree = "<group>"; };
+		544759251FB72EFD0033B821 /* StringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTest.swift; sourceTree = "<group>"; };
 		546D65561FA46A5B00FAA00B /* digital-7mono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7mono.ttf"; sourceTree = "<group>"; };
 		546D65571FA46A5B00FAA00B /* AsyncCalc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncCalc.swift; sourceTree = "<group>"; };
 		546D655A1FA46A5B00FAA00B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				544759251FB72EFD0033B821 /* StringTest.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -465,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				544759261FB72EFD0033B821 /* StringTest.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

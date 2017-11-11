@@ -14,6 +14,8 @@ import BigInt
 public class BigFloatConstant {
 	
 	static private var _pi : BigFloat? = nil
+	static private var _ln2 : BigFloat? = nil
+	static private var _e : BigFloat? = nil
 	static public  var pi : BigFloat {
 		get {
 			if _pi != nil { return _pi! }
@@ -46,32 +48,63 @@ public class BigFloatConstant {
 			}
 		}
 	}
+	static public var e : BigFloat {
+		get {
+			if _e != nil { return _e! }
+			_e = BigFloat.exp(x: BigFloat(1))
+			return _e!
+		}
+	}
+	
+	static public var ln2 : BigFloat {
+		get {
+			if _ln2 != nil { return _ln2! }
+			_ln2 = BigFloat.ln(x: BigFloat(2))
+			return _ln2!
+		}
+	}
 	
 }
 extension BigFloat {
-	public static func exp(x:BigFloat, precision px:Int = 64)->BigFloat {
-		if x.isZero() {
-			return BigFloat(1)
+
+	public static func exp(x:BigFloat, precision bits:Int = 0)->BigFloat {
+		if x.isZero() {	return BigFloat(1) }
+		
+		/*
+		let half = BigFloat(significand: 1, exponent: -1)
+		if x < -half {
+			return BigFloat(1) / BigFloat.exp(x: -x,precision: bits)
+		}
+		*/
+
+		
+		if x >= BigFloat(16000) { return BigFloat(0) }
+		if x <= BigFloat(-16000) { return BigFloat(0) }
+		
+		if x > BigFloat(2) || (x<BigFloat(-2)) {
+			let k = Int((x.toDouble() - 1 ) / log(2.0))
+			let xln2 = x - BigFloat(k) * BigFloatConstant.ln2
+			let exln2 = BigFloat.exp(x: xln2)
+			let kpow = BigFloat(significand: 1, exponent: k)
+			let ans = exln2 * kpow
+			return ans
 		}
 		
 		let epsilon = BigFloat(significand:1, exponent:-BigFloat.maxprecision / 2)
 		var ans = BigFloat(1)
 		var summand = BigFloat(1)
-		var k = BigFloat(1)
+		var (k,xk) = (BigFloat(1),x)
 		while BigFloat.abs(summand) > epsilon {
 			//let temp = BigFloat(1) / BigFloat(2)
-			summand = summand * x
+			summand = summand * xk
 			summand = summand / k
 			k = k + BigFloat(1)
 			ans = ans + summand
-			//let k = String(k.toDouble())
-			//let s = summand.ExponentialString(base: 10, fix: 20)
-			//print(k,s)
 		}
 		return ans
 	}
 	
-	public static func sqrt(x:BigFloat, precision px:Int = 64)->BigFloat {
+	public static func sqrt(x:BigFloat, precision px:Int = 0)->BigFloat {
 		let half = BigFloat(1) / BigFloat(2)
 		var y0 = BigFloat(2)
 		let epsilon = BigFloat(significand:1, exponent:-BigFloat.maxprecision / 2)
@@ -203,8 +236,10 @@ extension BigFloat {
 	
 	// ln(a^b) = b * ln(a) --> a^b = exp(b*ln(a))
 	public static func pow(x:BigFloat, _ y:BigFloat,  bits:Int = 64)->BigFloat  {
-		let xx = y*BigFloat.ln(x: x)
-		let ans = BigFloat.exp(x: xx)
+		let lnx = BigFloat.ln(x: x)
+		let ylnx = y * lnx
+		var ans = BigFloat.exp(x: ylnx)
+		_ = ans.truncate(bits: bits)
 		return ans
 	}
 }

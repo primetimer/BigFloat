@@ -63,10 +63,13 @@ public struct BigFloat : ExpressibleByFloatLiteral {
 		if shift <= 0 { return self }
 		let ex = self.exponent + (self.significand.bitWidth)
 		self.significand >>= BigInt(shift-1)
+		
+		/*
 		let carry = significand & 1
 		if carry>0 {
 			self.significand += 1
 		}
+		*/
 		self.significand >>= 1
 		self.exponent = ex - self.significand.bitWidth
 		while self.significand != 0 && self.significand & 1 == 0 {

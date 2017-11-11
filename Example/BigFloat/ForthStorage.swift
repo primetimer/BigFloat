@@ -16,17 +16,11 @@ class ForthStorage {
 	
 	func Store(key : String, elem: StackElem) {
 		dict[key] = elem
-		let temp = elem.value
-		let tstr = temp.ExponentialString(base: 10, fix: 10)
-		print("sto:",key,tstr)
 	}
 	
 	func Recall(key: String) -> StackElem {
 		
 		if let elem = dict[key] {
-			let temp = elem.value
-			let tstr = temp.ExponentialString(base: 10, fix: 10)
-			print("rcl:",key,tstr)
 			return elem
 		}
 		return StackElem()

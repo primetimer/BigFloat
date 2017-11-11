@@ -99,7 +99,7 @@ struct StackElem  {
 		case .Alpha:
 			return (alpha,1)
 		case .BigFloat:
-			return (value.ExponentialString(base: 10, fix: self.fix),1)
+			return (value.autoString(),1)
 		case .BigInt:
 			return (String(num),1)
 		case .Unknown:
