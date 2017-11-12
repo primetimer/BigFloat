@@ -141,60 +141,59 @@ public extension BigFloat {
 			ex = ex - 1
 		}
 		
-		var fracdigits : [Int] = []
-		var ndigits = fix
+		var digits : [Int] = []
+		while int > 0 {
+			let r = int % BigInt(base)
+			digits.insert(Int(r), at: 0)
+			int = int / BigInt(base)
+		}
+		ex = ex + digits.count - 1
+
+		var ndigits = fix - digits.count
 		var started = false
-		while ndigits > 0 {
+		while ndigits >= 0 {
 			var r:BigInt
 			fract = fract * bfbase
 			(r, fract) = fract.SplitIntFract()
 			if r != 0 { started = true }
 			let digit = Int(r)
-			fracdigits.append(digit)
+			digits.append(digit)
 			if fract.significand == 0 { break }
 			if started { ndigits = ndigits - 1 }
 		}
 		
-		var carry = false
-		if fract * BigFloat(2) >= BigFloat(1) {   // round up!
-			var idx = fracdigits.count
-			carry = true
-			while idx > 0 {
-				if fracdigits[idx - 1] < base - 1 {
-					fracdigits[idx - 1] += 1
+		//Letzte Ziffer + 1
+		while digits.count <= fix {
+			digits.append(0)
+		}
+		var pos = fix
+		let d = digits[pos]
+		if d >= base / 2 {
+			var carry = true
+			while pos > 0 && carry == true{
+				pos = pos - 1
+				if digits[pos] < base - 1 {
+					digits[pos] = digits[pos] + 1
 					carry = false
-					break
+				} else {
+					digits[pos] = 0
 				}
-				
-				fracdigits[idx - 1] = 0
-				idx -= 1
+			}
+			if carry {
+				digits.insert(1, at: 0)
+				ex = ex + 1
 			}
 		}
 		
-		if carry { int = int + 1 }
-		var intdigits : [Int] = []
-		while int > 0 {
-			let r = int % BigInt(base)
-			intdigits.insert(Int(r), at: 0)
-			int = int / BigInt(base)
-		}
-		ex = ex + intdigits.count - 1
-		
 		var ans = ""
 		var digitcount = 0
-		for i in 0..<intdigits.count  {
-			ans = ans + intdigits[i].AsciiCode
+		for i in 0..<digits.count  {
+			ans = ans + digits[i].AsciiCode
 			if i == 0 {
 				ans = ans + "."
 			}
 			digitcount = digitcount + 1
 			if digitcount >= fix { break }
-		}
-		for i in 0..<fracdigits.count {
-			if digitcount > fix { break }
-			ans = ans + fracdigits[i].AsciiCode
-			digitcount = digitcount + 1
-			
 		}
 		
 		ans = ans + "E" + String(ex)

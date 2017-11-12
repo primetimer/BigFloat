@@ -262,7 +262,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		
 		//LinkButtons(b: GetButtonByCmd(cmd:.n3)!, shift: GetCalcButton(type: .pi)!)
 		//LinkButtons(b: GetInputButton(cmd: .ee), shift: GetS
-		LinkButtons(b: GetSpecialButton(key: .enter) , shift: GetSpecialButton(key: .preview))
+		//LinkButtons(b: GetSpecialButton(key: .enter) , shift: GetSpecialButton(key: .preview))
 		Layout()
 	}
 	
@@ -414,6 +414,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		row = row - 1
 		LayoutButtonRaster(row:row, col: 0, button: GetSpecialButton(key: .alpha))
 		LayoutButtonRaster(row:row, col: 1, button: GetSpecialButton(key: .prog))
+		LayoutButtonRaster(row:row, col: 2, button: GetSpecialButton(key: .preview), numcols: 2)
 		LayoutButtonRaster(row:4, col: 4, button: GetSpecialButton(key: .esc))
 		LayoutButtonRaster(row:4, col: 4, button: GetSpecialButton(key: .undo))
 		LayoutButtonRaster(row:row, col: 5, button: GetSpecialButton(key: .back))
@@ -528,9 +529,11 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		}
 		
 		if visiblestackelems == 1 {
-			let val = rpn[0].value
-			let str = val.autoString(10, fix: 200)
-			uistack[0].text = str
+			if input.IsFinished() {
+				let val = rpn[0].value
+				let str = val.autoString(10, fix: 200)
+				uistack[0].text = str
+			}
 		}
 		
 		//Changes font according to the maximal number of rows per register

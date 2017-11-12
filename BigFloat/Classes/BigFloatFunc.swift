@@ -14,6 +14,9 @@ import BigInt
 public class BigFloatConstant {
 	
 	static private var _pi : BigFloat? = nil
+	static private var _pi2 : BigFloat? = nil
+	static private var _pi_2 : BigFloat? = nil
+	static private var _pi_4 : BigFloat? = nil
 	static private var _ln2 : BigFloat? = nil
 	static private var _e : BigFloat? = nil
 	static public  var pi : BigFloat {
@@ -46,6 +49,28 @@ public class BigFloatConstant {
 				//partstr = p.ExponentialString(base: 10, fix: 40)
 				//print(astr, bstr, tstr,partstr)
 			}
+		}
+	}
+	
+	static public var pi2 : BigFloat {
+		get {
+			if _pi2 != nil { return _pi2! }
+			_pi2 = pi * BigFloat(2)
+			return _pi2!
+		}
+	}
+	static public var pi_2 : BigFloat {
+		get {
+			if _pi_2 != nil { return _pi_2! }
+			_pi_2 = pi / BigFloat(2)
+			return _pi_2!
+		}
+	}
+	static public var pi_4 : BigFloat {
+		get {
+			if _pi_4 != nil { return _pi_4! }
+			_pi_4 = pi / BigFloat(4)
+			return _pi_4!
 		}
 	}
 	static public var e : BigFloat {
@@ -119,7 +144,7 @@ extension BigFloat {
 		return y0
 	}
 	
-	public static func hypot(x:BigFloat, _ y:BigFloat, precision px:Int=64)->BigFloat {
+	public static func hypot(x:BigFloat, _ y:BigFloat, precision px:Int=0)->BigFloat {
 		//if let dx = x as? Double { return Self(Double.hypot(dx, y as! Double)) }
 		var (r, l) = (x < BigFloat(0) ? -x : x, y < BigFloat(0) ? -y : y)
 		if r < l { (r, l) = (l, r) }
@@ -138,7 +163,7 @@ extension BigFloat {
 		return r.truncate(bits: BigFloat.maxprecision)
 	}
 	
-	public static func atan(x:BigFloat, precision bits:Int = 64)->BigFloat {
+	public static func atan(x:BigFloat, precision bits:Int = 0)->BigFloat {
 		
 		let px = BigFloat.maxprecision / 2
 		let atan1 = BigFloatConstant.pi / BigFloat(4)
@@ -153,7 +178,6 @@ extension BigFloat {
 					_ = t.truncate(bits: px)
 					r = r + t
 					_ = r.truncate(bits : px)
-					// print("\(Self.self).inner_atan: r=\(r.debugDescription)")
 					if t < epsilon { break }
 				}
 				return r * x / x2p1
@@ -179,7 +203,7 @@ extension BigFloat {
 		return x.significand<0 ? -r.truncate(bits:px) : r.truncate(bits:px)
 	}
 	
-	public static func ln(x:BigFloat, precision bits:Int = 64)->BigFloat {
+	public static func ln(x:BigFloat, precision bits:Int = 0)->BigFloat {
 		//if let dx = x as? Double { return Self(Double.log(dx)) }
 		let px = BigFloat.maxprecision / 2
 		let epsilon = BigFloat(significand:1, exponent:-px)
@@ -235,11 +259,79 @@ extension BigFloat {
 	}
 	
 	// ln(a^b) = b * ln(a) --> a^b = exp(b*ln(a))
-	public static func pow(x:BigFloat, _ y:BigFloat,  bits:Int = 64)->BigFloat  {
+	public static func pow(x:BigFloat, y:BigFloat,  bits:Int = 0)->BigFloat  {
+		let px = bits > 0 ? bits : BigFloat.maxprecision / 2
 		let lnx = BigFloat.ln(x: x)
 		let ylnx = y * lnx
 		var ans = BigFloat.exp(x: ylnx)
-		_ = ans.truncate(bits: bits)
+		_ = ans.truncate(bits: px)
 		return ans
+	}
+	
+	public static func sin(x:BigFloat, bits:Int = 0)->BigFloat  {
+		if x < BigFloat(0) {
+			return -sin(x: -x,bits : bits)
+		}
+		if x > BigFloatConstant.pi2 {
+			let k = x / BigFloatConstant.pi2
+			let (kint,r) = k.SplitIntFract()
+			let xx = r * BigFloatConstant.pi2
+			return sin(x: xx, bits: bits)
+		}
+		
+		let epsilon = BigFloat(significand:1, exponent:-BigFloat.maxprecision / 2)
+		var ans = x
+		var (k,summand,x2) = (BigFloat(1),x,x*x)
+		while BigFloat.abs(summand) > epsilon {
+			k = k + BigFloat(2)
+			summand = -summand * x2 / k / (k-BigFloat(1))
+			ans = ans + summand
+
+		}
+		return ans
+	}
+	
+	public static func cos(x:BigFloat, bits:Int = 0)->BigFloat  {
+		
+		if BigFloat.abs(x) > BigFloatConstant.pi_2 {
+			return BigFloat.sin(x: x + BigFloatConstant.pi_2)
+		}
+		let epsilon = BigFloat(significand:1, exponent:-BigFloat.maxprecision / 2)
+		var ans = BigFloat(1)
+		var (k,summand,x2) = (BigFloat(0),BigFloat(1),x*x)
+		while BigFloat.abs(summand) > epsilon {
+			k = k + BigFloat(2)
+			summand = -summand * x2 / k / (k-BigFloat(1))
+			ans = ans + summand
+		}
+		return ans
+	}
+	
+	public static func tan(x:BigFloat, bits:Int = 0)->BigFloat  {
+		let c = cos(x: x)
+		let s = sin(x: x)
+		let t = s / c
+		return t
+	}
+	
+	public static func asin(x:BigFloat, bits:Int = 0)->BigFloat  {
+		if BigFloat.abs(x) <= BigFloat(1) {
+			let r = BigFloat.sqrt(x: (BigFloat(1) - x) * (BigFloat(1) + x))
+			let arg = x / (BigFloat(1) + r)
+			let ans = BigFloat(2) * BigFloat.atan(x: arg)
+			return ans
+		}
+		return BigFloat(0)
+		
+	}
+	
+	public static func acos(x:BigFloat, bits:Int = 0)->BigFloat  {
+		if BigFloat.abs(x) <= BigFloat(1) {
+			let arg = (BigFloat(1) - BigFloat(x)) / (BigFloat(1) + BigFloat(x))
+			let arg2 = BigFloat.sqrt(x: arg)
+			let ans = BigFloat(2) * BigFloat.atan(x: (arg2))
+			return ans
+		}
+		return BigFloat(0)
 	}
 }

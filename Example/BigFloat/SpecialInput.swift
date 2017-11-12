@@ -23,7 +23,7 @@ enum KeyBoardSpecialCmd {
 		case .back:		return "⌫"
 		case .enter:	return "ENTER"
 		case .esc:		return "ESC"
-		case .preview:	return "View"
+		case .preview:	return "View#"
 		case .clx:		return "CLR"
 		case .info:		return "ℹ︎"
 		}

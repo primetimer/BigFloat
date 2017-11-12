@@ -150,7 +150,6 @@
 		607FACD21AFB9204008FA782 /* Example for BigFloat */ = {
 			isa = PBXGroup;
 			children = (
-				544759231FB393FE0033B821 /* RPNCalcCmd.swift */,
 				54B8A3151FA49BB90015CEA3 /* StackInput.swift */,
 				5447591B1FADC1A30033B821 /* NumberInput.swift */,
 				5447591D1FADC75D0033B821 /* AlphaInput.swift */,
@@ -164,6 +163,7 @@
 				546D65561FA46A5B00FAA00B /* digital-7mono.ttf */,
 				546D65601FA46A5C00FAA00B /* Extensions.swift */,
 				546D655D1FA46A5B00FAA00B /* Images.xcassets */,
+				544759231FB393FE0033B821 /* RPNCalcCmd.swift */,
 				546D655E1FA46A5B00FAA00B /* RPNCalc.swift */,
 				546D655F1FA46A5B00FAA00B /* RPNInfo.swift */,
 				546D65611FA46A5C00FAA00B /* UIExtensions.swift */,

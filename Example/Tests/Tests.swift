@@ -187,5 +187,20 @@ class Tests: XCTestCase {
 		}
 	}
 	
+	func testPow10() {
+		let ten = BigFloat(10)
+		var tenpow = ten
+		
+		for i in 2...20 {
+			tenpow = tenpow * ten
+			let tpow = BigFloat.pow(x: ten,y :BigFloat(i))
+			let d = BigFloat.abs(tenpow - tpow)
+			let str1 = tpow.expString( 10, fix: 40)
+			let strd = d.expString( 10, fix: 40)
+			print (i," ", str1, " ", strd)
+			XCTAssert(d < epsilon )
+		}
+	}
+	
 	
 }

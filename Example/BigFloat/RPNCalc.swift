@@ -156,7 +156,7 @@ class RPNCalc : CalcCancellable, CustomStringConvertible {
 			stackstate = .error
 			return
 		}
-		let z = BigFloat.pow(x: y.value,x.value)
+		let z = BigFloat.pow(x: y.value,y: x.value)
 		popx()
 		pop()
 		push(val: z)
@@ -176,14 +176,11 @@ class RPNCalc : CalcCancellable, CustomStringConvertible {
 		stackstate = .valid
 	}
 	private func tenpow() {
-		stackstate = .unimplemented
-		/*
-		if x > bitMax { stackstate = .overflow; return }
-		let t = BigUInt(10).power(Int(x))
+		let ten = BigFloat(10)
+		let ans = BigFloat.pow(x: ten, y: x.value)
 		popx()
-		push(x: t)
+		push(val: ans)
 		stackstate = .valid
-		*/
 	}
 	
 	
@@ -404,12 +401,53 @@ class RPNCalc : CalcCancellable, CustomStringConvertible {
 		pop()
 		push(x: StackElem(val: r))
 		stackstate = .valid
-		/*
-		let ans = x.squareRoot()
+	}
+	
+	private func sin() {
+		let r = BigFloat.sin(x: x.value)
 		popx()
-		push(x: ans)
+		push(x: StackElem(val: r))
 		stackstate = .valid
-		*/
+	}
+	private func cos() {
+		let r = BigFloat.cos(x: x.value)
+		popx()
+		push(x: StackElem(val: r))
+		stackstate = .valid
+	}
+	
+	private func tan() {
+		let r = BigFloat.tan(x: x.value)
+		popx()
+		push(x: StackElem(val: r))
+		stackstate = .valid
+	}
+	
+	private func atan() {
+		let r = BigFloat.atan(x: x.value)
+		popx()
+		push(x: StackElem(val: r))
+		stackstate = .valid
+	}
+	private func acos() {
+		if BigFloat.abs(x.value) > BigFloat(1) {
+			stackstate = .error
+		} else {
+			let r = BigFloat.acos(x: x.value)
+			popx()
+			push(x: StackElem(val: r))
+		}
+		stackstate = .valid
+	}
+	private func asin() {
+		if BigFloat.abs(x.value) > BigFloat(1) {
+			stackstate = .error
+		} else {
+			let r = BigFloat.asin(x: x.value)
+			popx()
+			push(x: StackElem(val: r))
+		}
+		stackstate = .valid
 	}
 	
 	private func exp() {
@@ -622,18 +660,12 @@ class RPNCalc : CalcCancellable, CustomStringConvertible {
 		//case .Factors:	self.factors()
 		case .Sto1:		store()
 		case .Rcl1:		rcl()
-		case .Sin:
-			unimplemented()
-		case .Cos:
-			unimplemented()
-		case .Tan:
-			unimplemented()
-		case .aSin:
-			unimplemented()
-		case .aCos:
-			unimplemented()
-		case .aTan:
-			unimplemented()
+		case .Sin:		sin()
+		case .Cos:		cos()
+		case .Tan:		tan()
+		case .aSin:		asin()
+		case .aCos:		acos()
+		case .aTan:		atan()
 		case .log:
 			unimplemented()
 		case .Inv:
