@@ -477,6 +477,19 @@ class RPNCalc : CalcCancellable, CustomStringConvertible {
 		push(x: StackElem(val :pi))
 	}
 	
+	private func sqrt2() {
+		let x = BigFloatConstant.sqrt2
+		push(x: StackElem(val :x))
+	}
+	private func ln2() {
+		let x = BigFloatConstant.ln2
+		push(x: StackElem(val :x))
+	}
+	private func e() {
+		let x = BigFloatConstant.e
+		push(x: StackElem(val :x))
+	}
+	
 	private func ln() {
 		if (x.value <= BigFloat(0)) {
 			stackstate = .overflow
@@ -627,12 +640,15 @@ class RPNCalc : CalcCancellable, CustomStringConvertible {
 		case .CmdV:		cmdv()
 		case .Plus:		self.plus()
 		case .Minus:	self.minus()
-		case .Prod:		self.prod()
-		case .Divide:	self.divide()
+		case .Prod,.Prod2:		self.prod()
+		case .Divide,.Divide2:	self.divide()
 		case .gcd:		self.gcd()
 		case .sqrt:		self.sqrt()
 		case .crt:		self.crt()
 		case .pi:		self.pi()
+		case .sqrt2:	self.sqrt2()
+		case .ln2:		self.ln2()
+		case .exp1:		self.e()
 		case .exp:		self.exp()
 		case .ln:		self.ln()
 		case .Swap:		self.swap()
@@ -676,7 +692,7 @@ class RPNCalc : CalcCancellable, CustomStringConvertible {
 			greater()
 		case .equal:
 			equal()
-		case .unequal:
+		case .unequal,.unequal2:
 			unequal()
 		case .lowerequal:
 			lowerequal()

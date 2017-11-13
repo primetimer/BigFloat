@@ -36,7 +36,7 @@ class StringTests: XCTestCase {
 		do {
 			let d = Double(0.001234)
 			let x = BigFloat(d)
-			let dstr = String(d)
+			//let dstr = String(d)
 			let xstr = x.asString(10, fix: 5)
 			XCTAssert(xstr == "0.00123")
 			
@@ -56,19 +56,19 @@ class StringTests: XCTestCase {
 		do {
 			let x = BigFloat(16)
 			let xstr = x.expString(fix: 3)
-			XCTAssert(xstr == "1.60E1")
+			XCTAssert(xstr == "1.60 e1")
 		}
 		do {
 			let x = BigFloat(Double(16000))
 			let xstr = x.expString(fix: 5)
-			XCTAssert(xstr == "1.6000E4")
+			XCTAssert(xstr == "1.6000 e4")
 		}
 		do {
 			let d = Double(0.001234)
 			let x = BigFloat(d)
-			let dstr = String(d)
+			//let dstr = String(d)
 			let xstr = x.expString(fix: 5)
-			XCTAssert(xstr == "1.2340E-3")
+			XCTAssert(xstr == "1.2340 e-3")
 			
 		}
 		do {
@@ -76,7 +76,7 @@ class StringTests: XCTestCase {
 			let x = BigFloat(d)
 			//let dstr = String(d)
 			let xstr =  x.expString(fix: 5)
-			XCTAssert(xstr == "1.2340E-16")
+			XCTAssert(xstr == "1.2340 e-16")
 			
 		}
 		do {
@@ -84,7 +84,7 @@ class StringTests: XCTestCase {
 			let x = BigFloat(d)
 			//let dstr = String(d)
 			let xstr =  x.expString(fix: 5)
-			XCTAssert(xstr == "1.2340E15")
+			XCTAssert(xstr == "1.2340 e15")
 			
 		}
 		do {
@@ -92,7 +92,7 @@ class StringTests: XCTestCase {
 			let x = BigFloat(d)
 			//let dstr = String(d)
 			let xstr =  x.expString(fix: 5)
-			XCTAssert(xstr == "1.2350E-16")
+			XCTAssert(xstr == "1.2350 e-16")
 			
 		}
 	}

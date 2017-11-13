@@ -19,6 +19,7 @@ public class BigFloatConstant {
 	static private var _pi_4 : BigFloat? = nil
 	static private var _ln2 : BigFloat? = nil
 	static private var _e : BigFloat? = nil
+	static private var _sqrt2 : BigFloat? = nil
 	static public  var pi : BigFloat {
 		get {
 			if _pi != nil { return _pi! }
@@ -86,6 +87,14 @@ public class BigFloatConstant {
 			if _ln2 != nil { return _ln2! }
 			_ln2 = BigFloat.ln(x: BigFloat(2))
 			return _ln2!
+		}
+	}
+	
+	static public var sqrt2 : BigFloat {
+		get {
+			if _sqrt2 != nil { return _ln2! }
+			_sqrt2 = BigFloat.sqrt(x: BigFloat(2))
+			return _sqrt2!
 		}
 	}
 	
@@ -274,7 +283,7 @@ extension BigFloat {
 		}
 		if x > BigFloatConstant.pi2 {
 			let k = x / BigFloatConstant.pi2
-			let (kint,r) = k.SplitIntFract()
+			let (_,r) = k.SplitIntFract()
 			let xx = r * BigFloatConstant.pi2
 			return sin(x: xx, bits: bits)
 		}

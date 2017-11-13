@@ -30,6 +30,21 @@ extension Int {
 		default:	return "X"
 		}
 	}
+	
+	public func String(withbase : Int) -> String {
+		if self == 0 { return "0" }
+		var num = abs(self)
+		var ans = ""
+		while num > 0 {
+			let digit = num % withbase
+			ans = digit.AsciiCode + ans
+			num = num / withbase
+		}
+		if self < 0 {
+			ans = "-" + ans
+		}
+		return ans
+	}
 }
 
 extension BigFloat : CustomStringConvertible {
@@ -50,17 +65,18 @@ public extension BigFloat {
 		for _ in 0...fix/2 {
 			maxval = maxval * Double(base)
 		}
-		if self > BigFloat(maxval) {
+		let bfmax = BigFloat(maxval)
+		if BigFloat.abs(self) > bfmax {
 			return expString(base, fix : fix)
 		}
-		if self <= BigFloat(1.0 / maxval) {
+		if BigFloat.abs(self) < BigFloat(1) / bfmax  {
 			return expString(base, fix : fix)
 		}
 		return asString(base,fix: fix)
 		
 	}
 	
-	public func asString(_ base : Int = 10 , fix : Int = 8) -> String {
+	public func asString(_ base : Int = 10 , maxlen: Int = 18, fix : Int = 8) -> String {
 		
 		if self.significand == 0 { return "0" }
 		if self.significand < 0 {
@@ -111,20 +127,28 @@ public extension BigFloat {
 			int = int / BigInt(base)
 		}
 		
+		var len = 0
 		var ans = ""
 		for i in 0..<intdigits.count {
 			ans = ans + intdigits[i].AsciiCode
+			len = len + 1
+			if len >= maxlen && maxlen > 0 {
+				return expString(base, fix: Swift.abs(fix))
+			}
 		}
 		ans = ans + "."
 		let fracfix = fix > 0 ? fix : fracdigits.count
 		for i in 0..<fracfix {
 			let d = i >= fracdigits.count ? 0 : fracdigits[i]
 			ans = ans + d.AsciiCode
+			len = len + 1
+			if len >= maxlen && maxlen > 0 { break }
 		}
 		return ans
 	}
 	
 	func expString(_ base : Int = 10 , fix : Int) -> String {
+
 		if self.significand < 0 {
 			let neg = -self
 			return "-" + neg.expString(base,fix: fix)
@@ -195,8 +219,8 @@ public extension BigFloat {
 			digitcount = digitcount + 1
 			if digitcount >= fix { break }
 		}
-		
-		ans = ans + "E" + String(ex)
+		let estr = base == 10 ? " e" : " x"
+		ans = ans + estr + ex.String(withbase: base)
 		return ans
 	}
 }

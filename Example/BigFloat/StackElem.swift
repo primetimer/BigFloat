@@ -90,21 +90,24 @@ struct StackElem  {
 	
 	
 	
-	func FormatStr(maxrows: Int, rowlen: Int) -> (String,rows: Int) {
+	func FormatStr(base: Int ,maxrows: Int, rowlen: Int) -> (String,rows: Int) {
+		var ans = ""
 		switch type {
 		case .ProgCmd:
-			return (RPNCalcDict.shared.String(cmd: rpncmd),1)
+			ans = RPNCalcDict.shared.String(cmd: rpncmd)
 		case .ProgLine:
-			return (":" + String(describing: prog) + ";" ,1)
+			ans = ":" + String(describing: prog) + ";"
 		case .Alpha:
-			return (alpha,1)
+			ans = alpha
 		case .BigFloat:
-			return (value.autoString(),1)
+			ans = value.autoString(base)
 		case .BigInt:
-			return (String(num),1)
+			ans = String(num)
 		case .Unknown:
-			return ("- / -",1)
+			ans = "- / -"
 		}
+		let rows = ans.count / rowlen
+		return (ans,rows)
 	}
 }
 

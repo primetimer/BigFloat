@@ -11,7 +11,7 @@ import BigInt
 import BigFloat
 
 enum KeyBoardSpecialCmd {
-	case none, alpha, prog, shift, undo, back, enter, esc, preview, clx, info
+	case none, alpha, prog, shift, undo, back, enter, esc, preview, clx, info, hex
 	
 	var description : String {
 		switch self {
@@ -23,9 +23,10 @@ enum KeyBoardSpecialCmd {
 		case .back:		return "⌫"
 		case .enter:	return "ENTER"
 		case .esc:		return "ESC"
-		case .preview:	return "View#"
+		case .preview:	return "≈"
 		case .clx:		return "CLR"
 		case .info:		return "ℹ︎"
+		case .hex:		return "HEX"
 		}
 	}
 }

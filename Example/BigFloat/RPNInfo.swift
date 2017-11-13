@@ -36,8 +36,8 @@ class InfoView : UITextView {
 		case .LastX:	t = "Restore X-Register after operation"
 		case .Plus: 	t = "Adds the x and y register."
 		case .Minus: 	t = "Subtrats x from y. Negative Numbers are not allowed."
-		case .Prod:		t = "Product of x and y. Products greater than 100 digits are not allowed."
-		case .Divide:   t = "Divides y by x."
+		case .Prod,.Prod2:		t = "Product of x and y. Products greater than 100 digits are not allowed."
+		case .Divide,.Divide2:   t = "Divides y by x."
 		case .PNext:	t = "Next prime number."
 		case .PPrev: 	t = "Previous prime number."
 		case .Rnd: 		t = "Random Number up to x. If x is zero a random number up 10^10 is calculated."
@@ -71,8 +71,10 @@ class InfoView : UITextView {
 		//case .Sexy:     t = "Sexy Prime ( the next prime p, with p + 6  prime )"
 		//case .Cousin:   t = "Cousin Prime ( the next prime p, with p + 4  prime )"
 			case .pi:		t = "pi"
-		case .exp:
-			t = "Exponential function with base e"
+			case .ln2:	t = "ln 2"
+		case .sqrt2: t = "Square root 2"
+		case .exp1:  t = "e"
+		case .exp:		t = "Exponential function with base e"
 		case .ln:
 			t = "Natural logarithm"
 		case .aSin:
@@ -91,7 +93,7 @@ class InfoView : UITextView {
 			t = "One if  x > y else Zero"
 		case .equal:
 			t = "One if  x equals y else Zero"
-		case .unequal:
+		case .unequal,.unequal2:
 			t = "One if  x does not equal y else Zero"
 		case .lowerequal:
 			t = "One if  x loewer equal y else Zero"

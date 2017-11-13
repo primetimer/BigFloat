@@ -41,15 +41,24 @@ class NumInputCmd : InputCmd {
 		case .chs:
 			return "+/-"
 		case .digit:
-			return String(self.key)
+			return key.AsciiCode
 		}
 	}
 }
 
+
 class NumberInput : StackInputProt {
+	func SetBase(base: Int) {
+		radix = base
+	}
+	
 	
 	private var radix = 10
 	var cmdstack : [NumInputCmd] = []
+	
+	init(radix : Int = 10) {
+		self.radix = radix
+	}
 	
 	func GetStackElem() -> StackElem {
 		return StackElem(val: InputValue())
@@ -67,13 +76,13 @@ class NumberInput : StackInputProt {
 				str = str + "."
 			case .digit:
 				if isee { ee = ee * radix + c.key }
-				else { str = str + String(c.key) }
+				else { str = str + c.key.AsciiCode }
 			case .ee:
 				isee = true
-				str = str + "E"
+				str = str + (radix == 10 ? " e" : " x")
 			}
 		}
-		let eestr = isee ? String(ee*eesign) : ""
+		let eestr = isee ? (ee*eesign).String(withbase: radix) : ""
 		if sign < 0 { str = "-" + str }
 		let ans = str + eestr
 		if ans == "" { return "0" }

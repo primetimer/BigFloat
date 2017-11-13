@@ -18,10 +18,14 @@ class RPNCalcDict {
 	private init() {
 		dict["Undefined"] = .Undefined
 		dict["π"] = .pi
+		dict["ln 2"] = .ln2
+		dict["e"] = .exp1
 		dict["+"] = .Plus
 		dict["-"] = .Minus
-		dict["*"] = .Prod
-		dict["/"] = .Divide
+		dict["*"] = .Prod2
+		dict["✕"] = .Prod
+		dict["/"] = .Divide2
+		dict["÷"] = .Divide
 		dict["%"] = .Mod
 		dict["LastX"] = .LastX
 		dict["x^2"] = .Square
@@ -45,6 +49,7 @@ class RPNCalcDict {
 		dict["log"] = .log
 		dict["√"] = .sqrt
 		dict["∛"] = .crt
+		//dict["\u{1f1e9}\u{1f1ea}"] = .crt
 		dict["STO"] = .Sto1
 		dict["!"] = .Sto1
 		dict["RCL"] = .Rcl1
@@ -56,7 +61,12 @@ class RPNCalcDict {
 		dict[">"] = .greater
 		dict[">="] = .greaterequal
 		dict["="] = .equal
-		dict["!="] = .unequal
+		dict["!="] = .unequal2
+		dict["≠"] = .unequal
+		dict["√2"] = .sqrt2
+
+	
+
 	}
 	
 	func String(cmd: RPNCalcCmd) -> String {
@@ -75,10 +85,11 @@ enum RPNCalcCmd : Int, CustomStringConvertible {
 	case Undefined,Plus,Minus,Prod,Divide, LastX, Mersenne, Square, Cube, TenPow, Inv, negate
 	case Sin, Cos, Tan, aSin, aCos, aTan
 	case PNext, PPrev
-	case Swap, Pop, Pow, PowMod, exp, ln, pi, log
+	case Swap, Pop, Pow, PowMod, exp, ln, pi, log, ln2, exp1, sqrt2
 	case Mod, gcd, sqrt, crt, Hash,Rnd
 	case Sto1, Rcl1, CmdC, CmdV
-	case lower,greater,equal,unequal,lowerequal,greaterequal
+	case lower,greater,equal,unequal,lowerequal,greaterequal,unequal2
+	case Prod2, Divide2
 	
 	var description : String {
 		return RPNCalcDict.shared.String(cmd: self)
