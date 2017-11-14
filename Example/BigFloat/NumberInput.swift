@@ -59,14 +59,10 @@ class NumberInput : StackInputProt {
 	init(radix : Int = 10) {
 		self.radix = radix
 	}
-	
 	func GetStackElem() -> StackElem {
 		return StackElem(val: InputValue())
 	}
-	
-	
 	func GetInputString() -> String {
-
 		var (str,ee,isee,sign,eesign) = ("",0,false,1,1)
 		for c in cmdstack {
 			switch c.type {
@@ -135,7 +131,6 @@ class NumberInput : StackInputProt {
 			AppendCmd(cmd: numcmd)
 		}
 	}
-
 	private func AppendCmd(cmd: NumInputCmd) {
 		switch cmd.type {
 		case .punct:
@@ -155,7 +150,6 @@ class NumberInput : StackInputProt {
 	func Begin() {
 		cmdstack.removeAll()
 	}
-	
 	func Back() {
 		if cmdstack.count > 0 {
 			cmdstack.removeLast()

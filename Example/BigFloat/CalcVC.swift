@@ -14,12 +14,10 @@ import BigFloat
 enum KeyBoardView {
 	case num, shift
 	case alpha, alphashift
-	//case prog
 	case hex, hexshift
 }
 
-
-class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
+class CalcVC: UIViewController, ProtShowResult, StackInputDelegate {
 	func InputHasStarted() {
 		rpn.push()
 	}
@@ -27,8 +25,11 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 	func InputHasFinished() {
 		let inputelem = input.GetStackElem()
 		rpn.x = inputelem
-		ShowStack()
+		show.ShowStack()
 	}
+	
+	private var buttonarr : [UIButton] = []
+	private var show : StackShow!
 	
 	private var _keyboardview = KeyBoardView.num
 	private var keyboardview : KeyBoardView {
@@ -63,12 +64,6 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 	private var rpn : RPNCalc {
 		get { return rpnlist[0] }
 	}
-	
-	private var uistate = UILabel()
-	private var uistack : [UILabel] = []
-	private var uistackdesc : [UILabel] = []
-	private var buttonarr : [UIButton] = []
-	private var uiinfotext = InfoView()
 	
 	private func GetAlphaButton(key : Int) -> AlphaButton {
 		for a in buttonarr {
@@ -155,54 +150,25 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		return CreateCalcButton(type : type)
 	}
 	
-	/*
-	func CreateProgButton(type : ProgInputType) -> ProgButton {
-		let stmt = ProgInputCmd(type: type)
-		let b = ProgButton(stmt: stmt)
-		buttonarr.append(b)
-		view.addSubview(b)
-		
-		b.addTarget(self, action: #selector(ProgAction), for: .touchUpInside)
-		return b
-	}
-	private func GetProgButton(type : ProgInputType) -> ProgButton {
-		for b in buttonarr {
-			if let button = b as? ProgButton {
-				if button.stmt?.type == type { return button }
-			}
-		}
-		return CreateProgButton(type : type)
-	}
-	*/
-	
 	override func viewWillAppear(_ animated: Bool) {
 		timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.TimerUpdate), userInfo: nil, repeats: true)
-		ShowStack()
+		show.ShowStack()
 		ShowButtons()
 	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		show = StackShow(vc: self, rpn: rpn, input: input)
 		input.inputdelegate = self
 		self.view.backgroundColor = UIColor.black
-		view.addSubview(uistate)	//State of calculation
 		
-		//UI for the RPN-Registers
-		for _ in 0...3 {
-			let stacklabel = UILabel()
-			let stackdesc = UILabel()
-			uistack.append(stacklabel)
-			uistackdesc.append(stackdesc)
-			view.addSubview(stacklabel)
-			view.addSubview(stackdesc)
-		}
+		
+		
 		
 		_ = CreateInputButton(str: ".", cmd:  NumInputCmd(type: .punct))
 		_ = CreateInputButton(str: "EE", cmd: NumInputCmd(type: .ee))
 		_ = CreateInputButton(str: "+/-", cmd: NumInputCmd(type: .chs))
-		
-		view.addSubview(uiinfotext)
-		uiinfotext.isHidden = true
+
 		
 		//LinkButtons(b: GetSpecialButton(key: .preview), shift: GetSpecialButton(key: .hex))
 		LinkButtons(b: GetCalcButton(type: .Sin), shift: GetCalcButton(type: .aSin))
@@ -234,32 +200,20 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 	//Digit Buttons
 	//private var ui_num : [InputButton] = []
 	
-	//Size of the Stackview depending on landscape or portrait mode and device type
-	private func StackWidth() -> CGFloat {
-		let wphone = landscape ? view.frame.width / 2 : view.frame.width
-		let wpad = landscape ? view.frame.width * 3 / 5 : view.frame.width
-		switch UIDevice.current.userInterfaceIdiom {
-		case .pad:
-			return wpad
-		case .phone:
-			return wphone
-		default:
-			return wpad
-		}
-	}
+	
 	
 	//Size of the Number and Action depending on landscape or portrait mode and device type
 	private func GetNumpadFrameWidth() -> CGFloat
 	{
-		if !landscape { return StackWidth() }
-		return self.view.frame.width - StackWidth()
+		if !view.landscape { return show.StackWidth() }
+		return self.view.frame.width - show.StackWidth()
 	}
 	
 	private func LayoutButtonRaster(row : Int, col : Int, button: UIButton, numcols : Int = 1) {
 		let w = GetNumpadFrameWidth()
 		let h = view.frame.height
-		let x0 = landscape ? StackWidth() + 20 : 20
-		let row0 = landscape ? 4 : 0
+		let x0 = view.landscape ? show.StackWidth() + 20 : 20
+		let row0 = view.landscape ? 4 : 0
 		let parts = 12 - row0
 		let wpart = (w-40) / 6
 		let hpart = (h-40) / CGFloat(parts)
@@ -269,57 +223,14 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		button.frame = rect
 	}
 	
-	private var landscape : Bool {
-		get { return UIDevice.current.orientation.isLandscape }
-	}
 	
-	private func StackHeight() -> CGFloat {
-		return CGFloat(visiblestackelems) * RegisterHeight()
-	}
-	private func RegisterHeight() -> CGFloat {
-		let viewh = view.frame.height - 40
-		let parts = landscape ? 4.0 : 12.0
-		let regh = viewh / CGFloat(parts) * 4 / CGFloat(visiblestackelems)
-		return regh
-	}
-	private func LayoutStack(stackpos: Int, label : UILabel, desc: UILabel) {
-		let w = StackWidth()
-		let wpart = (w-40) / 6
-		let x = CGFloat(20)
-		let y = 20 + CGFloat(visiblestackelems - stackpos - 1) * RegisterHeight()
-		let descrect = CGRect(x: x, y: y, width: wpart, height : RegisterHeight())
-		desc.textAlignment = .center
-		desc.frame = descrect
-		desc.backgroundColor = UIColor.white.withAlphaComponent(0.2)
-		desc.textColor = .white
-		let rect = CGRect(x: x+wpart, y: y, width: wpart*5, height: RegisterHeight())
-		label.backgroundColor = UIColor.white.withAlphaComponent(0.2)
-		label.textAlignment = .right;
-		label.numberOfLines = 0;
-		label.frame = rect
-		label.textColor = .green
-		label.isHidden = (stackpos >= visiblestackelems)
-		desc.isHidden = (stackpos >= visiblestackelems)
-	}
 	
-	private var visiblestackelems = 4
-	private func LayoutStack() {
-		let frame = CGRect(x: 20, y: 20, width:StackWidth() - 40.0 , height: StackHeight())
-		uiinfotext.frame = frame
-		for i in 0..<4 {
-			LayoutStack(stackpos : i, label: uistack[i], desc: uistackdesc[i])
-		}
-	}
+	
 	
 	//All UI-Elements are manual layouted, not via storyboard
 	private func Layout() {
-		LayoutStack()
-		do {
-			let frame0 = uistack[0].frame
-			let frame1 = CGRect(x: 20, y:frame0.origin.y + frame0.height, width: frame0.width,height: 20.0)
-			uistate.frame = frame1
-			uistate.textColor = .red
-		}
+		show.LayoutStack()
+		
 		
 		var row = 11
 		LayoutButtonRaster(row: row, col: 0, button: GetSpecialButton(key: .shift))
@@ -424,88 +335,14 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 	private var timer : Timer? = nil
 	private var timertoggle : Bool = false
 	@objc func TimerUpdate() {
-
 		GetSpecialButton(key: .esc).isHidden = asynccalc != nil ? false : true
 		GetSpecialButton(key: .undo).isHidden = asynccalc != nil ? true : false
 		timertoggle = asynccalc != nil ? !timertoggle : false
-		uistate.textColor = timertoggle ? .gray : .red
+		show.uistate.textColor = timertoggle ? .gray : .red
 	}
 	
-	private func StackName(index : Int) -> String {
-		//let len = String(rpn[index]).count
-		var str = String(index)
-		switch index {
-		case 0:		str = "X"
-		case 1:		str = "Y"
-		case 2:		str = "Z"
-		case 3:		str = "T"
-		default:	break
-		}
-		/*
-		if len >= 12 {
-		str = str + String(len)
-		}
-		*/
-		return str
-	}
 	
-	//Shows some infomration about the state of the registers (uistate) is uirelated
-	private func ShowStackState() {
-		
-		uistate.textColor = .red
-		switch rpn.stackstate {
-		case .stored:		uistate.text = "stored"
-		case .cancelled:	uistate.text = "cancelled"
-		case .factorized:	uistate.text = "factorized"
-		case .valid:		uistate.text = ""
-		case .busy:			uistate.text = "busy"
-		case .error:		uistate.text = "error"
-		case .overflow:		uistate.text = "overflow"
-		case .prime:		uistate.text = "prime"
-		case .unimplemented:uistate.text = "not implemented"
-		case .copied: 		uistate.text = "copied"
-		}
-	}
 	
-	private func ShowStack() {
-		ShowStackState()
-		//Calculates the maximal len of the registers
-		var (registerrows,registerlen) = (1,1)
-		let maxrows = 4 * 2 / visiblestackelems
-		for i in 0..<visiblestackelems {
-			if i == 0 && !input.IsFinished() {
-				let str = input.GetInputString()
-				uistack[i].text = str
-			} else {
-				let val = rpn[i]
-				let (valstr,rows) = val.FormatStr(base: base, maxrows: maxrows, rowlen: 18)
-				uistack[i].text = valstr
-				registerrows = max(registerrows,rows)
-			}
-			
-			uistackdesc[i].text = StackName(index: i)
-			registerlen = max(registerlen,uistack[i].text!.count)
-		}
-		
-		if visiblestackelems == 1 {
-			if input.IsFinished() {
-				let val = rpn[0].value
-				let str = val.autoString(base, fix: 5*18-6)
-				uistack[0].text = str
-			}
-		}
-		
-		//Changes font according to the maximal number of rows per register
-		var fonth = landscape ? RegisterHeight() * 0.45 - 4 : RegisterHeight() * 0.7 - 4
-		fonth = fonth / CGFloat(maxrows)
-		if registerrows == 1 && registerlen <= 18 { fonth = fonth * 2 }
-		for i in 0..<uistack.count {
-			if let font = UIFont(name: "digital-7mono", size: fonth) {
-				uistack[i].font = font
-				uistackdesc[i].font = font
-			}
-		}
-	}
 	
 	//UI Related Display of the Action-Pad
 	private func ShowButtons(clear : Bool = false) {
@@ -517,7 +354,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 			
 		do {
 			let uipreview = self.GetSpecialButton(key: .preview)
-			if self.visiblestackelems == 1 {
+			if show.visible == 1 {
 				uipreview.setTitleColor(.red,for: .normal)
 			}
 			else {
@@ -642,12 +479,13 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 	@objc func CalcAction(sender: CalcButton!)
 	{
 		if isInfo {
-			uiinfotext.ShowText(type: sender.type)
+			show.ShowInfoText(type: sender.type)
+			
 			return
 		}
 		if inputmode == .prog {
 			input.SendCmd(cmd: ProgInputCmd(rpncmd: sender.type))
-			ShowStack()
+			show.ShowStack()
 			return
 		}
 		input.Finish()
@@ -662,20 +500,19 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		
 		switch inputmode {
 		case .prog:
-			print("Programm Execution?")
-			ShowStack()
+			show.ShowStack()
 		case .number: //,.hex:
 			asynccalc?.cancel()		//Try to cancels previous action s
 			rpn.stackstate = .busy	//Blinks in Stackview as long as the calculation needs
-			ShowStackState()
+			show.ShowStackState()
 			//Calculation runs asynchrous (as best as i can)
 			let queue = OperationQueue()
 			asynccalc = AsyncCalc(rpn: rpn, type: cmd)
-			ShowStackState()
+			show.ShowStackState()
 			asynccalc?.resultdelegate = self
 			queue.addOperation(asynccalc!)
 		case .alpha:
-			ShowStack()
+			show.ShowStack()
 		case .none:
 			break
 		}
@@ -686,7 +523,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 	internal func ShowCalcResult() {
 		asynccalc = nil
 		input.Finish()
-		self.ShowStack()
+		show.ShowStack()
 		self.ShowButtons(clear : true)
 	}
 	
@@ -696,8 +533,8 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		asynccalc = nil
 		rpn.stackstate = .cancelled
 		ShowButtons()
-		ShowStackState()
-		ShowStack()
+		show.ShowStackState()
+		show.ShowStack()
 	}
 	
 	//Some useless information about the buttons in the ui
@@ -743,7 +580,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		case .enter:
 			if inputmode == .prog {
 				input.SendCmd(cmd: ProgInputCmd(type: .enter))
-				ShowStack()
+				show.ShowStack()
 				return
 			}
 			
@@ -782,14 +619,14 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 			print("Not implemented: Never come here")
 		
 		}
-		ShowStack()
+		show.ShowStack()
 		ShowButtons()
 	}
 	//Actions for Number Input and related Actions
 	@objc func NumberAction(sender: InputCmdButton!) {
 		if inputmode == .prog {
 			input.SendCmd(cmd: ProgInputCmd(numcmd: sender.cmd))
-			ShowStack()
+			show.ShowStack()
 			return
 		}
 		if input.IsFinished() && (sender.cmd.type == .chs)  {
@@ -798,13 +635,13 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 			input.SendCmd(cmd: sender.cmd)
 			rpn.stackstate = .valid
 		}
-		ShowStack()
+		show.ShowStack()
 	}
 	
 	@objc func AlphaAction(sender: AlphaButton!) {
 		if inputmode == .prog {
 			input.SendCmd(cmd: ProgInputCmd(alpcmd: sender.alphacmd))
-			ShowStack()
+			show.ShowStack()
 			return
 		}
 		if keyboardview == .hex || keyboardview == .hexshift {
@@ -816,22 +653,22 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 			input.SendCmd(cmd: sender.alphacmd)
 		}
 		rpn.stackstate = .valid
-		ShowStack()
+		show.ShowStack()
 	}
 	
 	//Deletes Stack completelye
 	private func ClearAction() {
 		rpn.Clear()
 		while rpnlist.count > 1 {	rpnlist.remove(at: 1) }
-		ShowStack()
+		show.ShowStack()
 		ShowButtons(clear: true)
 	}
 	
 	private func PreviewAction() {
 		UIView.animate(withDuration: 2.0, animations: {
-			self.visiblestackelems = 5 - self.visiblestackelems	//Toggles between 4 and 1
-			self.LayoutStack()
-			self.ShowStack()
+			self.show.visible = 5 - self.show.visible	//Toggles between 4 and 1
+			self.show.LayoutStack()
+			self.show.ShowStack()
 		})
 	}
 	

@@ -84,3 +84,9 @@ extension String {
 	}
 }
 
+extension UIView {
+	var landscape : Bool {
+		get { return UIDevice.current.orientation.isLandscape }
+	}
+}
+

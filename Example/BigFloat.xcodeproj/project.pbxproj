@@ -24,10 +24,11 @@
 		546D656A1FA46A5C00FAA00B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D65601FA46A5C00FAA00B /* Extensions.swift */; };
 		546D656B1FA46A5C00FAA00B /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D65611FA46A5C00FAA00B /* UIExtensions.swift */; };
 		546D656C1FA46A5C00FAA00B /* digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 546D65621FA46A5C00FAA00B /* digital-7.ttf */; };
+		549BC8541FBB711E0079C575 /* StackShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549BC8531FBB711E0079C575 /* StackShow.swift */; };
 		54B8A3141FA46C7D0015CEA3 /* StackElem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B8A3131FA46C7D0015CEA3 /* StackElem.swift */; };
 		54B8A3161FA49BB90015CEA3 /* StackInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B8A3151FA49BB90015CEA3 /* StackInput.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		607FACD81AFB9204008FA782 /* CalcVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* CalcVC.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
@@ -67,12 +68,13 @@
 		546D65601FA46A5C00FAA00B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		546D65611FA46A5C00FAA00B /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		546D65621FA46A5C00FAA00B /* digital-7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7.ttf"; sourceTree = "<group>"; };
+		549BC8531FBB711E0079C575 /* StackShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackShow.swift; sourceTree = "<group>"; };
 		54B8A3131FA46C7D0015CEA3 /* StackElem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackElem.swift; sourceTree = "<group>"; };
 		54B8A3151FA49BB90015CEA3 /* StackInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackInput.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* BigFloat_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigFloat_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		607FACD71AFB9204008FA782 /* CalcVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcVC.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -168,7 +170,8 @@
 				546D655F1FA46A5B00FAA00B /* RPNInfo.swift */,
 				546D65611FA46A5C00FAA00B /* UIExtensions.swift */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				607FACD71AFB9204008FA782 /* CalcVC.swift */,
+				549BC8531FBB711E0079C575 /* StackShow.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -447,7 +450,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5447591C1FADC1A30033B821 /* NumberInput.swift in Sources */,
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				549BC8541FBB711E0079C575 /* StackShow.swift in Sources */,
+				607FACD81AFB9204008FA782 /* CalcVC.swift in Sources */,
 				54B8A3161FA49BB90015CEA3 /* StackInput.swift in Sources */,
 				546D656B1FA46A5C00FAA00B /* UIExtensions.swift in Sources */,
 				546D656A1FA46A5C00FAA00B /* Extensions.swift in Sources */,

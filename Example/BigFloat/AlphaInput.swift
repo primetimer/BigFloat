@@ -42,13 +42,12 @@ class AlphaInputCmd : InputCmd {
 }
 
 class AlphaInput : StackInputProt {
-	func SetBase(base: Int) {
-		return
-	}
-	
 	
 	var cmdstack : [AlphaInputCmd] = []
 	
+	func IsFinished() -> Bool {
+		return false
+	}
 	func GetStackElem() -> StackElem {
 		return StackElem(alpha: GetInputValue())
 	}
