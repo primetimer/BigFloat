@@ -61,10 +61,7 @@ public extension BigFloat {
 	}
 	
 	public func autoString(_ base : Int = 10 , fix : Int = 8) -> String {
-		var maxval = 1.0
-		for _ in 0...fix/2 {
-			maxval = maxval * Double(base)
-		}
+		let maxval = Darwin.pow(Double(base),Double(fix/2))
 		let bfmax = BigFloat(maxval)
 		if BigFloat.abs(self) > bfmax {
 			return expString(base, fix : fix)
@@ -72,7 +69,7 @@ public extension BigFloat {
 		if BigFloat.abs(self) < BigFloat(1) / bfmax  {
 			return expString(base, fix : fix)
 		}
-		return asString(base,fix: fix)
+		return asString(base,maxlen: fix, fix: fix)
 		
 	}
 	

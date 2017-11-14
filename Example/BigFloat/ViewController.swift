@@ -14,7 +14,7 @@ import BigFloat
 enum KeyBoardView {
 	case num, shift
 	case alpha, alphashift
-	case prog
+	//case prog
 	case hex, hexshift
 }
 
@@ -34,26 +34,17 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 	private var keyboardview : KeyBoardView {
 		get { return _keyboardview }
 		set {
-			if newValue == _keyboardview { return }
 			_keyboardview = newValue
+			if inputmode == .prog { return }
 			switch keyboardview  {
 			case .num, .shift:
 				inputmode = .number
 			case .alpha,.alphashift:
 				inputmode = .alpha
-			case .prog:
-				inputmode = .prog
 			case .hex,.hexshift:
 				inputmode = .number //.hex
 			}
-			if newValue == .hex || newValue == .hexshift {
-				base = 16
-				
-			} else {
-				base = 10
-			}
 			input.SetBase(base: base)
-
 		}
 	}
 	private var _inputmode = StackInputType.number
@@ -61,14 +52,12 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		get { return _inputmode }
 		set {
 			if newValue != _inputmode {
-				print("Mode changed",_inputmode, newValue)
 				_inputmode = newValue
 				input.SetInputMode(mode: _inputmode)
 			}
 		}
 	}
 	private var base = 10
-	
 	private var input = StackInput()
 	private var rpnlist : [RPNCalc] = [RPNCalc()]
 	private var rpn : RPNCalc {
@@ -80,7 +69,6 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 	private var uistackdesc : [UILabel] = []
 	private var buttonarr : [UIButton] = []
 	private var uiinfotext = InfoView()
-	
 	
 	private func GetAlphaButton(key : Int) -> AlphaButton {
 		for a in buttonarr {
@@ -167,6 +155,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		return CreateCalcButton(type : type)
 	}
 	
+	/*
 	func CreateProgButton(type : ProgInputType) -> ProgButton {
 		let stmt = ProgInputCmd(type: type)
 		let b = ProgButton(stmt: stmt)
@@ -184,20 +173,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		}
 		return CreateProgButton(type : type)
 	}
-	
-	//Create Button when shift is activated
-	private func CreateCalcButtonShift(type : RPNCalcCmd, unshift: CalcButton) {
-		let str = type.description
-		let b = CalcButton(type: type)
-		buttonarr.append(b)
-		view.addSubview(b)
-		b.setTitle(str, for: .normal)
-		b.setTitleColor(.yellow, for: .normal)
-		b.addTarget(self, action: #selector(CalcAction), for: .touchUpInside)
-		b.titleLabel?.font = b.titleLabel?.font.withSize(14)
-		LinkButtons(b: unshift, shift: b)
-		b.isHidden = true
-	}
+	*/
 	
 	override func viewWillAppear(_ animated: Bool) {
 		timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.TimerUpdate), userInfo: nil, repeats: true)
@@ -228,50 +204,19 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		view.addSubview(uiinfotext)
 		uiinfotext.isHidden = true
 		
-		//UI for Functions
-		/*
-		_ = CreateCalcButton(type: .LastX)
-		_ = CreateCalcButton(type: .Plus)
-		_ = CreateCalcButton(type: .Minus)
-		_ = CreateCalcButton(type: .Prod)
-		_ = CreateCalcButton(type: .Divide)
-		_ = CreateCalcButton(type: .Sin)
-		_ = CreateCalcButton(type: .Cos)
-		_ = CreateCalcButton(type: .Tan)
-		_ = CreateCalcButtonShift(type: .aSin,unshift: GetCalcButton(type: .Sin))
-		_ = CreateCalcButtonShift(type: .aCos,unshift: GetCalcButton(type: .Cos))
-		_ = CreateCalcButtonShift(type: .aTan,unshift: GetCalcButton(type: .Tan))
-		_ = CreateCalcButton(type: .Inv)
-		_ = CreateCalcButton(str: "STO", type: .Sto1)
-		_ = CreateCalcButton(str: "RCL", type: .Rcl1)
-		_ = CreateCalcButton(type: .Swap)
-		_ = CreateCalcButton(type: .Pop)
-		_ = CreateCalcButton(type: .Mod)
-		_ = CreateCalcButton(type: .Pow)
-		_ = CreateCalcButton(type: .sqrt)
-		_ = CreateCalcButtonShift(type: .crt, unshift: GetCalcButton(type: .sqrt))
-		_ = CreateCalcButton(type: .exp)
-		_ = CreateCalcButtonShift(type: .ln, unshift: GetCalcButton(type: .exp))
-		//_ = CreateCalcButton(type: .pi)
-		_ = CreateCalcButton(type: .CmdC)
-		_ = CreateCalcButtonShift(type: .CmdV, unshift : GetCalcButton(type: .CmdC))
-		_ = CreateCalcButton(type: .TenPow)
-		_ = CreateCalcButtonShift(type: .log, unshift: GetCalcButton(type: .TenPow))
-		_ = CreateCalcButton(type: .Square)
-		_ = CreateCalcButton(type: .Cube)
-		_ = CreateCalcButton(type: .Mersenne)
-		
-		//Programmers
-		let lower = CreateCalcButton(type: .lower)
-		_ = CreateCalcButtonShift(type : .lowerequal, unshift: lower)
-		let greater = CreateCalcButton(type: .greater)
-		_ = CreateCalcButtonShift(type : .greaterequal, unshift: greater)
-		let equal = CreateCalcButton(type: .equal)
-		_ = CreateCalcButtonShift(type : .unequal, unshift: equal)
-		*/
-		
-		
 		//LinkButtons(b: GetSpecialButton(key: .preview), shift: GetSpecialButton(key: .hex))
+		LinkButtons(b: GetCalcButton(type: .Sin), shift: GetCalcButton(type: .aSin))
+		LinkButtons(b: GetCalcButton(type: .Cos), shift: GetCalcButton(type: .aCos))
+		LinkButtons(b: GetCalcButton(type: .Tan), shift: GetCalcButton(type: .aTan))
+		LinkButtons(b: GetCalcButton(type: .sqrt), shift: GetCalcButton(type: .crt))
+		LinkButtons(b: GetCalcButton(type: .TenPow), shift: GetCalcButton(type: .log))
+		LinkButtons(b: GetCalcButton(type: .exp), shift: GetCalcButton(type: .ln))
+		LinkButtons(b: GetCalcButton(type: .CmdC), shift: GetCalcButton(type: .CmdV))
+		LinkButtons(b: GetCalcButton(type: .lower), shift: GetCalcButton(type: .lowerequal))
+		LinkButtons(b: GetCalcButton(type: .greater), shift: GetCalcButton(type: .greaterequal))
+		LinkButtons(b: GetCalcButton(type: .equal), shift: GetCalcButton(type: .unequal))
+		
+		
 		LinkButtons(b: GetInputButton(cmd: NumInputCmd(digit : 3)), shift: GetCalcButton(type: .pi))
 		LinkButtons(b: GetInputButton(cmd: NumInputCmd(digit : 4)), shift: GetCalcButton(type: .sqrt2))
 		LinkButtons(b: GetInputButton(cmd: NumInputCmd(digit : 0)), shift: GetCalcButton(type: .ln2))
@@ -388,13 +333,13 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		LayoutButtonRaster(row:row, col: 2, button: GetInputButton(cmd: NumInputCmd(type: .punct)))
 		LayoutButtonRaster(row:row, col: 3, button: GetInputButton(cmd: NumInputCmd(type: .chs)))
 		LayoutButtonRaster(row:row, col: 4, button: GetCalcButton(type: .Plus))
-		LayoutButtonRaster(row:row, col: 5, button: GetCalcButton(type: .Sto1))
+		LayoutButtonRaster(row:row, col: 5, button: GetCalcButton(type: .Sto))
 		row = row - 1
 		LayoutButtonRaster(row:row, col: 1, button: GetInputButton(cmd: NumInputCmd(digit : 1)))
 		LayoutButtonRaster(row:row, col: 2, button: GetInputButton(cmd: NumInputCmd(digit : 2)))
 		LayoutButtonRaster(row:row, col: 3, button: GetInputButton(cmd: NumInputCmd(digit : 3)))
 		LayoutButtonRaster(row:row, col: 4, button: GetCalcButton(type: .Minus))
-		LayoutButtonRaster(row:row, col: 5, button: GetCalcButton(type: .Rcl1))
+		LayoutButtonRaster(row:row, col: 5, button: GetCalcButton(type: .Rcl))
 		
 		row = row - 1
 		LayoutButtonRaster(row:row, col: 0, button: GetCalcButton(type: .Swap))
@@ -421,8 +366,8 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		LayoutButtonRaster(row:row, col: 5, button: GetCalcButton(type: .Tan))
 		
 		row = row - 1
-		LayoutButtonRaster(row:row, col: 0, button: GetProgButton(type: .ifcond))
-		LayoutButtonRaster(row:row, col: 1, button: GetProgButton(type: .thencond))
+		//LayoutButtonRaster(row:row, col: 0, button: GetProgButton(type: .ifcond))
+		//LayoutButtonRaster(row:row, col: 1, button: GetProgButton(type: .thencond))
 		LayoutButtonRaster(row:row, col: 3, button: GetCalcButton(type: .lower))
 		LayoutButtonRaster(row:row, col: 4, button: GetCalcButton(type: .greater))
 		LayoutButtonRaster(row:row, col: 5, button: GetCalcButton(type: .equal))
@@ -430,8 +375,8 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		row = row - 1
 		LayoutButtonRaster(row:row, col: 0, button: GetSpecialButton(key: .alpha))
 		LayoutButtonRaster(row:row, col: 1, button: GetSpecialButton(key: .prog))
-		LayoutButtonRaster(row:row, col: 2, button: GetSpecialButton(key: .preview))
-		LayoutButtonRaster(row:row, col: 3, button: GetSpecialButton(key: .hex))
+		LayoutButtonRaster(row:row, col: 3, button: GetSpecialButton(key: .preview))
+		LayoutButtonRaster(row:row, col: 2, button: GetSpecialButton(key: .hex))
 		LayoutButtonRaster(row:4, col: 4, button: GetSpecialButton(key: .esc))
 		LayoutButtonRaster(row:4, col: 4, button: GetSpecialButton(key: .undo))
 		LayoutButtonRaster(row:row, col: 5, button: GetSpecialButton(key: .back))
@@ -465,7 +410,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		do {
 			let b = GetAlphaButton(key: 32)
 			b.setTitle("SPC", for: .normal)
-			LayoutButtonRaster(row: 4, col: 2, button: b)
+			LayoutButtonRaster(row: 11, col: 3, button: b, numcols: 2)
 		}
 		do {
 			let b = GetAlphaButton(key: 59)	//Semikolon
@@ -597,7 +542,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		}
 		do {
 			let b = GetSpecialButton(key: .prog)
-			if keyboardview == .prog {
+			if inputmode == .prog {
 				b.setTitleColor(.red, for: .normal)
 			} else	{
 				b.setTitleColor(.white, for: .normal)
@@ -642,13 +587,10 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 					b.isHidden = true
 				}
 			}
-
 			GetSpecialButton(key: .back).isHidden = false
 			GetSpecialButton(key: .enter).isHidden = false
 			GetSpecialButton(key: .clx).isHidden = true
-		
 		case .hex:
-			
 			for b in buttonarr {
 				b.isHidden = true
 				if let calc = b as? CalcButton {
@@ -663,7 +605,6 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 					}
 				}
 			}
-			
 			GetSpecialButton(key: .back).isHidden = false
 			GetSpecialButton(key: .enter).isHidden = false
 			GetSpecialButton(key: .clx).isHidden = true
@@ -686,16 +627,6 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 			GetSpecialButton(key: .back).isHidden = false
 			GetSpecialButton(key: .enter).isHidden = false
 			GetSpecialButton(key: .clx).isHidden = true
-		case .prog:
-			for b in buttonarr {
-				b.isHidden = true
-				if let button = b as? CalcButton {
-					if button.unshiftbutton == nil { b.isHidden = false }
-				}
-				
-				GetSpecialButton(key: .clx).isHidden = true
-
-			}
 		}
 		GetSpecialButton(key: .hex).isHidden = false
 		GetSpecialButton(key: .prog).isHidden = false
@@ -707,17 +638,6 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 	//When the Calculation ist started this variable is not nil
 	var asynccalc : AsyncCalc? = nil
 	
-	@objc func ProgAction(sender: ProgButton!)
-	{
-		if inputmode == .prog {
-			if let cmd = sender.stmt {
-				input.SendCmd(cmd: cmd)
-			}
-			ShowStack()
-			return
-		}
-	}
-		
 	//Executing all Calculation triggered by Buttons
 	@objc func CalcAction(sender: CalcButton!)
 	{
@@ -736,9 +656,9 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 		
 	private func StartCalculation(cmd: RPNCalcCmd) {
 		
-			//Create Copy of Stack for undo action
-			rpnlist.insert(rpn.Copy(), at: 1)
-			while rpnlist.count > 10 { rpnlist.remove(at: 10)}
+		//Create Copy of Stack for undo action
+		rpnlist.insert(rpn.Copy(), at: 1)
+		while rpnlist.count > 10 { rpnlist.remove(at: 10)}
 		
 		switch inputmode {
 		case .prog:
@@ -748,7 +668,6 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 			asynccalc?.cancel()		//Try to cancels previous action s
 			rpn.stackstate = .busy	//Blinks in Stackview as long as the calculation needs
 			ShowStackState()
-			
 			//Calculation runs asynchrous (as best as i can)
 			let queue = OperationQueue()
 			asynccalc = AsyncCalc(rpn: rpn, type: cmd)
@@ -799,42 +718,28 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 				keyboardview = .num
 			case .alphashift:
 				keyboardview = .alpha
-			case .prog:
-				keyboardview = .prog
 			case .hex:
 				keyboardview = .hexshift
 			case .hexshift:
 				keyboardview = .hex
 			}
 		case .prog:
-			if inputmode == .prog {
-				keyboardview = .num
-			}
-			else {
-				keyboardview = .prog
-			}
+			inputmode = inputmode == .prog ? .none : .prog
 		case .alpha:
 			switch keyboardview {
-			case .num, .prog,.hex,.hexshift:
+			case .num,.hex,.hexshift:
 				keyboardview = .alpha
 			case .alpha:
-				if inputmode == .prog {  break }
-				if base == 10 { keyboardview = .num }
-				if base == 16 { keyboardview = .hex }
+				keyboardview = base == 10 ? .num : .hex
 			case .shift:
 				keyboardview = .alphashift
 			case .alphashift:
-				if base == 10 { keyboardview = .shift }
-				if base == 16 { keyboardview = .hexshift }
+				keyboardview = base == 10 ? .shift : .hexshift
 			}
 		case .hex:
 			input.Finish()
 			base = 10 + 16 - base
-			if base == 16 {
-				keyboardview = .hex
-			} else {
-				keyboardview = .num
-			}
+			keyboardview = base == 16 ? .hex : .num
 		case .enter:
 			if inputmode == .prog {
 				input.SendCmd(cmd: ProgInputCmd(type: .enter))
@@ -924,9 +829,7 @@ class ViewController: UIViewController, ProtShowResult, StackInputDelegate {
 	
 	private func PreviewAction() {
 		UIView.animate(withDuration: 2.0, animations: {
-			
 			self.visiblestackelems = 5 - self.visiblestackelems	//Toggles between 4 and 1
-			
 			self.LayoutStack()
 			self.ShowStack()
 		})

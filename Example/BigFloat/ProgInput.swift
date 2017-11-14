@@ -112,10 +112,6 @@ class ProgInputCmd : InputCmd {
 }
 
 class ProgInput : StackInputProt, CustomStringConvertible {
-	func SetBase(base: Int) {
-		return
-	}
-	
 	var description: String {
 		get {
 			return GetInputValue()

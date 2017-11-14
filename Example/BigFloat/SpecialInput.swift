@@ -26,7 +26,7 @@ enum KeyBoardSpecialCmd {
 		case .preview:	return "≈"
 		case .clx:		return "CLR"
 		case .info:		return "ℹ︎"
-		case .hex:		return "HEX"
+		case .hex:		return "hex"
 		}
 	}
 }

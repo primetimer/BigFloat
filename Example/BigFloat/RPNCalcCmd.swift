@@ -49,10 +49,9 @@ class RPNCalcDict {
 		dict["log"] = .log
 		dict["√"] = .sqrt
 		dict["∛"] = .crt
-		//dict["\u{1f1e9}\u{1f1ea}"] = .crt
-		dict["STO"] = .Sto1
+		dict["STO"] = .Sto
 		dict["!"] = .Sto1
-		dict["RCL"] = .Rcl1
+		dict["RCL"] = .Rcl
 		dict["?"] = .Rcl1
 		dict["⌘C"] = .CmdC
 		dict["⌘V"] = .CmdV
@@ -64,9 +63,6 @@ class RPNCalcDict {
 		dict["!="] = .unequal2
 		dict["≠"] = .unequal
 		dict["√2"] = .sqrt2
-
-	
-
 	}
 	
 	func String(cmd: RPNCalcCmd) -> String {
@@ -87,7 +83,7 @@ enum RPNCalcCmd : Int, CustomStringConvertible {
 	case PNext, PPrev
 	case Swap, Pop, Pow, PowMod, exp, ln, pi, log, ln2, exp1, sqrt2
 	case Mod, gcd, sqrt, crt, Hash,Rnd
-	case Sto1, Rcl1, CmdC, CmdV
+	case Sto,Rcl,Sto1, Rcl1, CmdC, CmdV
 	case lower,greater,equal,unequal,lowerequal,greaterequal,unequal2
 	case Prod2, Divide2
 	

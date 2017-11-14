@@ -674,9 +674,9 @@ class RPNCalc : CalcCancellable, CustomStringConvertible {
 		case .Mersenne: self.mersenne()
 		case .Undefined:	break
 		//case .Factors:	self.factors()
-		case .Sto1:		store()
-		case .Rcl1:		rcl()
-		case .Sin:		sin()
+		case .Sto1,.Sto:		store()
+		case .Rcl1,.Rcl:		rcl()
+		case .Sin:				sin()
 		case .Cos:		cos()
 		case .Tan:		tan()
 		case .aSin:		asin()

@@ -71,6 +71,7 @@ class CalcButton : UIButton {
 		super.init(frame : .zero)
 		setTitleColor(.white, for: .normal)
 		self.setTitleColor(.blue, for: .highlighted)
+		self.titleLabel?.font = self.titleLabel?.font.withSize(14)
 	}
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
