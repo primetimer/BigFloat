@@ -92,7 +92,7 @@ public class BigFloatConstant {
 	
 	static public var sqrt2 : BigFloat {
 		get {
-			if _sqrt2 != nil { return _ln2! }
+			if _sqrt2 != nil { return _sqrt2! }
 			_sqrt2 = BigFloat.sqrt(x: BigFloat(2))
 			return _sqrt2!
 		}
