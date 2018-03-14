@@ -11,6 +11,7 @@ import BigInt
 
 //
 
+
 public class BigFloatConstant {
 	
 	static private var _pi : BigFloat? = nil
