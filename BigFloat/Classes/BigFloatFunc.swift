@@ -11,7 +11,6 @@ import BigInt
 
 //
 
-
 public class BigFloatConstant {
 	
 	static private var _pi : BigFloat? = nil
@@ -21,6 +20,7 @@ public class BigFloatConstant {
 	static private var _ln2 : BigFloat? = nil
 	static private var _e : BigFloat? = nil
 	static private var _sqrt2 : BigFloat? = nil
+	
 	static public  var pi : BigFloat {
 		get {
 			if _pi != nil { return _pi! }
@@ -99,6 +99,10 @@ public class BigFloatConstant {
 		}
 	}
 	
+	static public var phi: BigFloat = {
+		let p : BigFloat = (BigFloat.sqrt(x: 5.0) + BigFloat(1)) / BigFloat(2)
+		return p
+		}()
 }
 extension BigFloat {
 
