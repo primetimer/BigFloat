@@ -141,23 +141,22 @@ public struct BigFloat : ExpressibleByFloatLiteral {
 		if self.significand == 0 {
 			return self
 		}
-		if self.significand == 1 {
-			return BigFloat(significand:1, exponent:-self.exponent)
+		var r = self
+		r.normalize()
+		if r.significand == 1 {
+			return BigFloat(significand:1, exponent:-r.exponent)
 		}
 		
-		let ex = self.exponent + significand.bitWidth + 1
-		//let px = max(self.precision, precision)
+		let ex = r.exponent + r.significand.bitWidth + 1
 		let px = 256
 		
-		let n = BigInt(1) << BigInt(px*2+2*significand.bitWidth)
-		let q = n / self.significand
-		//print(self.significand,significand.bitWidth,self.exponent)
-		//print(n)
-		//print(q,q.bitWidth)
+		let n = BigInt(1) << BigInt(px*2+2*r.significand.bitWidth)
+		let q = n / r.significand
 		var ans = BigFloat(significand:q, exponent:-ex-q.bitWidth+4)
 		ans.normalize()
 		return ans
 	}
+	
 	/*
 	public func frexp()->(BigFloat, Int)   {
 		return (
